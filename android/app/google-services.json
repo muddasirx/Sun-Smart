@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "672685347058",
+    "project_id": "app-x-ce80a",
+    "storage_bucket": "app-x-ce80a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672685347058:android:a1a224084ad409fd88406b",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxJA_FtbJIUZtFvmW09DUkXA_r3BDA41I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
