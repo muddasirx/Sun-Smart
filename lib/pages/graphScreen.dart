@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled/pages/LoginScreen.dart';
 import '../SplashScreen.dart';
 import '../providers/historyProvider.dart';
 import '../providers/sessionDetailsProvider.dart';
@@ -75,6 +76,7 @@ class _GraphScreenState extends State<GraphScreen> {
               switch (value) {
                 case 'Update profile':
                   userData.updateProfile=true;
+                  userData.skinType=userData.user['skinType'];
                   Navigator.pushNamed(context, "/SkinType");
                   break;
                 case 'Update my history':
@@ -576,8 +578,7 @@ class _GraphScreenState extends State<GraphScreen> {
                 }),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: isTablet(context) ? screenWidth * 0.05 : 0),
+            padding: EdgeInsets.only(left: isTablet(context) ? screenWidth * 0.05 : 0,right: isTablet(context) ? screenWidth * 0.05 : 0,bottom: screenHeight*0.07),
             child: Consumer<sessionDetailsNotifier>(
                 builder: (context, value, child) {
                   return (!value.sessionPossible && value.nightTime) ?
@@ -600,8 +601,7 @@ class _GraphScreenState extends State<GraphScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Image.asset(
-                            'assets/images/moon.png', height: screenHeight *
-                              0.15,),
+                            'assets/images/moon.png', height: screenHeight * 0.15,),
                           Text(
                             "It's already evening, so sunlight for Vitamin D isn't available now. Aim to get some sun exposure tomorrow, preferably around midday for maximum benefit."
                             , style: GoogleFonts.raleway(
@@ -621,10 +621,13 @@ class _GraphScreenState extends State<GraphScreen> {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            SystemNavigator.pop();
+                            setState(() {
+                              value.sessionPossible =true;
+                              value.nightTime=false;
+                            });
                           },
                           child: Text(
-                            "Exit",
+                            "Ok",
                             style: GoogleFonts.brunoAceSc(
                               textStyle: TextStyle(
                                 color: Colors.white,
@@ -803,7 +806,11 @@ class _GraphScreenState extends State<GraphScreen> {
                       prefs.setString('email', '');
                       prefs.setString('uid', '');
                       prefs.setBool('appSettings', false);
-                      Navigator.pushReplacementNamed(context, '/LoginPage');
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                            (route) => false,
+                      );
                     },
                     child: Text(
                       "Yes",

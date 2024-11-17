@@ -15,6 +15,7 @@ class sessionDetailsNotifier with ChangeNotifier {
     bool vitaminIntakeComplete=false;
     bool sessionUpdated=false;
 
+
     void nightArrived(){
       nightTime=true;
       notifyListeners();

@@ -107,11 +107,14 @@ class _SkinTypeState extends State<SkinType> {
                                   children: [
                                     InkWell(
                                       onTap: (){
-                                        updateSkinType(1);
+
                                         if(userData.updateProfile){
                                           Navigator.pushNamed(context, "/UpdateProfile");
+                                          userData.changeSkinType(1);
                                         }else{
+                                          updateSkinType(1);
                                           Navigator.pushNamed(context, "/UserPrescription" );
+                                          userData.changeSkinType(1);
                                         }
                                       },
                                       splashFactory: NoSplash.splashFactory,
@@ -147,6 +150,12 @@ class _SkinTypeState extends State<SkinType> {
                                                     ),
                                               ),
                                             ),
+                                            Consumer<UserDataNotifier>(builder: (context,value,child) {
+                                              return (userData.skinType == 1) ?
+                                              Icon(Icons.check_circle_rounded,
+                                                color: Color(0xFF0DA500),)
+                                                  : SizedBox();
+                                            })
                                           ],
                                         ),
                                       ),
@@ -158,11 +167,13 @@ class _SkinTypeState extends State<SkinType> {
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
-                                        updateSkinType(2);
                                         if(userData.updateProfile){
                                           Navigator.pushNamed(context, "/UpdateProfile");
+                                          userData.changeSkinType(2);
                                         }else{
                                           Navigator.pushNamed(context, "/UserPrescription" );
+                                          updateSkinType(2);
+                                          userData.changeSkinType(2);
                                         }
                                       },
                                       child: Padding(
@@ -197,6 +208,12 @@ class _SkinTypeState extends State<SkinType> {
                                                   ),
                                               ),
                                             ),
+                                            Consumer<UserDataNotifier>(builder: (context,value,child) {
+                                              return (userData.skinType == 2) ?
+                                              Icon(Icons.check_circle_rounded,
+                                                color: Color(0xFF0DA500),)
+                                                  : SizedBox();
+                                            })
                                           ],
                                         ),
                                       ),
@@ -208,11 +225,13 @@ class _SkinTypeState extends State<SkinType> {
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
-                                        updateSkinType(3);
                                         if(userData.updateProfile){
                                           Navigator.pushNamed(context, "/UpdateProfile");
+                                          userData.changeSkinType(3);
                                         }else{
                                           Navigator.pushNamed(context, "/UserPrescription" );
+                                          updateSkinType(3);
+                                          userData.changeSkinType(3);
                                         }
                                       },
                                       child: Padding(
@@ -247,6 +266,12 @@ class _SkinTypeState extends State<SkinType> {
                                                   ),
                                               ),
                                             ),
+                                            Consumer<UserDataNotifier>(builder: (context,value,child) {
+                                              return (userData.skinType == 3) ?
+                                              Icon(Icons.check_circle_rounded,
+                                                color: Color(0xFF0DA500),)
+                                                  : SizedBox();
+                                            })
                                           ],
                                         ),
                                       ),
@@ -258,11 +283,13 @@ class _SkinTypeState extends State<SkinType> {
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
-                                        updateSkinType(4);
                                         if(userData.updateProfile){
                                           Navigator.pushNamed(context, "/UpdateProfile");
+                                          userData.changeSkinType(4);
                                         }else{
                                           Navigator.pushNamed(context, "/UserPrescription" );
+                                          updateSkinType(4);
+                                          userData.changeSkinType(4);
                                         }
                                       },
                                       child: Padding(
@@ -298,6 +325,12 @@ class _SkinTypeState extends State<SkinType> {
 
                                               ),
                                             ),
+                                            Consumer<UserDataNotifier>(builder: (context,value,child) {
+                                              return (userData.skinType == 4) ?
+                                              Icon(Icons.check_circle_rounded,
+                                                color: Color(0xFF0DA500),)
+                                                  : SizedBox();
+                                            })
                                           ],
                                         ),
                                       ),
@@ -309,11 +342,13 @@ class _SkinTypeState extends State<SkinType> {
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
-                                        updateSkinType(5);
                                         if(userData.updateProfile){
                                           Navigator.pushNamed(context, "/UpdateProfile");
+                                          userData.changeSkinType(5);
                                         }else{
                                           Navigator.pushNamed(context, "/UserPrescription" );
+                                          updateSkinType(5);
+                                          userData.changeSkinType(5);
                                         }
                                       },
                                       child: Padding(
@@ -348,6 +383,12 @@ class _SkinTypeState extends State<SkinType> {
                                                   ),
                                               ),
                                             ),
+                                            Consumer<UserDataNotifier>(builder: (context,value,child) {
+                                              return (userData.skinType == 5) ?
+                                              Icon(Icons.check_circle_rounded,
+                                                color: Color(0xFF0DA500),)
+                                                  : SizedBox();
+                                            })
                                           ],
                                         ),
                                       ),
@@ -359,11 +400,13 @@ class _SkinTypeState extends State<SkinType> {
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
-                                        updateSkinType(6);
                                         if(userData.updateProfile){
                                           Navigator.pushNamed(context, "/UpdateProfile");
+                                          userData.changeSkinType(6);
                                         }else{
                                           Navigator.pushNamed(context, "/UserPrescription" );
+                                          userData.changeSkinType(6);
+                                          updateSkinType(6);
                                         }
                                       },
                                       child: Padding(
@@ -398,6 +441,12 @@ class _SkinTypeState extends State<SkinType> {
                                                   ),
                                               ),
                                             ),
+                                            Consumer<UserDataNotifier>(builder: (context,value,child) {
+                                              return (userData.skinType == 6) ?
+                                              Icon(Icons.check_circle_rounded,
+                                                color: Color(0xFF0DA500),)
+                                                  : SizedBox();
+                                            })
                                           ],
                                         ),
                                       ),

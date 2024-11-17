@@ -212,8 +212,11 @@ class _UserPrescriptionState extends State<UserPrescription> {
                                     print("inside yes pressed");
                                      updateUserData();
                                      if(userData.updateHistoryPressed){
-                                       Navigator.pop(context);
-                                       Navigator.pop(context);
+                                       Navigator.pushAndRemoveUntil(
+                                         context,
+                                         MaterialPageRoute(builder: (context) => GraphScreen()),
+                                             (route) => false,
+                                       );
                                        Fluttertoast.showToast(
                                          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
                                          msg: "User History updated successfully.",

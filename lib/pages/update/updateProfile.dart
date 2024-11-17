@@ -307,6 +307,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           if(userData.updateProfile){
                             userData.updateProfile=false;
                           }
+                          userData.updateSkinType(userData.skinType);
                           updateData();
                           Navigator.pop(context);
                           Navigator.pop(context);
@@ -452,7 +453,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
     final userData = Provider.of<UserDataNotifier>(context, listen: false);
 
     if(_ageController.text.isNotEmpty && _dateController.text.isNotEmpty && _weightController.text.isNotEmpty && _nameController.text.isNotEmpty) {
-      if(_nameController.text.trim()!=userData.user['name'] || dropdownValue!=userData.user['gender'] || _ageController.text.trim()!=userData.user['age'].toString() || _weightController.text.trim()!=userData.user['weight'].toString()){
+      if(userData.user['skinType']!=userData.skinType || _nameController.text.trim()!=userData.user['name'] || dropdownValue!=userData.user['gender'] || _ageController.text.trim()!=userData.user['age'].toString() || _weightController.text.trim()!=userData.user['weight'].toString()){
         if (int.parse(_ageController.text.trim()) != 0) {
           return true;
         }

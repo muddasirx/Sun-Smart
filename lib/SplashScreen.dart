@@ -123,8 +123,7 @@ class SplashScreenState extends State<SplashScreen> with SingleTickerProviderSta
         }
         else {
           if(loginData.user['skinType']!=0){
-            if(loginData.user['sessionID']!='none'){
-              Navigator.pushReplacement(
+            Navigator.pushReplacement(
                 context,
                 PageRouteBuilder(
                   pageBuilder: (context, animation1, animation2) => GraphScreen(),//Spf(),//firstPage(),////UserPrescription(), //
@@ -141,26 +140,6 @@ class SplashScreenState extends State<SplashScreen> with SingleTickerProviderSta
                   },
                 ),
               );
-            }
-            else{
-              Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (context, animation1, animation2) => Spf(),//firstPage(),////UserPrescription(), //
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    var begin = Offset(1.0, 0.0);
-                    var end = Offset.zero;
-                    var tween = Tween(begin: begin, end: end);
-                    var offsetAnimation = animation.drive(tween);
-
-                    return SlideTransition(
-                      position: offsetAnimation,
-                      child: child,
-                    );
-                  },
-                ),
-              );
-            }
           }
           else if(loginData.user['skinType']==0){
             Navigator.pushReplacement(

@@ -16,6 +16,39 @@ class UserDataNotifier with ChangeNotifier {
   bool updateHistoryPressed=false;
   bool locationProvided=false;
   bool updateProfile=false;
+  int skinType=0;
+
+  void changeSkinType(int x){
+      skinType=x;
+      print("skin Type changed to $x");
+      notifyListeners();
+  }
+
+  Future<void> updateSkinType(int skinTypeNumber) async{
+
+    CollectionReference userCollection = FirebaseFirestore.instance.collection('UserInfo');
+
+    try {
+      print(uid);
+      QuerySnapshot querySnapshot = await userCollection.where('uid', isEqualTo: uid).get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        DocumentReference userDoc = querySnapshot.docs.first.reference;
+
+        await userDoc.update({
+          'skinType':skinTypeNumber
+        });
+
+        fetchUserData(uid);
+
+        print('User info updated successfully');
+      } else {
+        print('No user found with the provided userID');
+      }
+    } catch (e) {
+      print('Error updating user info: $e');
+    }
+  }
 
   Future<void> fetchUserSessions(String sessionID)async{
     DocumentSnapshot docSnapshot = await FirebaseFirestore.instance.collection("Sessions").doc(sessionID).get();
@@ -46,6 +79,7 @@ class UserDataNotifier with ChangeNotifier {
 
       if (querySnapshot.docs.isNotEmpty) {
         user=querySnapshot.docs.first;
+        skinType=user['skinType'];
       } else {
         print('No user found with uid: $userId');
       }
