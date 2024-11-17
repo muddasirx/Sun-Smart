@@ -304,6 +304,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           setState(() {
                             updatePressed= true;
                           });
+                          if(userData.updateProfile){
+                            userData.updateProfile=false;
+                          }
                           updateData();
                           Navigator.pop(context);
                           Navigator.pop(context);

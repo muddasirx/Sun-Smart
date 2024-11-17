@@ -110,7 +110,6 @@ class _SkinTypeState extends State<SkinType> {
                                         updateSkinType(1);
                                         if(userData.updateProfile){
                                           Navigator.pushNamed(context, "/UpdateProfile");
-                                          userData.updateProfile=false;
                                         }else{
                                           Navigator.pushNamed(context, "/UserPrescription" );
                                         }
@@ -160,7 +159,11 @@ class _SkinTypeState extends State<SkinType> {
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
                                         updateSkinType(2);
-                                        Navigator.pushNamed(context, "/UserPrescription" );
+                                        if(userData.updateProfile){
+                                          Navigator.pushNamed(context, "/UpdateProfile");
+                                        }else{
+                                          Navigator.pushNamed(context, "/UserPrescription" );
+                                        }
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03,vertical: screenHeight*0.02),
@@ -206,7 +209,11 @@ class _SkinTypeState extends State<SkinType> {
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
                                         updateSkinType(3);
-                                        Navigator.pushNamed(context, "/UserPrescription" );
+                                        if(userData.updateProfile){
+                                          Navigator.pushNamed(context, "/UpdateProfile");
+                                        }else{
+                                          Navigator.pushNamed(context, "/UserPrescription" );
+                                        }
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03,vertical: screenHeight*0.02),
@@ -252,7 +259,11 @@ class _SkinTypeState extends State<SkinType> {
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
                                         updateSkinType(4);
-                                        Navigator.pushNamed(context, "/UserPrescription" );
+                                        if(userData.updateProfile){
+                                          Navigator.pushNamed(context, "/UpdateProfile");
+                                        }else{
+                                          Navigator.pushNamed(context, "/UserPrescription" );
+                                        }
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03,vertical: screenHeight*0.02),
@@ -299,7 +310,11 @@ class _SkinTypeState extends State<SkinType> {
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
                                         updateSkinType(5);
-                                        Navigator.pushNamed(context, "/UserPrescription" );
+                                        if(userData.updateProfile){
+                                          Navigator.pushNamed(context, "/UpdateProfile");
+                                        }else{
+                                          Navigator.pushNamed(context, "/UserPrescription" );
+                                        }
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03,vertical: screenHeight*0.02),
@@ -345,7 +360,11 @@ class _SkinTypeState extends State<SkinType> {
                                       splashFactory: NoSplash.splashFactory,
                                       onTap: (){
                                         updateSkinType(6);
-                                        Navigator.pushNamed(context, "/UserPrescription" );
+                                        if(userData.updateProfile){
+                                          Navigator.pushNamed(context, "/UpdateProfile");
+                                        }else{
+                                          Navigator.pushNamed(context, "/UserPrescription" );
+                                        }
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03,vertical: screenHeight*0.02),

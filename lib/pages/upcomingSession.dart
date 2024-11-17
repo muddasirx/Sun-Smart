@@ -349,7 +349,7 @@ class _UpcomingSessionState extends State<UpcomingSession> {
     List<double> exposureValues=[0.10,0.30,0.50,0.70,0.80];
     double exposure = exposureValues[sessionDetails.clothingTypeNumber-1];
 
-    double sessionTimeInMin=sessionDetails.vitaminDIntake/(uvIndex*typeFactor*ageFactor*coverFactor);
+    double sessionTimeInMin=(sessionDetails.vitaminDIntake*coverFactor)/(uvIndex*typeFactor*ageFactor);
     if(sessionDetails.spf!=0){
       sessionTimeInMin=sessionTimeInMin*sessionDetails.spf;
     }

@@ -250,9 +250,13 @@ class _countDownScreenState extends State<countDownScreen> with SingleTickerProv
                         width: isTablet(context)?screenWidth*0.28:screenWidth*0.36,
                         textFormat: (sessionDetails.sessionDurationMinutes>60)?TextFormat.HH_MM_SS:TextFormat.MM_SS,
                         onComplete: (){
+                          uploadDataToDB();
                           countDownDetails.timeSpentInSeconds = (sessionDetails.sessionDurationMinutes * 60) - controller.getTimeInSeconds();
-
-                          Navigator.pushNamed(context, "/SessionFinished");
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => SessionFinished()),
+                                (Route<dynamic> route) => false,
+                          );
                         },
                         duration:sessionDetails.sessionDurationMinutes*60,
                         textStyle: GoogleFonts.brunoAceSc(
