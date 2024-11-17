@@ -232,72 +232,47 @@ class _GraphScreenState extends State<GraphScreen> {
                         bottomTitles: AxisTitles(
                           sideTitles: SideTitles(
                             showTitles: true,
-                            getTitlesWidget: (value, meta) {
-                              if (selectedRange == 'Week') {
-                                List<String> weekDays = [
-                                  'Sun',
-                                  'Mon',
-                                  'Tue',
-                                  'Wed',
-                                  'Thu',
-                                  'Fri',
-                                  'Sat'
-                                ];
-                                return Text(
-                                  weekDays[value.toInt()],
-                                  style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: (isTablet(context))
-                                          ? screenWidth * 0.026
-                                          : screenWidth * 0.035,
-                                    ),
-                                  ),
-                                );
-                              } else if (selectedRange == 'Month') {
-                                int day = value.toInt() + 1;
-                                if ([1, 5, 10, 15, 20, 25, 30].contains(day)) {
+                              getTitlesWidget: (value, meta) {
+                                if (selectedRange == 'Week') {
+                                  List<String> weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
                                   return Text(
-                                    day.toString(),
+                                    weekDays[value.toInt()],
                                     style: GoogleFonts.raleway(
                                       textStyle: TextStyle(
                                         color: Colors.black,
-                                        fontSize: (isTablet(context))
-                                            ? screenWidth * 0.026
-                                            : screenWidth * 0.035,
+                                        fontSize: (isTablet(context)) ? screenWidth * 0.026 : screenWidth * 0.035,
+                                      ),
+                                    ),
+                                  );
+                                } else if (selectedRange == 'Month') {
+                                  int day = value.toInt() + 1;
+                                  if ([1, 5, 10, 15, 20, 25, 30].contains(day)) {
+                                    return Text(
+                                      day.toString(),
+                                      style: GoogleFonts.raleway(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: (isTablet(context)) ? screenWidth * 0.026 : screenWidth * 0.035,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                } else if (selectedRange == 'Year') {
+                                  List<String> months = [
+                                    'J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'
+                                  ];
+                                  return Text(
+                                    months[value.toInt()],
+                                    style: GoogleFonts.raleway(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: (isTablet(context)) ? screenWidth * 0.026 : screenWidth * 0.035,
                                       ),
                                     ),
                                   );
                                 }
-                              } else if (selectedRange == 'Year') {
-                                List<String> months = [
-                                  'J',
-                                  'F',
-                                  'M',
-                                  'A',
-                                  'M',
-                                  'J',
-                                  'J',
-                                  'A',
-                                  'S',
-                                  'O',
-                                  'N',
-                                  'D'
-                                ];
-                                return Text(
-                                  months[value.toInt()],
-                                  style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: (isTablet(context))
-                                          ? screenWidth * 0.026
-                                          : screenWidth * 0.035,
-                                    ),
-                                  ),
-                                );
+                                return Text('');
                               }
-                              return Text('');
-                            },
                           ),
                         ),
                         rightTitles: AxisTitles(
@@ -895,8 +870,8 @@ class _GraphScreenState extends State<GraphScreen> {
     setState(() {
       if (selectedRange == 'Week') {
         int weekday = currentDate.weekday;
-        rangeStart = currentDate.subtract(Duration(days: weekday - 1));
-        rangeEnd = rangeStart.add(Duration(days: 6));
+        rangeStart = currentDate.subtract(Duration(days: weekday - 1)); // Start from Monday
+        rangeEnd = rangeStart.add(Duration(days: 6)); // End on Sunday
       } else if (selectedRange == 'Month') {
         rangeStart = DateTime(currentDate.year, currentDate.month, 1);
         rangeEnd = DateTime(currentDate.year, currentDate.month + 1, 0);
@@ -936,19 +911,11 @@ class _GraphScreenState extends State<GraphScreen> {
   bool isForwardButtonEnabled() {
     if (selectedRange == 'Week') {
       return currentDate.isBefore(
-          DateTime.now().subtract(Duration(days: DateTime
-              .now()
-              .weekday - 1)));
+          DateTime.now().subtract(Duration(days: DateTime.now().weekday - 1)));
     } else if (selectedRange == 'Month') {
-      return currentDate.isBefore(DateTime(DateTime
-          .now()
-          .year, DateTime
-          .now()
-          .month, 1));
+      return currentDate.isBefore(DateTime(DateTime.now().year, DateTime.now().month, 1));
     } else if (selectedRange == 'Year') {
-      return currentDate.year < DateTime
-          .now()
-          .year;
+      return currentDate.year < DateTime.now().year;
     }
     return false;
   }
@@ -968,17 +935,15 @@ class _GraphScreenState extends State<GraphScreen> {
   List<BarChartGroupData> getBarGroups() {
     final userData = Provider.of<UserDataNotifier>(context, listen: false);
 
-    double screenWidth = MediaQuery
-        .sizeOf(context)
-        .width;
+    double screenWidth = MediaQuery.sizeOf(context).width;
 
     int numberOfBars;
     if (selectedRange == 'Week') {
-      numberOfBars = 7;
+      numberOfBars = 7; // 7 days
     } else if (selectedRange == 'Month') {
       numberOfBars = DateTime(currentDate.year, currentDate.month + 1, 0).day;
     } else {
-      numberOfBars = 12;
+      numberOfBars = 12; // 12 months
     }
 
     double barWidth = screenWidth / (numberOfBars * 2);
@@ -989,7 +954,7 @@ class _GraphScreenState extends State<GraphScreen> {
       DateTime periodStart;
 
       if (selectedRange == 'Week') {
-        periodStart = rangeStart.add(Duration(days: i));
+        periodStart = rangeStart.add(Duration(days: i)); // Start from Monday
       } else if (selectedRange == 'Month') {
         periodStart = DateTime(currentDate.year, currentDate.month, i + 1);
       } else {
@@ -1025,7 +990,6 @@ class _GraphScreenState extends State<GraphScreen> {
             BarChartRodData(
               toY: iuSum,
               color: iuSum > 0 ? Colors.orangeAccent : Color(0xFFE7E7E7),
-              // Fix applied here
               width: barWidth,
               borderRadius: BorderRadius.circular(8),
             ),
