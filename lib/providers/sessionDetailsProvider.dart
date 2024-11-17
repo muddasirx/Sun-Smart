@@ -4,10 +4,10 @@ import 'package:untitled/providers/userDataProvider.dart';
 
 class sessionDetailsNotifier with ChangeNotifier {
     int clothingTypeNumber=0;
-    int sessionDurationMinutes=25;
-    int timeTillSunsetMinutes=350;
+    int sessionDurationMinutes=0;
+    int timeTillSunsetMinutes=0;
     int sessionTakenTime=0;
-    double uvIndex=3.4;
+    double uvIndex=0.0;
     int vitaminDIntake=1000;
     int spf=0;
     bool sessionPossible=true;

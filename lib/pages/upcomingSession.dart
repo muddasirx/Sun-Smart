@@ -16,16 +16,15 @@ class UpcomingSession extends StatefulWidget {
 }
 
 class _UpcomingSessionState extends State<UpcomingSession> {
-  double uvIndex=3.4;
+  double uvIndex=0.0;
   int sessionDuration=0;
   int timeTillSunset=0;
-  bool indexFetched=true;
+  bool indexFetched=false;
 
   @override
   void initState() {
-    final sessionDetails = Provider.of<sessionDetailsNotifier>(context, listen: false);
     super.initState();
-    //fetchUVIndex();
+    fetchUVIndex();
   }
 
   @override
