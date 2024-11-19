@@ -37,13 +37,9 @@ class WeatherService {
 
         DateTime sunsetTime = DateTime.parse(data['result']["sun_info"]['sun_times']['sunset']);
 
-        DateTime thirtyMinutesBeforeSunset = sunsetTime.subtract(Duration(minutes: 30));
-
-        // Add 30 minutes to the current time
-        DateTime currentTimePlusThirty = DateTime.now().add(Duration(minutes: 30));
         final currentTime = DateTime.now();
         // Check if the current time plus 30 minutes has reached or passed 30 minutes before sunset
-        if (currentTimePlusThirty.isAfter(thirtyMinutesBeforeSunset) || currentTimePlusThirty.isAtSameMomentAs(thirtyMinutesBeforeSunset)) {
+        if (currentTime.isAtSameMomentAs(sunsetTime)) {
           sessionDetails.sessionSuspended();
           sessionDetails.nightArrived();
           print("inside night case");

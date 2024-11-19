@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +23,13 @@ class _UserPrescriptionState extends State<UserPrescription> {
   bool yesPressed=true;
   bool noPressed=false;
   bool submitPressed=false;
+  bool hasConnection=true;
+
+  @override
+  void initState() {
+    super.initState();
+    checkConnection();
+  }
 
 
   @override
@@ -68,13 +77,13 @@ class _UserPrescriptionState extends State<UserPrescription> {
                             SizedBox(height: screenHeight*0.015,),
                             Text(
                               "Are you taking any supplements?",
-                              style: GoogleFonts.brunoAceSc(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'BrunoAceSC',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth*0.035:screenWidth*0.0405,
                                   //fontWeight: FontWeight.bold,
                                 ),
-                              ),
+
                             ),
                             SizedBox(height: screenHeight*0.018,),
                             Row(
@@ -94,25 +103,25 @@ class _UserPrescriptionState extends State<UserPrescription> {
                                   SizedBox(height: screenHeight*0.06,),
                                   Text(
                                     "Add your pill",
-                                    style: GoogleFonts.brunoAceSc(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'BrunoAceSC',
                                         color: Colors.black,
                                         fontSize: (isTablet(context))?screenWidth*0.035:screenWidth*0.0405,
                                         //fontWeight: FontWeight.bold,
                                       ),
-                                    ),
+
                                   ),
                                   SizedBox(height: screenHeight*0.015,),
                                   Text(
                                     "Add your Vitamin D pill IU and get more precise results",
                                     softWrap: true,
-                                    style: GoogleFonts.lato(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Lato',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.028:screenWidth*0.035,
 
                                         //fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
 
@@ -133,14 +142,13 @@ class _UserPrescriptionState extends State<UserPrescription> {
                                       Text(
                                         "Pills added successfully.",
                                         softWrap: true,
-                                        style: GoogleFonts.raleway(
-                                          textStyle: TextStyle(
+                                        style: TextStyle(
+                                        fontFamily: 'Raleway',
                                             color: Colors.green,
                                             fontSize: (isTablet(context))?screenWidth*0.025:screenWidth*0.032,
 
                                             //fontWeight: FontWeight.bold,
                                           ),
-                                        ),
                                       ),
                                     ],
                                   ):SizedBox();
@@ -148,26 +156,24 @@ class _UserPrescriptionState extends State<UserPrescription> {
                                   SizedBox(height: screenHeight*0.05,),
                                   Text(
                                     "Add your test results",
-                                    style: GoogleFonts.brunoAceSc(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'BrunoAceSC',
                                         color: Colors.black,
                                         fontSize: (isTablet(context))?screenWidth*0.035:screenWidth*0.0405,
                                         //fontWeight: FontWeight.bold,
-                                      ),
                                     ),
                                   ),
                                   SizedBox(height: screenHeight*0.015,),
                                   Text(
                                     "Add your recent Serum vitamin D level",
                                     softWrap: true,
-                                    style: GoogleFonts.lato(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Lato',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.028:screenWidth*0.035,
 
                                         //fontWeight: FontWeight.bold,
                                       ),
-                                    ),
                                   ),
                                   SizedBox(height: screenHeight*0.025,),
                                   GestureDetector(
@@ -185,15 +191,15 @@ class _UserPrescriptionState extends State<UserPrescription> {
                                       Text(
                                         "Results added successfully.",
                                         softWrap: true,
-                                        style: GoogleFonts.raleway(
-                                          textStyle: TextStyle(
+                                        style: TextStyle(
+                                        fontFamily: 'Raleway',
                                             color: Colors.green,
                                             fontSize: (isTablet(context))?screenWidth*0.025:screenWidth*0.032,
 
 
                                             //fontWeight: FontWeight.bold,
                                           ),
-                                        ),
+
                                       ),
                                     ],
                                       ):SizedBox();
@@ -206,62 +212,64 @@ class _UserPrescriptionState extends State<UserPrescription> {
                             Center(
                               child: InkWell(
                                 splashFactory: NoSplash.splashFactory,
-                                onTap: (){
-
-                                  if(yesPressed && (historyProvider.pillAdded || testResultsProvider.resultsAdded) ) {
-                                    print("inside yes pressed");
-                                     updateUserData();
-                                     if(userData.updateHistoryPressed){
-                                       Navigator.pushAndRemoveUntil(
-                                         context,
-                                         MaterialPageRoute(builder: (context) => GraphScreen()),
-                                             (route) => false,
-                                       );
-                                       Fluttertoast.showToast(
-                                         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-                                         msg: "User History updated successfully.",
-                                         toastLength: Toast.LENGTH_SHORT,
-                                         gravity: ToastGravity.BOTTOM,
-                                         timeInSecForIosWeb: 1,
-                                         backgroundColor: Colors.grey[300],
-                                         textColor: Colors.black,
-                                       );
-                                       userData.updateHistoryPressed=false;
-                                     }else
-                                    Navigator.pushNamed(context, "/SourcesOfVitaminD");
-                                  }
-                                  else if(noPressed) {
-                                    print("Inside no pressed");
-                                    removeUserHistory();
-                                    if(userData.updateHistoryPressed){
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => GraphScreen()),
-                                            (route) => false,
-                                      );
+                                onTap: () async{
+                                  await checkConnection();
+                                  if(hasConnection){
+                                    if(yesPressed && (historyProvider.pillAdded || testResultsProvider.resultsAdded) ) {
+                                      print("inside yes pressed");
+                                      updateUserData();
+                                      if(userData.updateHistoryPressed){
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => GraphScreen()),
+                                              (route) => false,
+                                        );
+                                        Fluttertoast.showToast(
+                                          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+                                          msg: "User History updated successfully.",
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.grey[300],
+                                          textColor: Colors.black,
+                                        );
+                                        userData.updateHistoryPressed=false;
+                                      }else
+                                        Navigator.pushNamed(context, "/SourcesOfVitaminD");
+                                    }
+                                    else if(noPressed) {
+                                      print("Inside no pressed");
+                                      removeUserHistory();
+                                      if(userData.updateHistoryPressed){
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => GraphScreen()),
+                                              (route) => false,
+                                        );
+                                        Fluttertoast.showToast(
+                                          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+                                          msg: "User History updated successfully.",
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.grey[300],
+                                          textColor: Colors.black,
+                                        );
+                                        userData.updateHistoryPressed=false;
+                                      }else
+                                        Navigator.pushNamed(context, "/SourcesOfVitaminD");
+                                    }
+                                    else{
                                       Fluttertoast.showToast(
-                                        fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-                                        msg: "User History updated successfully.",
+                                        fontSize: (isTablet(context))?22:13,
+                                        msg: "Please add the pill and results to proceed",
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.BOTTOM,
                                         timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.grey[300],
-                                        textColor: Colors.black,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
                                       );
-                                      userData.updateHistoryPressed=false;
-                                    }else
-                                    Navigator.pushNamed(context, "/SourcesOfVitaminD");
-                                  }
-                                  else{
-                                    Fluttertoast.showToast(
-                                      fontSize: (isTablet(context))?22:13,
-                                      msg: "Please add the pill and results to proceed",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor: Colors.red,
-                                      textColor: Colors.white,
-                                    );
+                                    }
                                   }
 
                                 },
@@ -297,7 +305,81 @@ class _UserPrescriptionState extends State<UserPrescription> {
                     ),
                   ],
                 ),
+            ),
+            !hasConnection?
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: Colors.white24,
+
+            ):Container(),
+            !hasConnection
+                ? Padding(
+              padding: EdgeInsets.only(left: isTablet(context)?screenWidth*0.05:0,right: isTablet(context)?screenWidth*0.05:0),
+              child: Center(
+                  child: AlertDialog(
+                    title: Text(
+                      "No Internet Available",
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
+                        color: Colors.black,
+                        fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.048,
+                        //fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset('assets/images/noConnection.png',height: screenHeight*0.2,),
+                        Text(
+                          'You need an internet connection to proceed. Please check your connection and try again.',
+                          style: TextStyle(
+                            fontFamily: 'Raleway',
+                            color: Colors.black,
+                            fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.04,
+                            //fontWeight: FontWeight.bold,
+
+                          ),
+                          textAlign: TextAlign.center,),
+                      ],
+                    ),
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    actions: [
+                      TextButton(
+                        onPressed: () => SystemNavigator.pop(),
+                        child:  Text(
+                          "Exit",
+                          style: TextStyle(
+                            fontFamily: 'BrunoAceSC',
+                            color: Colors.black,
+                            fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
+                            //fontWeight: FontWeight.bold,
+                          ),
+
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          await checkConnection();
+                          // Navigator.pop() can be used here if desired
+                        },
+                        child:  Text(
+                          "Retry",
+                          style: TextStyle(
+                            fontFamily: 'BrunoAceSC',
+                            color: Colors.black,
+                            fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
+                            //fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],)
+              ),
             )
+                : Container(),
           ],
         ),
     );
@@ -411,14 +493,14 @@ class _UserPrescriptionState extends State<UserPrescription> {
         padding: EdgeInsets.symmetric(horizontal: screenWidth*0.04,vertical: screenHeight*0.015),
         child: Text(
           ch,
-          style: GoogleFonts.brunoAceSc(
-            textStyle: TextStyle(
+          style: TextStyle(
+            fontFamily: 'BrunoAceSC',
               color: Colors.white,
               fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.038,
               //fontWeight: FontWeight.bold,
             ),
           ),
-        ),
+
       )
     );
   }
@@ -450,19 +532,26 @@ class _UserPrescriptionState extends State<UserPrescription> {
             padding: EdgeInsets.symmetric(horizontal: screenWidth*0.04,vertical: screenHeight*0.015),
             child: Text(
               ch,
-              style: GoogleFonts.brunoAceSc(
-                textStyle: TextStyle(
+              style: TextStyle(
+                fontFamily: 'BrunoAceSC',
                   color: Colors.black,
                   fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.038,
                   //fontWeight: FontWeight.bold,
                 ),
-              ),
+
             ),
           )
       )
     );
   }
 
-
+  Future<void> checkConnection() async {
+    var result = await InternetConnectionChecker().hasConnection;
+    if (mounted) {
+      setState(() {
+        hasConnection = result;
+      });
+    }
+  }
 
 }

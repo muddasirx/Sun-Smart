@@ -40,12 +40,11 @@ class _firstPageState extends State<firstPage> {
                         SizedBox(height: (isTablet(context))?screenHeight * 0.02:screenHeight * 0.015),
                         Text(
                           "Track Your Goal",
-                          style: GoogleFonts.oxanium(
-                            textStyle: TextStyle(
+                          style: TextStyle(
+                            fontFamily: 'Oxanium',
                               color: Colors.black,
                               fontSize: (isTablet(context))?screenWidth* 0.037:screenWidth* 0.056,//22,
                               fontWeight: FontWeight.bold,
-                            ),
                           ),
                         ),
                         SizedBox(height: screenHeight * 0.005),
@@ -55,21 +54,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "1. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?22:15,
                                 ),
-                              ),
                             ),
                             Flexible(
                               child: Text(
                                 "Spread about benefits of Vitamin D",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -82,21 +79,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "2. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                ),
                               ),
                             ),
                             Flexible(
                               child: Text(
                                 "Prevent vitamin D deficiency among children and adults",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -109,21 +104,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "3. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                ),
                               ),
                             ),
                             Flexible(
                               child: Text(
                                 "Healthier lifestyle",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -136,21 +129,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "4. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//15,
-                                ),
                               ),
                             ),
                             Flexible(
                               child: Text(
                                 "Create more reasons for families to spend more time outdoors",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -161,13 +152,12 @@ class _firstPageState extends State<firstPage> {
                         SizedBox(height: screenHeight * 0.03),
                         Text(
                           "How App Works",
-                          style: GoogleFonts.oxanium(
-                            textStyle: TextStyle(
+                          style: TextStyle(
+                            fontFamily: 'Oxanium',
                               color: Colors.black,
                               fontSize: (isTablet(context))?screenWidth* 0.037:screenWidth* 0.056,//(isTablet(context))?27:22,
                               fontWeight: FontWeight.bold,
                             ),
-                          ),
                         ),
                         SizedBox(height: screenHeight * 0.005),
                         Row(
@@ -176,21 +166,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "1. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                ),
                               ),
                             ),
                             Flexible(
                               child: Text(
                                 "Scan the sun",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?21:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -203,21 +191,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "2. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
                                 ),
-                              ),
                             ),
                             Flexible(
                               child: Text(
                                 "Start the timer",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -230,21 +216,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "3. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                ),
                               ),
                             ),
                             Flexible(
                               child: Text(
                                 "Know when to end the session",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -257,21 +241,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "4. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
                                 ),
-                              ),
                             ),
                             Flexible(
                               child: Text(
                                 "Track the progress",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style:  TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -282,12 +264,11 @@ class _firstPageState extends State<firstPage> {
                         SizedBox(height: screenHeight * 0.03),
                         Text(
                           "Features",
-                          style: GoogleFonts.oxanium(
-                            textStyle: TextStyle(
+                          style: TextStyle(
+                            fontFamily: 'Oxanium',
                               color: Colors.black,
                               fontSize: (isTablet(context))?screenWidth* 0.037:screenWidth* 0.056,//(isTablet(context))?27:22,
                               fontWeight: FontWeight.bold,
-                            ),
                           ),
                         ),
                         SizedBox(height: screenHeight * 0.005),
@@ -297,22 +278,20 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "1. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
                                 ),
                               ),
-                            ),
                             Flexible(
                               child: Text(
                                 "Calculates the amount of vitamin D produced during each session",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                    fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
                                   ),
-                                ),
                                 softWrap: true,
                               ),
                             ),
@@ -324,21 +303,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "2. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
                                 ),
                               ),
-                            ),
                             Flexible(
                               child: Text(
                                 "Vitamin D supplement tracker",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -351,21 +328,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "3. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
                                 ),
-                              ),
                             ),
                             Flexible(
                               child: Text(
                                 "Vitamin D supplement reminder",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -378,21 +353,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "4. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style:  TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                ),
                               ),
                             ),
                             Flexible(
                               child: Text(
                                 "Calculates session duration in the sun",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),
@@ -405,21 +378,19 @@ class _firstPageState extends State<firstPage> {
                           children: [
                             Text(
                               "5. ",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style:  TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                ),
                               ),
                             ),
                             Flexible(
                               child: Text(
                                 "Daily goals and reminders",
-                                style: GoogleFonts.raleway(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth* 0.027:screenWidth* 0.038,//(isTablet(context))?20:15,
-                                  ),
                                 ),
                                 softWrap: true,
                               ),

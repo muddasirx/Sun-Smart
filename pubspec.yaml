@@ -73,6 +73,22 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Regular.ttf
+        - asset: assets/fonts/Raleway-Bold.ttf
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Bold.ttf
+    - family: BrunoAceSC
+      fonts:
+        - asset: assets/fonts/BrunoAceSC-Regular.ttf
+    - family: Oxanium
+      fonts:
+        - asset: assets/fonts/Oxanium-Regular.ttf
+        - asset: assets/fonts/Oxanium-Bold.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

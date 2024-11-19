@@ -53,12 +53,11 @@ class _SkinTypeState extends State<SkinType> {
                       children: [
                         Text(
                           "What's your Skin Type?",
-                          style: GoogleFonts.brunoAceSc(
-                            textStyle: TextStyle(
+                          style: TextStyle(
+                            fontFamily: 'BrunoAceSC',
                               color: Colors.black,
                               fontSize: (isTablet(context))?screenWidth*0.04:screenWidth*0.051,
                               //fontWeight: FontWeight.bold,
-                            ),
                           ),
                         ),
                         SizedBox(height: screenHeight*0.01,),
@@ -67,26 +66,24 @@ class _SkinTypeState extends State<SkinType> {
                              Text(
                                   "Select any of the following skin type",
                                   softWrap: true,
-                                  style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'Lato',
                                       color: Colors.black54,
                                       fontSize:(isTablet(context))?screenWidth*0.027:screenWidth*0.035,
 
                                       //fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
 
                               Text(
                                 "to proceed",
                                 softWrap: true,
-                                style: GoogleFonts.lato(
-                                  textStyle: TextStyle(
+                                style:TextStyle(
+                                  fontFamily: 'Lato',
                                     color: Colors.black54,
                                     fontSize: (isTablet(context))?screenWidth*0.027:screenWidth*0.035,
 
                                     //fontWeight: FontWeight.bold,
-                                  ),
                                 ),
                               ),
                             ],
@@ -106,15 +103,17 @@ class _SkinTypeState extends State<SkinType> {
                           child: Column(
                                   children: [
                                     InkWell(
-                                      onTap: (){
-
-                                        if(userData.updateProfile){
-                                          Navigator.pushNamed(context, "/UpdateProfile");
-                                          userData.changeSkinType(1);
-                                        }else{
-                                          updateSkinType(1);
-                                          Navigator.pushNamed(context, "/UserPrescription" );
-                                          userData.changeSkinType(1);
+                                      onTap: () async{
+                                        await checkConnection();
+                                        if(hasConnection){
+                                          if(userData.updateProfile){
+                                            Navigator.pushNamed(context, "/UpdateProfile");
+                                            userData.changeSkinType(1);
+                                          }else{
+                                            updateSkinType(1);
+                                            Navigator.pushNamed(context, "/UserPrescription" );
+                                            userData.changeSkinType(1);
+                                          }
                                         }
                                       },
                                       splashFactory: NoSplash.splashFactory,
@@ -141,11 +140,10 @@ class _SkinTypeState extends State<SkinType> {
                                                       "Always burns, never tans",
                                                       textAlign: TextAlign.center,
                                                       softWrap: true,
-                                                      style: GoogleFonts.raleway(
-                                                        textStyle: TextStyle(
+                                                      style: TextStyle(
+                                                        fontFamily: 'Raleway',
                                                           color: Colors.white,
                                                           fontSize: (isTablet(context)) ? screenWidth*0.033 : screenWidth*0.041,
-                                                        ),
                                                       ),
                                                     ),
                                               ),
@@ -153,6 +151,7 @@ class _SkinTypeState extends State<SkinType> {
                                             Consumer<UserDataNotifier>(builder: (context,value,child) {
                                               return (userData.skinType == 1) ?
                                               Icon(Icons.check_circle_rounded,
+                                                size: isTablet(context)?screenWidth*0.05:screenWidth*0.058,
                                                 color: Color(0xFF0DA500),)
                                                   : SizedBox();
                                             })
@@ -166,14 +165,17 @@ class _SkinTypeState extends State<SkinType> {
                                     ),
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
-                                      onTap: (){
-                                        if(userData.updateProfile){
-                                          Navigator.pushNamed(context, "/UpdateProfile");
-                                          userData.changeSkinType(2);
-                                        }else{
-                                          Navigator.pushNamed(context, "/UserPrescription" );
-                                          updateSkinType(2);
-                                          userData.changeSkinType(2);
+                                      onTap: () async{
+                                        await checkConnection();
+                                        if(hasConnection){
+                                          if(userData.updateProfile){
+                                            Navigator.pushNamed(context, "/UpdateProfile");
+                                            userData.changeSkinType(2);
+                                          }else{
+                                            Navigator.pushNamed(context, "/UserPrescription" );
+                                            updateSkinType(2);
+                                            userData.changeSkinType(2);
+                                          }
                                         }
                                       },
                                       child: Padding(
@@ -199,18 +201,18 @@ class _SkinTypeState extends State<SkinType> {
                                                       textAlign: TextAlign.center,
                                                       "Usually burns, Sometimes tans",
                                                       softWrap: true,
-                                                      style: GoogleFonts.raleway(
-                                                        textStyle: TextStyle(
+                                                      style: TextStyle(
+                                                        fontFamily: 'Raleway',
                                                           color: Colors.white,
                                                           fontSize: (isTablet(context)) ? screenWidth*0.033 : screenWidth*0.041,
                                                         ),
-                                                    ),
                                                   ),
                                               ),
                                             ),
                                             Consumer<UserDataNotifier>(builder: (context,value,child) {
                                               return (userData.skinType == 2) ?
                                               Icon(Icons.check_circle_rounded,
+                                                  size: isTablet(context)?screenWidth*0.05:screenWidth*0.058,
                                                 color: Color(0xFF0DA500),)
                                                   : SizedBox();
                                             })
@@ -224,14 +226,17 @@ class _SkinTypeState extends State<SkinType> {
                                     ),
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
-                                      onTap: (){
-                                        if(userData.updateProfile){
-                                          Navigator.pushNamed(context, "/UpdateProfile");
-                                          userData.changeSkinType(3);
-                                        }else{
-                                          Navigator.pushNamed(context, "/UserPrescription" );
-                                          updateSkinType(3);
-                                          userData.changeSkinType(3);
+                                      onTap: () async{
+                                        await checkConnection();
+                                        if(hasConnection){
+                                          if(userData.updateProfile){
+                                            Navigator.pushNamed(context, "/UpdateProfile");
+                                            userData.changeSkinType(3);
+                                          }else{
+                                            Navigator.pushNamed(context, "/UserPrescription" );
+                                            updateSkinType(3);
+                                            userData.changeSkinType(3);
+                                          }
                                         }
                                       },
                                       child: Padding(
@@ -257,11 +262,10 @@ class _SkinTypeState extends State<SkinType> {
                                                       "Sometimes mild burns, tans uniformly",
                                                       softWrap: true,
                                                       textAlign: TextAlign.center,
-                                                      style: GoogleFonts.raleway(
-                                                        textStyle: TextStyle(
+                                                      style: TextStyle(
+                                                        fontFamily: 'Raleway',
                                                           color: Colors.white,
                                                           fontSize: (isTablet(context)) ? screenWidth*0.033 : screenWidth*0.041,
-                                                        ),
                                                     ),
                                                   ),
                                               ),
@@ -269,6 +273,7 @@ class _SkinTypeState extends State<SkinType> {
                                             Consumer<UserDataNotifier>(builder: (context,value,child) {
                                               return (userData.skinType == 3) ?
                                               Icon(Icons.check_circle_rounded,
+                                                size: isTablet(context)?screenWidth*0.05:screenWidth*0.058,
                                                 color: Color(0xFF0DA500),)
                                                   : SizedBox();
                                             })
@@ -282,15 +287,19 @@ class _SkinTypeState extends State<SkinType> {
                                     ),
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
-                                      onTap: (){
-                                        if(userData.updateProfile){
-                                          Navigator.pushNamed(context, "/UpdateProfile");
-                                          userData.changeSkinType(4);
-                                        }else{
-                                          Navigator.pushNamed(context, "/UserPrescription" );
-                                          updateSkinType(4);
-                                          userData.changeSkinType(4);
+                                      onTap: () async{
+                                        await checkConnection();
+                                        if(hasConnection){
+                                          if(userData.updateProfile){
+                                            Navigator.pushNamed(context, "/UpdateProfile");
+                                            userData.changeSkinType(4);
+                                          }else{
+                                            Navigator.pushNamed(context, "/UserPrescription" );
+                                            updateSkinType(4);
+                                            userData.changeSkinType(4);
+                                          }
                                         }
+
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03,vertical: screenHeight*0.02),
@@ -315,11 +324,10 @@ class _SkinTypeState extends State<SkinType> {
                                                       "Burns minimally, always tans well",
                                                       textAlign: TextAlign.center,
                                                       softWrap: true,
-                                                      style: GoogleFonts.raleway(
-                                                        textStyle: TextStyle(
+                                                      style: TextStyle(
+                                                        fontFamily: 'Raleway',
                                                           color: Colors.white,
                                                           fontSize: (isTablet(context)) ? screenWidth*0.033 : screenWidth*0.041,
-                                                        ),
                                                     ),
                                                   ),
 
@@ -328,6 +336,7 @@ class _SkinTypeState extends State<SkinType> {
                                             Consumer<UserDataNotifier>(builder: (context,value,child) {
                                               return (userData.skinType == 4) ?
                                               Icon(Icons.check_circle_rounded,
+                                                size: isTablet(context)?screenWidth*0.05:screenWidth*0.058,
                                                 color: Color(0xFF0DA500),)
                                                   : SizedBox();
                                             })
@@ -341,15 +350,19 @@ class _SkinTypeState extends State<SkinType> {
                                     ),
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
-                                      onTap: (){
-                                        if(userData.updateProfile){
-                                          Navigator.pushNamed(context, "/UpdateProfile");
-                                          userData.changeSkinType(5);
-                                        }else{
-                                          Navigator.pushNamed(context, "/UserPrescription" );
-                                          updateSkinType(5);
-                                          userData.changeSkinType(5);
+                                      onTap: ()async{
+                                        await checkConnection();
+                                        if(hasConnection){
+                                          if(userData.updateProfile){
+                                            Navigator.pushNamed(context, "/UpdateProfile");
+                                            userData.changeSkinType(5);
+                                          }else{
+                                            Navigator.pushNamed(context, "/UserPrescription" );
+                                            updateSkinType(5);
+                                            userData.changeSkinType(5);
+                                          }
                                         }
+
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03,vertical: screenHeight*0.02),
@@ -374,11 +387,11 @@ class _SkinTypeState extends State<SkinType> {
                                                       "Burns rarely, tans very easily",
                                                       softWrap: true,
                                                       textAlign: TextAlign.center,
-                                                      style: GoogleFonts.raleway(
-                                                        textStyle: TextStyle(
+                                                      style: TextStyle(
+                                                        fontFamily: 'Raleway',
                                                           color: Colors.white,
                                                           fontSize: (isTablet(context)) ? screenWidth*0.033 : screenWidth*0.041,
-                                                        ),
+
                                                     ),
                                                   ),
                                               ),
@@ -386,6 +399,7 @@ class _SkinTypeState extends State<SkinType> {
                                             Consumer<UserDataNotifier>(builder: (context,value,child) {
                                               return (userData.skinType == 5) ?
                                               Icon(Icons.check_circle_rounded,
+                                                size: isTablet(context)?screenWidth*0.05:screenWidth*0.058,
                                                 color: Color(0xFF0DA500),)
                                                   : SizedBox();
                                             })
@@ -399,15 +413,19 @@ class _SkinTypeState extends State<SkinType> {
                                     ),
                                     InkWell(
                                       splashFactory: NoSplash.splashFactory,
-                                      onTap: (){
-                                        if(userData.updateProfile){
-                                          Navigator.pushNamed(context, "/UpdateProfile");
-                                          userData.changeSkinType(6);
-                                        }else{
-                                          Navigator.pushNamed(context, "/UserPrescription" );
-                                          userData.changeSkinType(6);
-                                          updateSkinType(6);
+                                      onTap: ()async{
+                                        await checkConnection();
+                                        if(hasConnection){
+                                          if(userData.updateProfile){
+                                            Navigator.pushNamed(context, "/UpdateProfile");
+                                            userData.changeSkinType(6);
+                                          }else{
+                                            Navigator.pushNamed(context, "/UserPrescription" );
+                                            userData.changeSkinType(6);
+                                            updateSkinType(6);
+                                          }
                                         }
+
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03,vertical: screenHeight*0.02),
@@ -432,11 +450,11 @@ class _SkinTypeState extends State<SkinType> {
                                                       "Never burns deeply",
                                                       softWrap: true,
                                                       textAlign: TextAlign.center,
-                                                      style: GoogleFonts.raleway(
-                                                        textStyle: TextStyle(
+                                                      style: TextStyle(
+                                                        fontFamily: 'Raleway',
                                                           color: Colors.white,
                                                           fontSize: (isTablet(context)) ? screenWidth*0.033 : screenWidth*0.041,
-                                                        ),
+
                                                     ),
                                                   ),
                                               ),
@@ -444,6 +462,7 @@ class _SkinTypeState extends State<SkinType> {
                                             Consumer<UserDataNotifier>(builder: (context,value,child) {
                                               return (userData.skinType == 6) ?
                                               Icon(Icons.check_circle_rounded,
+                                                size: isTablet(context)?screenWidth*0.05:screenWidth*0.058,
                                                 color: Color(0xFF0DA500),)
                                                   : SizedBox();
                                             })
@@ -461,10 +480,11 @@ class _SkinTypeState extends State<SkinType> {
                 ),
               ),
             !hasConnection?
-            Expanded(
-              child: Container(
+             Container(
+               height: double.infinity,
+                width: double.infinity,
                 color: Colors.white24,
-              ),
+
             ):Container(),
             !hasConnection
                 ? Padding(
@@ -473,13 +493,12 @@ class _SkinTypeState extends State<SkinType> {
                   child: AlertDialog(
                     title: Text(
                       "No Internet Available",
-                      style: GoogleFonts.brunoAceSc(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+    fontFamily: 'BrunoAceSC',
                           color: Colors.black,
                           fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.048,
                           //fontWeight: FontWeight.bold,
                         ),
-                      ),
                       textAlign: TextAlign.center,
                     ),
                     content: Column(
@@ -488,12 +507,12 @@ class _SkinTypeState extends State<SkinType> {
                         Image.asset('assets/images/noConnection.png',height: screenHeight*0.2,),
                         Text(
                           'You need an internet connection to proceed. Please check your connection and try again.',
-                          style: GoogleFonts.raleway(
-                            textStyle: TextStyle(
+                          style: TextStyle(
+    fontFamily: 'Raleway',
                               color: Colors.black,
                               fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.04,
                               //fontWeight: FontWeight.bold,
-                            ),
+
                           ),
                           textAlign: TextAlign.center,),
                       ],
@@ -504,13 +523,13 @@ class _SkinTypeState extends State<SkinType> {
                         onPressed: () => SystemNavigator.pop(),
                         child:  Text(
                           "Exit",
-                          style: GoogleFonts.brunoAceSc(
-                            textStyle: TextStyle(
+                          style: TextStyle(
+    fontFamily: 'BrunoAceSC',
                               color: Colors.black,
                               fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
                               //fontWeight: FontWeight.bold,
                             ),
-                          ),
+
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -521,12 +540,11 @@ class _SkinTypeState extends State<SkinType> {
                         },
                         child:  Text(
                           "Retry",
-                          style: GoogleFonts.brunoAceSc(
-                            textStyle: TextStyle(
+                          style: TextStyle(
+    fontFamily: 'BrunoAceSC',
                               color: Colors.black,
                               fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
                               //fontWeight: FontWeight.bold,
-                            ),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -565,10 +583,12 @@ class _SkinTypeState extends State<SkinType> {
      print('Error updating user info: $e');
    }
  }
+
   bool isTablet(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return screenWidth >= 600 && screenWidth <= 1024;
   }
+
   Future<void> checkConnection() async {
     var result = await InternetConnectionChecker().hasConnection;
     if (mounted) {

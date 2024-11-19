@@ -29,12 +29,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
   TextEditingController _weightController = TextEditingController();
   TextEditingController _ageController = TextEditingController();
   bool hasConnection = true;
+  bool dataFetched=false;
 
   @override
   void initState() {
     super.initState();
     checkConnection();
-    fetchData();
   }
 
   @override
@@ -69,20 +69,20 @@ class _UpdateProfileState extends State<UpdateProfile> {
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: Colors.black87,
-          size: (isTablet(context))?screenWidth* 0.046:screenWidth* 0.06,//(isTablet(context))?30:23
+          size: (isTablet(context)) ? screenWidth * 0.046 : screenWidth * 0.06, //(isTablet(context))?30:23
         ),
         centerTitle: true,
         title: Text(
           "Update Profile",
-          style: GoogleFonts.brunoAceSc(
-            textStyle: TextStyle(
-              color: Colors.black,
-              fontSize: (isTablet(context))?screenWidth* 0.038:screenWidth* 0.051,//(isTablet(context))?27:20,
-              //fontWeight: FontWeight.bold,
-            ),
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: 'BrunoAceSC', // Correctly specify the font family here
+            //fontWeight: FontWeight.bold, // Use an appropriate weight for the font
+            fontSize: (isTablet(context)) ? screenWidth * 0.038 : screenWidth * 0.051, //(isTablet(context))?27:20,
           ),
         ),
       ),
+
 
       body: Stack(
         children: [
@@ -103,11 +103,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         errorStyle: TextStyle(color: Colors.red),
                         contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.015),
                         hintText: "Name",
-                        hintStyle: GoogleFonts.lato(
-                            textStyle:TextStyle(
+                        hintStyle: TextStyle(
                               color: Colors.black54,
+                              fontFamily: 'Lato',
                               fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
-                            )),
+                            ),
                         enabledBorder: UnderlineInputBorder(
                           //borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -142,11 +142,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         errorStyle: TextStyle(color: Colors.red),
                         contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.015),
                         hintText: "Age",
-                        hintStyle: GoogleFonts.lato(
-                            textStyle:TextStyle(
+                        hintStyle: TextStyle(
+                              fontFamily: 'Lato',
                               color: Colors.black54,
                               fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
-                            )),
+                            ),
                         enabledBorder: UnderlineInputBorder(
                           //borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -222,12 +222,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.016),
                         hintText: 'Date of Birth',
-                        hintStyle: GoogleFonts.lato(
-                            textStyle:TextStyle(
+                        hintStyle: TextStyle(
                               color: Colors.black54,
+                              fontFamily: 'Lato',
                               fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
                               // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                            )),
+                            ),
                         focusedErrorBorder: UnderlineInputBorder(
                           // borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -262,12 +262,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       errorStyle: TextStyle(color: Colors.red),
                       contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.013),
                       hintText: "Weight",
-                      hintStyle: GoogleFonts.lato(
-                          textStyle:TextStyle(
+                      hintStyle: TextStyle(
+                            fontFamily: 'Lato',
                             color: Colors.black54,
                             fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
                             // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                          )),
+                          ),
                       enabledBorder: UnderlineInputBorder(
                         //borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -298,28 +298,34 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   SizedBox(height: screenHeight*0.06,),
                   InkWell(
                     splashFactory: NoSplash.splashFactory,
-                    onTap: (){
+                    onTap: () async{
                       if(!updatePressed){
-                        if(_validateFields()){
-                          setState(() {
-                            updatePressed= true;
-                          });
-                          if(userData.updateProfile){
-                            userData.updateProfile=false;
+                        if(_validateFields()) {
+                          await checkConnection();
+                          print("-----connection : $hasConnection------");
+                          if(hasConnection){
+                            print("--------------inside update method-------------");
+                            setState(() {
+                              updatePressed=true;
+                            });
+                            if(userData.updateProfile){
+                              userData.updateProfile=false;
+                            }
+                            userData.updateSkinType(userData.skinType);
+                            updateData();
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Fluttertoast.showToast(
+                              fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+                              msg: "Profile updated successfully.",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.grey[300],
+                              textColor: Colors.black,
+                            );
                           }
-                          userData.updateSkinType(userData.skinType);
-                          updateData();
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          Fluttertoast.showToast(
-                            fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-                            msg: "Profile updated successfully.",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.grey[300],
-                            textColor: Colors.black,
-                          );
+
                         }
                       }
                     },
@@ -355,11 +361,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
             ),
           ),
           !hasConnection?
-          Expanded(
-            child: Container(
+          Container(
+          height: double.infinity,
+              width: double.infinity,
               color: Colors.white24,
-            ),
-          ):Container(),
+            )
+          :Container(),
           !hasConnection
               ? Padding(
             padding: EdgeInsets.only(top: isTablet(context)?screenHeight*0.1:0,left: isTablet(context)?screenWidth*0.05:0,right: isTablet(context)?screenWidth*0.05:0),
@@ -367,28 +374,26 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 child: AlertDialog(
                   title: Text(
                     "No Internet Available",
-                    style: GoogleFonts.brunoAceSc(
-                      textStyle: TextStyle(
+                    style: TextStyle(
                         color: Colors.black,
+                        fontFamily: 'BrunoAceSC',
                         fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.048,
                         //fontWeight: FontWeight.bold,
                       ),
-                    ),
                     textAlign: TextAlign.center,
-                  ),
+                    ),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset('assets/images/noConnection.png',height: screenHeight*0.2,),
                       Text(
                         'You need an internet connection to proceed. Please check your connection and try again.',
-                        style: GoogleFonts.raleway(
-                          textStyle: TextStyle(
+                        style: TextStyle(
                             color: Colors.black,
+                            fontFamily: 'Raleway',
                             fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.04,
                             //fontWeight: FontWeight.bold,
                           ),
-                        ),
                         textAlign: TextAlign.center,),
                     ],
                   ),
@@ -398,13 +403,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       onPressed: () => SystemNavigator.pop(),
                       child:  Text(
                         "Exit",
-                        style: GoogleFonts.brunoAceSc(
-                          textStyle: TextStyle(
+                        style: TextStyle(
                             color: Colors.black,
+                          fontFamily: 'BrunoAceSC',
                             fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
                             //fontWeight: FontWeight.bold,
                           ),
-                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -415,13 +419,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       },
                       child:  Text(
                         "Retry",
-                        style: GoogleFonts.brunoAceSc(
-                          textStyle: TextStyle(
+                        style: TextStyle(
                             color: Colors.black,
                             fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
+                            fontFamily: 'BrunoAceSC',
                             //fontWeight: FontWeight.bold,
                           ),
-                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -530,8 +533,13 @@ class _UpdateProfileState extends State<UpdateProfile> {
   }
 
   Future<void> checkConnection() async {
+    print("-------inside checking method-------");
     var result = await InternetConnectionChecker().hasConnection;
     if (mounted) {
+      if(result && !dataFetched){
+        fetchData();
+        dataFetched=true;
+      }
       setState(() {
         hasConnection = result;
       });

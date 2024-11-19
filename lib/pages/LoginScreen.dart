@@ -101,12 +101,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                             errorStyle: TextStyle(color: Colors.red),
                                             contentPadding: EdgeInsets.only(left: screenWidth*0.02,right: screenWidth*0.04,top: screenHeight*0.023,bottom: screenHeight*0.023),
                                             hintText: "Email",
-                                            hintStyle: GoogleFonts.lato(
-                                                textStyle:TextStyle(
+                                            hintStyle: TextStyle(
+                                                  fontFamily: 'Lato',
                                                   color: Colors.grey,
                                                   fontSize: (isTablet(context))?screenWidth* 0.038:screenWidth* 0.045,//(isTablet(context))?25:17,
                                                   // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                                                )),
+                                                ),
                                             border: InputBorder.none,
                                             prefixIcon: Padding(
                                               padding:  EdgeInsets.only(right: (isTablet(context))?screenWidth* 0.015:0),
@@ -150,12 +150,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                               errorStyle: TextStyle(color: Colors.red),
                                               contentPadding: EdgeInsets.only(left: screenWidth*0.020,right: screenWidth*0.07,top: screenHeight*0.023,bottom: screenHeight*0.023),
                                               hintText: "Password",
-                                              hintStyle: GoogleFonts.lato(
-                                                  textStyle:TextStyle(
+                                              hintStyle: TextStyle(
+                                                fontFamily: 'Lato',
                                                     color: Colors.grey,
                                                     fontSize: (isTablet(context))?screenWidth* 0.038:screenWidth* 0.045,//(isTablet(context))?25:17,
                                                     // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                                                  )),
+                                                  ),
                                               border: InputBorder.none,
                                               prefixIcon: Padding(
                                                 padding: EdgeInsets.only(right: (isTablet(context))?screenWidth* 0.015:0),
@@ -191,11 +191,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     },
                                     child: Text(
                                         "Forgot password?",
-                                        style: GoogleFonts.raleway(
-                                          textStyle: TextStyle(
+                                        style: TextStyle(
+                                            fontFamily: 'Raleway',
                                             color: Colors.black54,
                                             fontSize: (isTablet(context))?screenWidth* 0.032:screenWidth* 0.0407,//(isTablet(context))?22:16,
-                                          ),
                                         ),
                                       ),
                                   ),
@@ -207,40 +206,44 @@ class _LoginScreenState extends State<LoginScreen> {
                                           setState(() {
                                             loginPressed=true;
                                           });
-                                          if(await _checkLogin()){
-          
-                                            final loginData = Provider.of<UserDataNotifier>(context, listen: false);
-                                            if(loginData.user['skinType']!=0){
-                                              if(loginData.user['sessionID']!='none'){
-                                                Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(builder: (context) => GraphScreen()),
-                                                      (route) => false,
-                                                );
-                                              }else{
-                                                Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(builder: (context) => Spf()),
-                                                      (route) => false,
-                                                );
+                                          await checkConnection();
+                                          if(hasConnection){
+                                            if(await _checkLogin()){
+
+                                              final loginData = Provider.of<UserDataNotifier>(context, listen: false);
+                                              if(loginData.user['skinType']!=0){
+                                                if(loginData.user['sessionID']!='none'){
+                                                  Navigator.pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(builder: (context) => GraphScreen()),
+                                                        (route) => false,
+                                                  );
+                                                }else{
+                                                  Navigator.pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(builder: (context) => Spf()),
+                                                        (route) => false,
+                                                  );
+                                                }
                                               }
-                                            }
-                                            else {
-                                              print("move to skin type");
+                                              else {
+                                                print("move to skin type");
                                                 Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(builder: (context) => SkinType()),
                                                       (route) => false,
                                                 );
                                               }
-                                            setState(() {
-                                              loginPressed=false;
-                                            });
-                                          }else{
-                                            setState(() {
-                                              loginPressed=false;
-                                            });
+                                              setState(() {
+                                                loginPressed=false;
+                                              });
+                                            }else{
+                                              setState(() {
+                                                loginPressed=false;
+                                              });
+                                            }
                                           }
+
                                         }
                                       }
                                     },
@@ -275,12 +278,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                     children: [
                                       Text(
                                         "Don't have an account? ",
-                                        style: GoogleFonts.raleway(
-                                          textStyle: TextStyle(
+                                        style:  TextStyle(
+                                            fontFamily: 'Raleway',
                                             color: Colors.black54,
                                             fontSize: (isTablet(context))?screenWidth* 0.032:screenWidth* 0.0407//(isTablet(context))?22:16,
                                           ),
-                                        ),
                                       ),
                                       InkWell(
                                         onTap: (){
@@ -292,12 +294,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                         },
                                         child: Text(
                                           "Register",
-                                          style: GoogleFonts.raleway(
-                                            textStyle: TextStyle(
+                                          style: TextStyle(
+                                              fontFamily: 'Raleway',
                                               color: Colors.orange,
                                               fontSize: (isTablet(context))?screenWidth* 0.032:screenWidth* 0.0407,//(isTablet(context))?22:16,
                                               fontWeight: FontWeight.bold
-                                            ),
                                           ),
                                         ),
                                       ),
@@ -308,11 +309,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
               !hasConnection?
-              Expanded(
-                child: Container(
+              Container(
+    height: double.infinity,
+                  width: double.infinity,
                   color: Colors.white24,
-                ),
-              ):Container(),
+                )
+              :Container(),
               !hasConnection
                   ? Padding(
                 padding: EdgeInsets.only(top: isTablet(context)?screenHeight*0.15:screenHeight*0.1,left: isTablet(context)?screenWidth*0.05:0,right: isTablet(context)?screenWidth*0.05:0),
@@ -320,13 +322,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: AlertDialog(
                       title: Text(
                         "No Internet Available",
-                        style: GoogleFonts.brunoAceSc(
-                          textStyle: TextStyle(
+                        style:  TextStyle(
+                          fontFamily: 'BrunoAceSC',
                             color: Colors.black,
                             fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.048,
                             //fontWeight: FontWeight.bold,
                           ),
-                        ),
                         textAlign: TextAlign.center,
                       ),
                       content: Column(
@@ -335,12 +336,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           Image.asset('assets/images/noConnection.png',height: screenHeight*0.2,),
                           Text(
                               'You need an internet connection to proceed. Please check your connection and try again.',
-                            style: GoogleFonts.raleway(
-                              textStyle: TextStyle(
+                            style: TextStyle(
+    fontFamily: 'Raleway',
                                 color: Colors.black,
                                 fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.04,
                                 //fontWeight: FontWeight.bold,
-                              ),
                             ),
                           textAlign: TextAlign.center,),
                         ],
@@ -351,13 +351,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () => SystemNavigator.pop(),
                           child:  Text(
                             "Exit",
-                            style: GoogleFonts.brunoAceSc(
-                              textStyle: TextStyle(
+                            style: TextStyle(
+    fontFamily: 'BrunoAceSC',
                                 color: Colors.black,
                                 fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
                                 //fontWeight: FontWeight.bold,
                               ),
-                            ),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -368,13 +367,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child:  Text(
                             "Retry",
-                            style: GoogleFonts.brunoAceSc(
-                              textStyle: TextStyle(
+                            style: TextStyle(
+    fontFamily: 'BrunoAceSC',
                                 color: Colors.black,
                                 fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
                                 //fontWeight: FontWeight.bold,
                               ),
-                            ),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -496,6 +494,8 @@ class _LoginScreenState extends State<LoginScreen> {
     var result = await InternetConnectionChecker().hasConnection;
     if (mounted) {
       setState(() {
+        if(!result)
+          loginPressed=false;
         hasConnection = result;
       });
     }

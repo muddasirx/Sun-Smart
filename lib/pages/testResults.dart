@@ -68,23 +68,21 @@ class _BloodLevelState extends State<BloodLevel> {
                           SizedBox(height: (isTablet(context))?screenHeight*0.11:screenHeight*0.07,),
                           Text(
                               "Vitamin D Blood Level",
-                              style: GoogleFonts.brunoAceSc(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'BrunoAceSC',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth*0.041:screenWidth*0.048,
                                   //fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
                           SizedBox(height: screenHeight*0.03,),
                           Text(
                               "Enter the results of your most recent serum vitamin D level (if it was less then 90 days ago):",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black87,
                                   fontSize: (isTablet(context))?screenWidth*0.035:screenWidth*0.042,
                                   //fontWeight: FontWeight.bold,
-                                ),
                               ),
                               softWrap: true,
                               textAlign: TextAlign.center,
@@ -103,12 +101,12 @@ class _BloodLevelState extends State<BloodLevel> {
                                 errorStyle: TextStyle(color: Colors.red),
                                 contentPadding: EdgeInsets.only(left: screenWidth*0.04,right: screenWidth*0.04,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.013),
                                 hintText: "Test value",
-                                hintStyle: GoogleFonts.lato(
-                                    textStyle:TextStyle(
+                                hintStyle: TextStyle(
+                                  fontFamily: 'Lato',
                                       color: Colors.black54,
                                       fontSize: (isTablet(context))?screenWidth* 0.036:screenWidth* 0.044,//(isTablet(context))?23:16,
                                       // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                                    )),
+                                    ),
                                 enabledBorder: UnderlineInputBorder(
                                   //borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(
@@ -142,12 +140,12 @@ class _BloodLevelState extends State<BloodLevel> {
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.016),
                                   hintText: 'Taken on',
-                                  hintStyle: GoogleFonts.lato(
-                                      textStyle:TextStyle(
+                                  hintStyle: TextStyle(
+                                    fontFamily: 'Lato',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth* 0.036:screenWidth* 0.044,//(isTablet(context))?23:16,
                                         // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                                      )),
+                                      ),
                                   focusedErrorBorder: UnderlineInputBorder(
                                     // borderRadius: BorderRadius.circular(10),
                                     borderSide: BorderSide(
@@ -239,12 +237,12 @@ class _BloodLevelState extends State<BloodLevel> {
                                   padding: EdgeInsets.symmetric(horizontal: screenWidth*0.06,vertical: screenHeight*0.015),
                                   child: Text(
                                     "Save",
-                                    style: GoogleFonts.brunoAceSc(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                    fontFamily: 'BrunoAceSC',
                                         color: Colors.white,
                                         fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.038,
                                         //fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
                                 )
@@ -265,12 +263,13 @@ class _BloodLevelState extends State<BloodLevel> {
                                   padding: EdgeInsets.symmetric(horizontal: 8),
                                   child: Text(
                                     "OR",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                    fontFamily: 'Raleway',
+
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.0355:screenWidth*0.043,
                                         //fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
                                 ),

@@ -77,12 +77,12 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                             errorStyle: TextStyle(color: Colors.red),
                                             contentPadding: EdgeInsets.only(left: screenWidth*0.04,right: screenWidth*0.00,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.013),
                                             hintText: "Time Spent",
-                                            hintStyle: GoogleFonts.lato(
-                                                textStyle:TextStyle(
+                                            hintStyle: TextStyle(
+                                              fontFamily: 'Lato',
                                                   color: Colors.black54,
                                                   fontSize: (isTablet(context))?screenWidth* 0.036:screenWidth* 0.044,//(isTablet(context))?23:16,
                                                   // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                                                )),
+                                                ),
                                             enabledBorder: UnderlineInputBorder(
                                               //borderRadius: BorderRadius.circular(10),
                                               borderSide: BorderSide(
@@ -110,13 +110,12 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                   children: [
                                     Text(
                                       "Times per week:",
-                                      style: GoogleFonts.raleway(
-                                        textStyle: TextStyle(
+                                      style: TextStyle(
+                                        fontFamily: 'Raleway',
                                           color: Colors.black,
                                           fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.044,
                                           //fontWeight: FontWeight.bold,
                                         ),
-                                      ),
                                     ),
                                     SizedBox(width: screenWidth*0.03),
                                     DropdownButton<String>(
@@ -154,13 +153,12 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                 SizedBox(height: screenHeight*0.05,),
                                 Text(
                                   "Skin Exposed",
-                                  style: GoogleFonts.brunoAceSc(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'BrunoAceSC',
                                       color: Colors.black,
                                       fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.044,
                                       //fontWeight: FontWeight.bold,
                                     ),
-                                  ),
                                 ),
                                 SizedBox(height: screenHeight*0.03,),
                               ],
@@ -173,23 +171,21 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                 children: [
                                   Text(
                                     "Wearing",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black,
                                         fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.044,
                                        // fontWeight: FontWeight.bold,
-                                      ),
                                     ),
                                   ),
                                   Text(
                                     "Exposed",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black,
                                         fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
                                       ),
-                                    ),
                                   ),
                                 ],
                               ),
@@ -217,23 +213,21 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                   ),
                                   Text(
                                     "Long pants, sleeved shirts",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
                                       ),
-                                    ),
                                   ),
                                   Text(
                                     "10",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
                                       ),
-                                    ),
                                   ),
                                 ],
                               ),
@@ -260,22 +254,20 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                   ),
                                   Text(
                                     "Short sleeves, pants",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
-                                      ),
                                     ),
                                   ),
                                   Text(
                                     "30",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
-                                      ),
                                     ),
                                   ),
                                 ],
@@ -303,22 +295,20 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                   ),
                                   Text(
                                     "Short sleeves, shorts",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
-                                      ),
                                     ),
                                   ),
                                   Text(
                                     "50",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
-                                      ),
                                     ),
                                   ),
                                 ],
@@ -346,23 +336,22 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                   ),
                                   Text(
                                     "Shorts, no shirt",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
                                         color: Colors.black54,
+                                        fontFamily: 'Raleway',
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
                                   Text(
                                     "70",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                        fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
                                       ),
-                                    ),
                                   ),
                                 ],
                               ),
@@ -389,23 +378,21 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                   ),
                                   Text(
                                     "Swimwear",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
                                       ),
-                                    ),
                                   ),
                                   Text(
                                     "80",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.044,
                                         //fontWeight: FontWeight.bold,
                                       ),
-                                    ),
                                   ),
                                 ],
                               ),
@@ -423,13 +410,12 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
                                       padding: EdgeInsets.symmetric(horizontal: screenWidth*0.04,vertical: screenHeight*0.015),
                                       child: Text(
                                         "Save",
-                                        style: GoogleFonts.brunoAceSc(
-                                          textStyle: TextStyle(
+                                        style: TextStyle(
+                                          fontFamily: 'BrunoAceSC',
                                             color: Colors.white,
                                             fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.038,
                                             //fontWeight: FontWeight.bold,
                                           ),
-                                        ),
                                       ),
                                     )
                                 ),
@@ -488,13 +474,12 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
               padding: EdgeInsets.symmetric(horizontal: screenWidth*0.04,vertical: screenHeight*0.015),
               child: Text(
                 ch,
-                style: GoogleFonts.brunoAceSc(
-                  textStyle: TextStyle(
+                style: TextStyle(
+                  fontFamily: 'BrunoAceSC',
                     color: Colors.black,
                     fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.038,
                     //fontWeight: FontWeight.bold,
                   ),
-                ),
               ),
             )
         )
@@ -514,13 +499,13 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
           padding: EdgeInsets.symmetric(horizontal: screenWidth*0.03,vertical: screenHeight*0.013),
           child: Text(
             ch,
-            style: GoogleFonts.brunoAceSc(
-              textStyle: TextStyle(
+            style:  TextStyle(
+              fontFamily: 'BrunoAceSC',
                 color: Colors.white,
                 fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.032,
                 //fontWeight: FontWeight.bold,
               ),
-            ),
+
           ),
         )
     );
@@ -571,13 +556,12 @@ class _EstimatedBloodLevelState extends State<EstimatedBloodLevel> {
               padding: EdgeInsets.symmetric(horizontal: screenWidth*0.04,vertical: screenHeight*0.015),
               child: Text(
                 ch,
-                style: GoogleFonts.brunoAceSc(
-                  textStyle: TextStyle(
+                style: TextStyle(
+                  fontFamily: 'BrunoAceSC',
                     color: Colors.black,
                     fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.032,
                     //fontWeight: FontWeight.bold,
                   ),
-                ),
               ),
             )
         )

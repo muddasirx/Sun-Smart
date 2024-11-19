@@ -32,13 +32,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         centerTitle: true,
         title: Text(
           "Reset Password",
-          style: GoogleFonts.brunoAceSc(
-            textStyle: TextStyle(
+          style: TextStyle(
+            fontFamily: 'BrunoAceSC',
               color: Colors.black,
               fontSize: (isTablet(context))?screenWidth* 0.038:screenWidth* 0.051,
               //fontWeight: FontWeight.bold,
             ),
-          ),
         ),
       ),
       body: Padding(
@@ -56,12 +55,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 errorStyle: TextStyle(color: Colors.red),
                 contentPadding: EdgeInsets.only(left: screenWidth*0.04,right: screenWidth*0.01,top: screenHeight*0.025,bottom: screenHeight*0.025),
                 labelText: "Email",
-                labelStyle: GoogleFonts.lato(
-                    textStyle:TextStyle(
+                labelStyle: TextStyle(
+                  fontFamily: 'Lato',
                       color: Color(0xFF505050),
                       fontSize: (isTablet(context))?screenWidth* 0.038:screenWidth* 0.045,
                       // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                    )),
+                    ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 1.5,

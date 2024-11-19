@@ -16,7 +16,6 @@ import 'package:untitled/pages/sessionFinished.dart';
 import 'package:untitled/pages/skinTypeSelection.dart';
 import 'package:untitled/pages/sourcesOfVitaminD.dart';
 import 'package:untitled/pages/spf.dart';
-import 'package:untitled/pages/disclaimer.dart';
 import 'package:untitled/pages/upcomingSession.dart';
 import 'package:untitled/pages/update/updateProfile.dart';
 import 'package:untitled/pages/userHistory.dart';
@@ -70,7 +69,6 @@ class MyApp extends StatelessWidget {
           "/Spf" : (context) => Spf(),
           "/ClothingType" : (context) => ClothingType(),
           "/LocationAccess" : (context) => LocationAccess(),
-          "/Disclaimer" : (context) => Disclaimer(),
           "/UpcomingSession" : (context) => UpcomingSession(),
           "/countDownScreen" : (context) => countDownScreen(),
           "/SessionFinished" : (context) => SessionFinished(),

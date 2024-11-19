@@ -12,7 +12,6 @@ class sessionDetailsNotifier with ChangeNotifier {
     int spf=0;
     bool sessionPossible=true;
     bool nightTime=false;
-    bool vitaminIntakeComplete=false;
     bool sessionUpdated=false;
 
 

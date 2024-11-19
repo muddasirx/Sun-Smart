@@ -45,13 +45,12 @@ class _UserHistoryState extends State<UserHistory> {
         centerTitle: true,
         title: Text(
           "Your History",
-          style: GoogleFonts.brunoAceSc(
-            textStyle: TextStyle(
+          style: TextStyle(
+            fontFamily: 'BrunoAceSC',
               color: Colors.black,
               fontSize: (isTablet(context))?screenWidth* 0.038:screenWidth* 0.051,//(isTablet(context))?27:20,
               //fontWeight: FontWeight.bold,
             ),
-          ),
         ),
       ),
 
@@ -89,23 +88,23 @@ class _UserHistoryState extends State<UserHistory> {
                                   children: [
                                     Text(
                                       "Daily Cal",
-                                      style: GoogleFonts.brunoAceSc(
-                                        textStyle: TextStyle(
+                                      style: TextStyle(
+                                        fontFamily: 'BrunoAceSC',
                                           color: Colors.black,
                                           //fontWeight: FontWeight.bold,
                                           fontSize: (isTablet(context))?screenWidth* 0.037:screenWidth* 0.04,//(isTablet(context))?20:15,
                                         ),
-                                      ),
+
                                       softWrap: true,
                                     ),
                                     Text(
                                           "Fortified with Vitamin\nD3,C & B4",
-                                          style: GoogleFonts.raleway(
-                                            textStyle: TextStyle(
+                                          style: TextStyle(
+                                            fontFamily: 'Raleway',
                                               color: Colors.black,
                                               fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.036,
                                               //fontWeight: FontWeight.bold,
-                                            ),
+
                                           ),
                                           softWrap: true,
                                         ),
@@ -140,24 +139,24 @@ class _UserHistoryState extends State<UserHistory> {
                                   children: [
                                     Text(
                                       "Insta CAL-D",
-                                      style: GoogleFonts.brunoAceSc(
-                                        textStyle: TextStyle(
+                                      style: TextStyle(
+                                        fontFamily: 'BrunoAceSC',
                                           color: Colors.black,
                                           //fontWeight: FontWeight.bold,
                                           fontSize: (isTablet(context))?screenWidth* 0.037:screenWidth* 0.04,//(isTablet(context))?20:15,
-                                        ),
+
                                       ),
                                       softWrap: true,
                                     ),
                                     Text(
                                       "Fortified with Vitamin C\nfor healthy immune\nsystem",
-                                      style: GoogleFonts.raleway(
-                                        textStyle: TextStyle(
+                                      style:  TextStyle(
+                                        fontFamily: 'Raleway',
                                           color: Colors.black,
                                           fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.036,
                                           //fontWeight: FontWeight.bold,
                                         ),
-                                      ),
+
                                       softWrap: true,
                                     ),
 
@@ -191,23 +190,23 @@ class _UserHistoryState extends State<UserHistory> {
                                   children: [
                                     Text(
                                       "WIL-D",
-                                      style: GoogleFonts.brunoAceSc(
-                                        textStyle: TextStyle(
+                                      style:  TextStyle(
+                                        fontFamily: 'BrunoAceSC',
                                           color: Colors.black,
                                           //fontWeight: FontWeight.bold,
                                           fontSize: (isTablet(context))?screenWidth* 0.037:screenWidth* 0.04,//(isTablet(context))?20:15,
                                         ),
-                                      ),
+
                                       softWrap: true,
                                     ),
                                     Text(
                                       "Fortified with Vitamin D\nfor bone & heart",
-                                      style: GoogleFonts.raleway(
-                                        textStyle: TextStyle(
+                                      style: TextStyle(
+                                        fontFamily: 'Raleway',
                                           color: Colors.black,
                                           fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.036,
                                           //fontWeight: FontWeight.bold,
-                                        ),
+
                                       ),
                                       softWrap: true,
                                     ),
@@ -220,12 +219,12 @@ class _UserHistoryState extends State<UserHistory> {
                             SizedBox(height: screenHeight*0.07,),
                             Text(
                                 "Are you taking any other supplements?",
-                                style: GoogleFonts.brunoAceSc(
-                                  textStyle: TextStyle(
+                                style:  TextStyle(
+                                  fontFamily: 'BrunoAceSC',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth*0.035:screenWidth*0.04,
                                     //fontWeight: FontWeight.bold,
-                                  ),
+
                                 ),
                                 textAlign: TextAlign.center,
                                 softWrap: true,
@@ -237,26 +236,25 @@ class _UserHistoryState extends State<UserHistory> {
                                 controller: supplementsController,
                                 cursorColor: Color(0xFF505050),
                                 cursorWidth: 1.5,
-                                style: GoogleFonts.raleway(
-                                  textStyle:TextStyle(color: Colors.black, fontSize: (isTablet(context))?screenWidth* 0.035:screenWidth* 0.04),),
+                                style:TextStyle(fontFamily: 'Raleway',color: Colors.black, fontSize: (isTablet(context))?screenWidth* 0.035:screenWidth* 0.04),
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   errorStyle: TextStyle(color: Colors.red),
                                   contentPadding: EdgeInsets.only(left: screenWidth*0.04,right: screenWidth*0.01,top: screenHeight*0.023,bottom: screenHeight*0.023),
                                   labelText: "Other Supplements",
                                   hintText: "eg. Bonex-D, Suncell 5000...",
-                                  hintStyle: GoogleFonts.raleway(
-                                      textStyle:TextStyle(
+                                  hintStyle: TextStyle(
+                                    fontFamily: 'Raleway',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context))?screenWidth* 0.035:screenWidth* 0.038,
                                         // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                                      )),
-                                  labelStyle: GoogleFonts.raleway(
-                                      textStyle:TextStyle(
+                                      ),
+                                  labelStyle: TextStyle(
+                                    fontFamily: 'Raleway',
                                         color: Colors.black,
                                         fontSize: (isTablet(context))?screenWidth* 0.035:screenWidth* 0.04,
                                         // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                                      )),
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       width: 1.5,
@@ -339,13 +337,13 @@ class _UserHistoryState extends State<UserHistory> {
           padding: EdgeInsets.symmetric(horizontal: screenWidth*0.06,vertical: screenHeight*0.015),
           child: Text(
             ch,
-            style: GoogleFonts.brunoAceSc(
-              textStyle: TextStyle(
+            style: TextStyle(
+              fontFamily: 'BrunoAceSC',
                 color: Colors.white,
                 fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.038,
                 //fontWeight: FontWeight.bold,
               ),
-            ),
+
           ),
         )
     );

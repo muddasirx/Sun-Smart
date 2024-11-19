@@ -45,23 +45,21 @@ class _EstimatedVitaminDlevelState extends State<EstimatedVitaminDlevel> {
                             SizedBox(height: (isTablet(context))?screenHeight*0.12:screenHeight*0.09),
                             Text(
                               "Recommended/Optional",
-                              style: GoogleFonts.brunoAceSc(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'BrunoAceSC',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth*0.044:screenWidth*0.05,
                                   //fontWeight: FontWeight.bold,
-                                ),
                               ),
                             ),
                             SizedBox(height: screenHeight*0.02),
                             Text(
                               "Estimated Vitamin D blood level",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black87,
                                   fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.042,
                                   //fontWeight: FontWeight.bold,
-                                ),
                               ),
                             ),
                             SizedBox(height: screenHeight*0.02),
@@ -74,25 +72,23 @@ class _EstimatedVitaminDlevelState extends State<EstimatedVitaminDlevel> {
                                   padding: EdgeInsets.symmetric(horizontal: screenWidth*0.06,vertical: screenHeight*0.015),
                                   child: Text(
                                     "24",
-                                    style: GoogleFonts.brunoAceSc(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'BrunoAceSC',
                                         color: Colors.white,
                                         fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.04,
                                         //fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                  ),
                                 )
                             ),
                             SizedBox(height: screenHeight*0.02),
                             Text(
                               "ng/ml",
-                              style: GoogleFonts.raleway(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'Raleway',
                                   color: Colors.black87,
                                   fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.042,
                                   //fontWeight: FontWeight.bold,
-                                ),
                               ),
                             ),
                             SizedBox(height: screenHeight*0.06),
@@ -101,22 +97,20 @@ class _EstimatedVitaminDlevelState extends State<EstimatedVitaminDlevel> {
                               children: [
                                 Text(
                                   "Deficient",
-                                  style: GoogleFonts.brunoAceSc(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'BrunoAceSC',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.042,
                                       //fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
                                 Text(
                                   "Less than 31",
-                                  style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.04,
                                       //fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
                               ],
@@ -127,22 +121,20 @@ class _EstimatedVitaminDlevelState extends State<EstimatedVitaminDlevel> {
                               children: [
                                 Text(
                                   "Low  Normal",
-                                  style: GoogleFonts.brunoAceSc(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'BrunoAceSC',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.042,
                                       //fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
                                 Text(
                                   "31-39",
-                                  style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.04,
                                       //fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
                               ],
@@ -153,22 +145,20 @@ class _EstimatedVitaminDlevelState extends State<EstimatedVitaminDlevel> {
                               children: [
                                 Text(
                                   "Recommended",
-                                  style: GoogleFonts.brunoAceSc(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'BrunoAceSC',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.042,
                                       //fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
                                 Text(
                                   "40-60",
-                                  style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.04,
                                       //fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
                               ],
@@ -179,23 +169,21 @@ class _EstimatedVitaminDlevelState extends State<EstimatedVitaminDlevel> {
                               children: [
                                 Text(
                                   "High Normal",
-                                  style: GoogleFonts.brunoAceSc(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'BrunoAceSC',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.042,
                                       //fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
                                 Text(
                                   "61-80",
-                                  style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.04,
                                       //fontWeight: FontWeight.bold,
                                     ),
-                                  ),
                                 ),
                               ],
                             ),
@@ -205,23 +193,21 @@ class _EstimatedVitaminDlevelState extends State<EstimatedVitaminDlevel> {
                               children: [
                                 Text(
                                   "High But Not Toxic",
-                                  style: GoogleFonts.brunoAceSc(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'BrunoAceSC',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.042,
                                       //fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                ),
                                 Text(
                                   "81-149",
-                                  style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.04,
                                       //fontWeight: FontWeight.bold,
                                     ),
-                                  ),
                                 ),
                               ],
                             ),
@@ -231,22 +217,20 @@ class _EstimatedVitaminDlevelState extends State<EstimatedVitaminDlevel> {
                               children: [
                                 Text(
                                   "Toxicity Possible",
-                                  style: GoogleFonts.brunoAceSc(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'BrunoAceSC',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.042,
                                       //fontWeight: FontWeight.bold,
                                     ),
-                                  ),
                                 ),
                                 Text(
                                   "Greater than 149",
-                                  style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
                                       color: Colors.black87,
                                       fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.04,
                                       //fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ),
                               ],
@@ -265,12 +249,11 @@ class _EstimatedVitaminDlevelState extends State<EstimatedVitaminDlevel> {
                                     padding: EdgeInsets.symmetric(horizontal: screenWidth*0.06,vertical: screenHeight*0.015),
                                     child: Text(
                                       "Finish",
-                                      style: GoogleFonts.brunoAceSc(
-                                        textStyle: TextStyle(
+                                      style: TextStyle(
+                                        fontFamily: 'BrunoAceSC',
                                           color: Colors.white,
                                           fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.04,
                                           //fontWeight: FontWeight.bold,
-                                        ),
                                       ),
                                     ),
                                   )

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/pages/countDownScreen.dart';
 import '../providers/countDownDetailsProvider.dart';
@@ -20,6 +22,7 @@ class _UpcomingSessionState extends State<UpcomingSession> {
   int sessionDuration=0;
   int timeTillSunset=0;
   bool indexFetched=false;
+  bool hasConnection = true;
 
   @override
   void initState() {
@@ -93,13 +96,12 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                                 children: [
                                   Text(
                                     "Upcoming Session Details",
-                                    style: GoogleFonts.brunoAceSc(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'BrunoAceSC',
                                         color: Colors.black,
                                         fontSize: (isTablet(context))?screenWidth*0.039:screenWidth*0.048,
                                         //fontWeight: FontWeight.bold,
                                       ),
-                                    ),
                                     textAlign: TextAlign.center,
                                   ),
                                   SizedBox(height: screenHeight*0.03,),
@@ -110,12 +112,12 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                                   SizedBox(height: screenHeight*0.01,),
                                   Text(
                                     "${userData.user['name']}",
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
-                                        color: Colors.black,
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
+                                      color: Colors.black,
                                         fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.045,
                                         //fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -126,12 +128,12 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                             Center(
                               child: Text(
                                 "Recommended session duration",
-                                style: GoogleFonts.brunoAceSc(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'BrunoAceSC',
                                     color: Colors.black,
                                     fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.039,
                                     //fontWeight: FontWeight.bold,
-                                  ),
+
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -140,12 +142,12 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                             Center(
                               child: Text(
                                 "${(sessionDetails.sessionDurationMinutes ~/ 60<10)?"0${sessionDetails.sessionDurationMinutes ~/ 60}":"${sessionDetails.sessionDurationMinutes ~/ 60}"} : ${(sessionDetails.sessionDurationMinutes % 60<10)?"0${sessionDetails.sessionDurationMinutes % 60}":"${sessionDetails.sessionDurationMinutes % 60}"}",
-                                style: GoogleFonts.brunoAceSc(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'BrunoAceSC',
                                     color: Colors.cyan,
                                     fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.06,
                                     //fontWeight: FontWeight.bold,
-                                  ),
+
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -153,12 +155,12 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                             SizedBox(height: screenHeight*0.05,),
                             Text(
                               "Time till sunset",
-                              style: GoogleFonts.brunoAceSc(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                fontFamily: 'BrunoAceSC',
                                   color: Colors.black,
                                   fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.039,
                                   //fontWeight: FontWeight.bold,
-                                ),
+
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -166,13 +168,13 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                             Center(
                               child: Text(
                                   "${(sessionDetails.timeTillSunsetMinutes ~/ 60<10)?"0${sessionDetails.timeTillSunsetMinutes ~/ 60}":"${sessionDetails.timeTillSunsetMinutes ~/ 60}"} : ${(sessionDetails.timeTillSunsetMinutes % 60<10)?"0${sessionDetails.timeTillSunsetMinutes % 60}":"${sessionDetails.timeTillSunsetMinutes % 60}"}",
-                                style: GoogleFonts.brunoAceSc(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'BrunoAceSC',
                                     color: Colors.orangeAccent,
                                     fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.06,
                                     //fontWeight: FontWeight.bold,
                                   ),
-                                ),
+
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -184,12 +186,12 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                                   children: [
                                     Text(
                                       "Vitamin D intake",
-                                      style: GoogleFonts.brunoAceSc(
-                                        textStyle: TextStyle(
+                                      style: TextStyle(
+                                        fontFamily: 'BrunoAceSC',
                                           color: Colors.black,
                                           fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.039,
                                           //fontWeight: FontWeight.bold,
-                                        ),
+
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -197,24 +199,23 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                                       children: [
                                         Text(
                                           "${sessionDetails.vitaminDIntake}",
-                                          style: GoogleFonts.brunoAceSc(
-                                            textStyle: TextStyle(
+                                          style: TextStyle(
+                                            fontFamily: 'BrunoAceSC',
                                               color: Colors.cyan,
                                               fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.06,
                                               //fontWeight: FontWeight.bold,
                                             ),
-                                          ),
                                           textAlign: TextAlign.center,
                                         ),
                                         Text(
                                           " IU",
-                                          style: GoogleFonts.raleway(
-                                            textStyle: TextStyle(
-                                              color: Colors.cyan,
+                                          style: TextStyle(
+                                            fontFamily: 'Raleway',
+                                            color: Colors.cyan,
                                               fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.045,
                                               //fontWeight: FontWeight.bold,
                                             ),
-                                          ),
+
                                           textAlign: TextAlign.center,
                                         ),
                                       ],
@@ -226,23 +227,23 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                                   children: [
                                     Text(
                                       "UV Index",
-                                      style: GoogleFonts.brunoAceSc(
-                                        textStyle: TextStyle(
+                                      style:  TextStyle(
+                                        fontFamily: 'BrunoAceSC',
                                           color: Colors.black,
                                           fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.039,
                                           //fontWeight: FontWeight.bold,
                                         ),
-                                      ),
+
                                       textAlign: TextAlign.center,
                                     ),
                                     Text(
                                       "$uvIndex",
-                                      style: GoogleFonts.brunoAceSc(
-                                        textStyle: TextStyle(
+                                      style: TextStyle(
+                                        fontFamily: 'BrunoAceSC',
                                           color: Colors.cyan,
                                           fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.06,
                                           //fontWeight: FontWeight.bold,
-                                        ),
+
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -262,14 +263,13 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                                   borderRadius: BorderRadius.circular(50.0), // Rounded corners
                                 ),
                                 child: TextButton(
-                                  onPressed: () {
-                                    final countDownDetails = Provider.of<countDownDetailsNotifier>(context, listen: false);
-                                    countDownDetails.resetData();
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => countDownScreen()),
-                                          (Route<dynamic> route) => false,
-                                    );
+                                  onPressed: () async{
+                                    await checkConnection();
+                                    if(hasConnection){
+                                      final countDownDetails = Provider.of<countDownDetailsNotifier>(context, listen: false);
+                                      countDownDetails.resetData();
+                                      Navigator.pushNamed(context, '/countDownScreen');
+                                    }
                                   },
                                   style: TextButton.styleFrom(
                                     foregroundColor: Colors.white, padding: EdgeInsets.symmetric(horizontal: (isTablet(context))?screenWidth*0.09:screenWidth*0.15, vertical: (isTablet(context))?screenHeight*0.014:screenHeight*0.01), // Text color
@@ -292,6 +292,80 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                       width: isTablet(context)?60:40,
                       child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.orangeAccent),strokeWidth: isTablet(context)?3.5:3,))
               ):SizedBox(),
+              !hasConnection?
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                color: Colors.white38,
+
+              ):Container(),
+              !hasConnection
+                  ? Padding(
+                padding: EdgeInsets.only(left: isTablet(context)?screenWidth*0.05:0,right: isTablet(context)?screenWidth*0.05:0),
+                child: Center(
+                    child: AlertDialog(
+                      title: Text(
+                        "No Internet Available",
+                        style: TextStyle(
+                          fontFamily: 'BrunoAceSC',
+                          color: Colors.black,
+                          fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.048,
+                          //fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset('assets/images/noConnection.png',height: screenHeight*0.2,),
+                          Text(
+                            'You need an internet connection to proceed. Please check your connection and try again.',
+                            style: TextStyle(
+                              fontFamily: 'Raleway',
+                              color: Colors.black,
+                              fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.04,
+                              //fontWeight: FontWeight.bold,
+
+                            ),
+                            textAlign: TextAlign.center,),
+                        ],
+                      ),
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      actions: [
+                        TextButton(
+                          onPressed: () => SystemNavigator.pop(),
+                          child:  Text(
+                            "Exit",
+                            style: TextStyle(
+                              fontFamily: 'BrunoAceSC',
+                              color: Colors.black,
+                              fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
+                              //fontWeight: FontWeight.bold,
+                            ),
+
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            await checkConnection();
+                            // Navigator.pop() can be used here if desired
+                          },
+                          child:  Text(
+                            "Retry",
+                            style: TextStyle(
+                              fontFamily: 'BrunoAceSC',
+                              color: Colors.black,
+                              fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
+                              //fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],)
+                ),
+              )
+                  : Container(),
 
             ],
           ),
@@ -354,26 +428,18 @@ class _UpcomingSessionState extends State<UpcomingSession> {
       sessionTimeInMin=sessionTimeInMin*sessionDetails.spf;
     }
 
+    if(sessionTimeInMin.round()<sessionDetails.timeTillSunsetMinutes){
+      sessionDetails.addSessionDuration(sessionTimeInMin.round());
+    }else{
+      sessionDetails.addSessionDuration(sessionDetails.timeTillSunsetMinutes);
+      double vitaminD= (sessionDetails.timeTillSunsetMinutes*uvIndex*typeFactor*ageFactor)/coverFactor;
+      sessionDetails.addVitaminDIntake(vitaminD.round());
+    }
+
     print("Session vitamin D calculated: ${sessionDetails.vitaminDIntake}");
     print("Session time calculated: ${sessionTimeInMin}");
-    sessionDetails.addSessionDuration(sessionTimeInMin.round());
 
 
-
-    //double sunsetTimeInMin=sessionTimeInMin * 1.3;
-    //sessionDetails.addSunsetDuration(sunsetTimeInMin.round());
-
-    /*Map<int, double> vitaminDIntake = {};
-
-    print("------About to calculate iu--------");
-    for (int i = 0; i < typeValues.length; i++) {
-      double iu = uvIndex * sessionDetails.sessionDurationMinutes * typeValues[i];
-      vitaminDIntake[i] = iu;
-    }
-    print("------IU calculated--------");
-    sessionDetails.vitaminDIntake= vitaminDIntake[userData.user['skinType']-1]!.toInt();
-    print("------${vitaminDIntake[userData.user['skinType']-1]!.round()}------");
-    print(sessionDetails.vitaminDIntake);  */
 
   }
 
@@ -382,5 +448,14 @@ class _UpcomingSessionState extends State<UpcomingSession> {
     return screenWidth >= 600 && screenWidth <= 1024;
   }
 
+  Future<void> checkConnection() async {
+    var result = await InternetConnectionChecker().hasConnection;
+    if (mounted) {
+      print("-----connection : $result ------");
+      setState(() {
+        hasConnection = result;
+      });
+    }
+  }
 
 }

@@ -29,12 +29,12 @@ class _SourcesOfVitaminDState extends State<SourcesOfVitaminD> {
         centerTitle: true,
         title: Text(
           "Sources of Vitamin D",
-          style: GoogleFonts.brunoAceSc(
-            textStyle: TextStyle(
+          style: TextStyle(
+            fontFamily: 'BrunoAceSC',
               color: Colors.black,
               fontSize: (isTablet(context))?screenWidth* 0.038:screenWidth* 0.051,//(isTablet(context))?27:20,
               //fontWeight: FontWeight.bold,
-            ),
+
           ),
         ),
       ),
@@ -48,12 +48,12 @@ class _SourcesOfVitaminDState extends State<SourcesOfVitaminD> {
               children: [
                 Text(
                   "1. Sun",
-                  style: GoogleFonts.brunoAceSc(
-                    textStyle: TextStyle(
+                  style: TextStyle(
+                    fontFamily: 'BrunoAceSC',
                       color: Colors.black,
                       //fontWeight: FontWeight.bold,
                       fontSize: (isTablet(context))?screenWidth* 0.04:screenWidth* 0.046,//(isTablet(context))?20:15,
-                    ),
+
                   ),
                   softWrap: true,
                 ),
@@ -69,12 +69,12 @@ class _SourcesOfVitaminDState extends State<SourcesOfVitaminD> {
                   children: [
                     Text(
                       "2. Supplements",
-                      style: GoogleFonts.brunoAceSc(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
                           color: Colors.black,
                           //fontWeight: FontWeight.bold,
                           fontSize: (isTablet(context))?screenWidth* 0.04:screenWidth* 0.046,//(isTablet(context))?20:15,
-                        ),
+
                       ),
                       softWrap: true,
                     ),
@@ -82,12 +82,11 @@ class _SourcesOfVitaminDState extends State<SourcesOfVitaminD> {
                       padding: EdgeInsets.only(left: screenWidth*0.06,top: screenHeight*0.01),
                       child: Text(
                         "Daily Cal\nWIL-D\nPlant Cal\nSea Mega\nSea Mega Plus\nOthers",
-                        style: GoogleFonts.raleway(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+                          fontFamily: 'Raleway',
                             color: Colors.black,
                             //fontWeight: FontWeight.bold,
                             fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.04,//(isTablet(context))?20:15,
-                          ),
                         ),
                         softWrap: true,
                       ),
@@ -106,12 +105,12 @@ class _SourcesOfVitaminDState extends State<SourcesOfVitaminD> {
                   children: [
                     Text(
                       "3. Food",
-                      style: GoogleFonts.brunoAceSc(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
                           color: Colors.black,
                          // fontWeight: FontWeight.bold,
                           fontSize: (isTablet(context))?screenWidth* 0.04:screenWidth* 0.046,//(isTablet(context))?20:15,
-                        ),
+
                       ),
                       softWrap: true,
                     ),
@@ -119,12 +118,11 @@ class _SourcesOfVitaminDState extends State<SourcesOfVitaminD> {
                       padding: EdgeInsets.only(left: screenWidth*0.06,top: screenHeight*0.01),
                       child: Text(
                         "Milk\nEggs\nMushrooms\nBeef Liver\nRicotta Cheese",
-                        style: GoogleFonts.raleway(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+                          fontFamily: 'Raleway',
                             color: Colors.black,
                             //fontWeight: FontWeight.bold,
                             fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.04,//(isTablet(context))?20:15,
-                          ),
                         ),
                         softWrap: true,
                       ),

@@ -75,13 +75,12 @@ class _SignupscreenState extends State<SignupScreen> {
         centerTitle: true,
         title: Text(
           "Create an account",
-          style: GoogleFonts.brunoAceSc(
-            textStyle: TextStyle(
+          style: TextStyle(
+            fontFamily: 'BrunoAceSC',
               color: Colors.black,
               fontSize: (isTablet(context))?screenWidth* 0.038:screenWidth* 0.051,//(isTablet(context))?27:20,
               //fontWeight: FontWeight.bold,
             ),
-          ),
         ),
       ),
 
@@ -104,11 +103,11 @@ class _SignupscreenState extends State<SignupScreen> {
                       errorStyle: TextStyle(color: Colors.red),
                       contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.015),
                       hintText: "Name",
-                      hintStyle: GoogleFonts.lato(
-                          textStyle:TextStyle(
+                      hintStyle: TextStyle(
+    fontFamily: 'Lato',
                             color: Colors.black54,
                             fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
-                          )),
+                          ),
                       enabledBorder: UnderlineInputBorder(
                         //borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -143,11 +142,11 @@ class _SignupscreenState extends State<SignupScreen> {
                         errorStyle: TextStyle(color: Colors.red),
                         contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.015),
                         hintText: "Age",
-                        hintStyle: GoogleFonts.lato(
-                            textStyle:TextStyle(
+                        hintStyle: TextStyle(
+    fontFamily: 'Lato',
                               color: Colors.black54,
                               fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
-                            )),
+                            ),
                         enabledBorder: UnderlineInputBorder(
                           //borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -223,12 +222,12 @@ class _SignupscreenState extends State<SignupScreen> {
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.016),
                         hintText: 'Date of Birth',
-                        hintStyle: GoogleFonts.lato(
-                            textStyle:TextStyle(
+                        hintStyle: TextStyle(
+    fontFamily: 'Lato',
                               color: Colors.black54,
                               fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
                               // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                            )),
+                            ),
                         focusedErrorBorder: UnderlineInputBorder(
                           // borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -263,12 +262,12 @@ class _SignupscreenState extends State<SignupScreen> {
                         errorStyle: TextStyle(color: Colors.red),
                         contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.013),
                         hintText: "Weight",
-                        hintStyle: GoogleFonts.lato(
-                            textStyle:TextStyle(
+                        hintStyle: TextStyle(
+                        fontFamily: 'Lato',
                               color: Colors.black54,
                               fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
                               // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                            )),
+                            ),
                         enabledBorder: UnderlineInputBorder(
                           //borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -308,11 +307,11 @@ class _SignupscreenState extends State<SignupScreen> {
                         errorStyle: TextStyle(color: Colors.red),
                         contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.015),
                         hintText: "Email",
-                        hintStyle: GoogleFonts.lato(
-                            textStyle:TextStyle(
+                        hintStyle: TextStyle(
+                          fontFamily: 'Lato',
                               color: Colors.black54,
                               fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
-                            )),
+                            ),
                         enabledBorder: UnderlineInputBorder(
                           //borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -349,12 +348,12 @@ class _SignupscreenState extends State<SignupScreen> {
                         errorStyle: TextStyle(color: Colors.red),
                         contentPadding: EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: (isTablet(context))?screenHeight*0.003:screenHeight*0.015),
                         hintText: "Password",
-                        hintStyle: GoogleFonts.lato(
-                            textStyle:TextStyle(
+                        hintStyle: TextStyle(
+    fontFamily: 'Lato',
                               color: Colors.black54,
                               fontSize: (isTablet(context))?screenWidth* 0.034:screenWidth* 0.041,//(isTablet(context))?23:16,
                               // fontWeight: themeNotifier.isDarkTheme? FontWeight.normal:FontWeight.bold
-                            )),
+                            ),
                         enabledBorder: UnderlineInputBorder(
                           //borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -418,23 +417,21 @@ class _SignupscreenState extends State<SignupScreen> {
                             SizedBox(height: (isTablet(context)) ? screenHeight*0.007 : screenHeight*0.01,),
                             RichText(
                               text: TextSpan(
-                                style: GoogleFonts.lato(
-                                  textStyle: TextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
                                     color: Colors.black54,
                                     fontSize: (isTablet(context)) ? screenHeight*0.02 :screenWidth* 0.033,//(isTablet(context)) ? 20 : 13,
-                                  ),
                                 ),
                                 children: [
                                   TextSpan(text: 'By continuing you accept our '),
                                   TextSpan(
                                     text: 'Privacy Policy',
-                                    style: GoogleFonts.lato(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+    fontFamily: 'Lato',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context)) ? screenHeight*0.02:screenWidth* 0.033,//(isTablet(context)) ? 20 : 13,
                                         decoration: TextDecoration.underline,
                                         decorationColor: Colors.black54,
-                                      ),
                                     ),
                                   ),
                                   TextSpan(text: ' and ',style: TextStyle(
@@ -443,13 +440,13 @@ class _SignupscreenState extends State<SignupScreen> {
                                   )),
                                   TextSpan(
                                     text: 'Terms of Use',
-                                    style: GoogleFonts.lato(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+    fontFamily: 'Lato',
                                         color: Colors.black54,
                                         fontSize: (isTablet(context)) ? screenHeight*0.02:screenWidth* 0.033,//(isTablet(context)) ? 20 : 13,
                                         decoration: TextDecoration.underline,
                                         decorationColor: Colors.black54,
-                                      ),
+
                                     ),
                                   ),
                                 ],
@@ -462,13 +459,17 @@ class _SignupscreenState extends State<SignupScreen> {
                   ),
                   SizedBox(height: (isTablet(context))?screenHeight*0.04:screenHeight*0.035,),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () async{
                       if(!registerPressed){
                         if(_validateFields()){
-                          setState(() {
-                            registerPressed= true;
-                          });
-                          _register();
+                          await checkConnection();
+                          print("----------has Connection: ${hasConnection} -------------");
+                          if(hasConnection){
+                            setState(() {
+                              registerPressed= true;
+                            });
+                            _register();
+                          }
                         }
                       }
                     },
@@ -504,10 +505,11 @@ class _SignupscreenState extends State<SignupScreen> {
             ),
           ),
           !hasConnection?
-          Expanded(
-            child: Container(
+          Container(
+          height: double.infinity,
+              width: double.infinity,
               color: Colors.white24,
-            ),
+
           ):Container(),
           !hasConnection
               ? Padding(
@@ -516,12 +518,12 @@ class _SignupscreenState extends State<SignupScreen> {
                 child: AlertDialog(
                   title: Text(
                     "No Internet Available",
-                    style: GoogleFonts.brunoAceSc(
-                      textStyle: TextStyle(
+                    style: TextStyle(
+                      fontFamily: 'BrunoAceSC',
                         color: Colors.black,
                         fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.048,
                         //fontWeight: FontWeight.bold,
-                      ),
+
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -531,12 +533,11 @@ class _SignupscreenState extends State<SignupScreen> {
                       Image.asset('assets/images/noConnection.png',height: screenHeight*0.2,),
                       Text(
                         'You need an internet connection to proceed. Please check your connection and try again.',
-                        style: GoogleFonts.raleway(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+    fontFamily: 'Raleway',
                             color: Colors.black,
                             fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.04,
                             //fontWeight: FontWeight.bold,
-                          ),
                         ),
                         textAlign: TextAlign.center,),
                     ],
@@ -547,12 +548,11 @@ class _SignupscreenState extends State<SignupScreen> {
                       onPressed: () => SystemNavigator.pop(),
                       child:  Text(
                         "Exit",
-                        style: GoogleFonts.brunoAceSc(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+                          fontFamily: 'BrunoAceSC',
                             color: Colors.black,
                             fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
                             //fontWeight: FontWeight.bold,
-                          ),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -564,13 +564,12 @@ class _SignupscreenState extends State<SignupScreen> {
                       },
                       child:  Text(
                         "Retry",
-                        style: GoogleFonts.brunoAceSc(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+    fontFamily: 'BrunoAceSC',
                             color: Colors.black,
                             fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.04,
                             //fontWeight: FontWeight.bold,
                           ),
-                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -711,17 +710,19 @@ class _SignupscreenState extends State<SignupScreen> {
     } on FirebaseAuthException catch (e) {
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-        msg: "${e.message}",
+        msg: "-----${e.message}",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
       );
+      print("${e.message}");
       setState(() {
         registerPressed=false;
       });
     } catch (e) {
+      print("${e.toString()}");
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
         msg: "${e.toString()}",
@@ -738,9 +739,12 @@ class _SignupscreenState extends State<SignupScreen> {
   }
 
   Future<void> checkConnection() async {
+    print("-------Inside check connection method---------");
     var result = await InternetConnectionChecker().hasConnection;
     if (mounted) {
       setState(() {
+
+        print("----------Connection being checked: ${hasConnection} -------------");
         hasConnection = result;
       });
     }

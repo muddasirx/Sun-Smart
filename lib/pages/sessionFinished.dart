@@ -54,12 +54,11 @@ class _SessionFinishedState extends State<SessionFinished> {
                     SizedBox(height: isTablet(context)?screenHeight*0.17:screenHeight*0.12,),
                     Text(
                       "Session Results",
-                      style: GoogleFonts.brunoAceSc(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
                           color: Colors.black,
                           fontSize: (isTablet(context))?screenWidth*0.048:screenWidth*0.05,
                           //fontWeight: FontWeight.bold,
-                        ),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -71,60 +70,57 @@ class _SessionFinishedState extends State<SessionFinished> {
                     SizedBox(height: screenHeight*0.01,),
                     Text(
                       "${userData.user['name']}",
-                      style: GoogleFonts.raleway(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
                           color: Colors.black,
                           fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.045,
                           //fontWeight: FontWeight.bold,
-                        ),
                       ),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: screenHeight*0.06,),
                     Text(
                       "Vitamin units consumed",
-                      style: GoogleFonts.raleway(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
                           color: Colors.black,
                           fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.05,
                           //fontWeight: FontWeight.bold,
-                        ),
+
                       ),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: screenHeight*0.01,),
                     Text(
                       "${countDownDetails.iuConsumed}",
-                      style: GoogleFonts.brunoAceSc(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
                           color: Colors.orangeAccent,
                           fontSize: (isTablet(context))?screenWidth*0.08:screenWidth*0.09,
                           //fontWeight: FontWeight.bold,
                         ),
-                      ),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: screenHeight*0.04,),
                     Text(
                       "Time spent in sun",
-                      style: GoogleFonts.raleway(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
                           color: Colors.black,
                           fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.05,
                           //fontWeight: FontWeight.bold,
-                        ),
+
                       ),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: screenHeight*0.01,),
                     Text(
                       "${formatSecondsToTime(countDownDetails.timeSpentInSeconds)}",
-                      style: GoogleFonts.brunoAceSc(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
                           color: Colors.cyan,
                           fontSize: (isTablet(context))?screenWidth*0.08:screenWidth*0.09,
                           //fontWeight: FontWeight.bold,
-                        ),
                       ),
                       textAlign: TextAlign.center,
                     ),

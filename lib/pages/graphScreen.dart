@@ -40,12 +40,12 @@ class _GraphScreenState extends State<GraphScreen> {
     'Update my history',
     'Logout'
   ];
+  bool vitaminDIntakeComplete=false;
 
   @override
   void initState() {
     super.initState();
     checkConnection();
-    updateDateRange();
   }
 
   @override
@@ -107,13 +107,12 @@ class _GraphScreenState extends State<GraphScreen> {
                         // Add some spacing
                         Text(
                           item,
-                          style: GoogleFonts.raleway(
-                            textStyle: TextStyle(
+                          style: TextStyle(
+                            fontFamily: 'Raleway',
                               color: Colors.black,
                               fontSize: (isTablet(context)) ? screenWidth *
                                   0.028 : screenWidth * 0.037,
                               //fontWeight: FontWeight.bold,
-                            ),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -125,14 +124,13 @@ class _GraphScreenState extends State<GraphScreen> {
                     value: item,
                     child: Text(
                       item,
-                      style: GoogleFonts.raleway(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
                           color: Colors.black,
                           fontSize: (isTablet(context))
                               ? screenWidth * 0.028
                               : screenWidth * 0.037,
                           //fontWeight: FontWeight.bold,
-                        ),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -151,6 +149,7 @@ class _GraphScreenState extends State<GraphScreen> {
       ),
       body: Stack(
         children: [
+          hasConnection?
           Column(
             children: [
               CircleAvatar(
@@ -164,15 +163,14 @@ class _GraphScreenState extends State<GraphScreen> {
               SizedBox(height: screenHeight * 0.01,),
               Text(
                 "${userData.user['name']}",
-                style: GoogleFonts.raleway(
-                  textStyle: TextStyle(
+                style: TextStyle(
+                    fontFamily: 'Raleway',
                     color: Colors.black,
                     fontSize: (isTablet(context))
                         ? screenWidth * 0.033
                         : screenWidth * 0.038,
                     //fontWeight: FontWeight.bold,
                   ),
-                ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: screenHeight * 0.02),
@@ -190,13 +188,12 @@ class _GraphScreenState extends State<GraphScreen> {
                     ),
                     Text(
                       getRangeLabel(),
-                      style: GoogleFonts.brunoAceSc(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                         fontFamily: 'BrunoAceSC',
                           color: Colors.black,
                           fontSize: (isTablet(context))
                               ? screenWidth * 0.03
                               : screenWidth * 0.039,
-                        ),
                       ),
                     ),
                     IconButton(
@@ -239,11 +236,10 @@ class _GraphScreenState extends State<GraphScreen> {
                                   List<String> weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
                                   return Text(
                                     weekDays[value.toInt()],
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black,
                                         fontSize: (isTablet(context)) ? screenWidth * 0.026 : screenWidth * 0.035,
-                                      ),
                                     ),
                                   );
                                 } else if (selectedRange == 'Month') {
@@ -251,11 +247,10 @@ class _GraphScreenState extends State<GraphScreen> {
                                   if ([1, 5, 10, 15, 20, 25, 30].contains(day)) {
                                     return Text(
                                       day.toString(),
-                                      style: GoogleFonts.raleway(
-                                        textStyle: TextStyle(
+                                      style: TextStyle(
+                                        fontFamily: 'Raleway',
                                           color: Colors.black,
                                           fontSize: (isTablet(context)) ? screenWidth * 0.026 : screenWidth * 0.035,
-                                        ),
                                       ),
                                     );
                                   }
@@ -265,11 +260,10 @@ class _GraphScreenState extends State<GraphScreen> {
                                   ];
                                   return Text(
                                     months[value.toInt()],
-                                    style: GoogleFonts.raleway(
-                                      textStyle: TextStyle(
+                                    style: TextStyle(
+                                      fontFamily: 'Raleway',
                                         color: Colors.black,
                                         fontSize: (isTablet(context)) ? screenWidth * 0.026 : screenWidth * 0.035,
-                                      ),
                                     ),
                                   );
                                 }
@@ -295,14 +289,13 @@ class _GraphScreenState extends State<GraphScreen> {
                                     left: screenWidth * 0.03),
                                 child: Text(
                                   '${formattedValue}',
-                                  style: GoogleFonts.raleway(
-                                    textStyle: TextStyle(
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
                                       color: Colors.black,
                                       fontSize: (isTablet(context))
                                           ? screenWidth * 0.026
                                           : screenWidth * 0.035,
                                     ),
-                                  ),
                                 ),
                               );
                             },
@@ -348,14 +341,13 @@ class _GraphScreenState extends State<GraphScreen> {
                           child: Center(
                             child: Text(
                               "Week",
-                              style: GoogleFonts.brunoAceSc(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                              fontFamily: 'BrunoAceSC',
                                   color: weekPressed ? Colors.white : Colors
                                       .black,
                                   fontSize: (isTablet(context)) ? screenWidth *
                                       0.029 : screenWidth * 0.038,
                                 ),
-                              ),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -380,14 +372,13 @@ class _GraphScreenState extends State<GraphScreen> {
                           child: Center(
                             child: Text(
                               "Month",
-                              style: GoogleFonts.brunoAceSc(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                                  fontFamily: 'BrunoAceSC',
                                   color: monthPressed ? Colors.white : Colors
                                       .black,
                                   fontSize: (isTablet(context)) ? screenWidth *
                                       0.029 : screenWidth * 0.038,
                                 ),
-                              ),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -419,14 +410,13 @@ class _GraphScreenState extends State<GraphScreen> {
                           child: Center(
                             child: Text(
                               "Year",
-                              style: GoogleFonts.brunoAceSc(
-                                textStyle: TextStyle(
+                              style: TextStyle(
+                              fontFamily: 'BrunoAceSC',
                                   color: yearPressed ? Colors.white : Colors
                                       .black,
                                   fontSize: (isTablet(context)) ? screenWidth *
                                       0.029 : screenWidth * 0.038,
                                 ),
-                              ),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -442,15 +432,14 @@ class _GraphScreenState extends State<GraphScreen> {
                     0.03,),
               Text(
                 "Vitamin D intake - ${userData.todayIuConsumed}IU",
-                style: GoogleFonts.raleway(
-                  textStyle: TextStyle(
+                style: TextStyle(
+                fontFamily: 'Raleway',
                     color: Colors.black,
                     fontSize: (isTablet(context))
                         ? screenWidth * 0.036
                         : screenWidth * 0.04,
                     //fontWeight: FontWeight.bold,
                   ),
-                ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: screenHeight * 0.04,),
@@ -465,7 +454,12 @@ class _GraphScreenState extends State<GraphScreen> {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, "/Spf");
+                    if(sessionDetails.vitaminDIntake==0){
+                      setState(() {
+                        vitaminDIntakeComplete=true;
+                      });
+                    }else
+                      Navigator.pushNamed(context, "/Spf");
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -486,7 +480,7 @@ class _GraphScreenState extends State<GraphScreen> {
               ),
 
             ],
-          ),
+          ):SizedBox(),
           Consumer<sessionDetailsNotifier>(builder: (context, value, child) {
             return (!value.sessionPossible) ?
             Container(
@@ -505,14 +499,13 @@ class _GraphScreenState extends State<GraphScreen> {
                     child: AlertDialog(
                       title: Text(
                         "Sun is resting now",
-                        style: GoogleFonts.brunoAceSc(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+                          fontFamily: 'BrunoAceSC',
                             color: Colors.white,
                             fontSize: (isTablet(context))
                                 ? screenWidth * 0.042
                                 : screenWidth * 0.048,
                             //fontWeight: FontWeight.bold,
-                          ),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -524,16 +517,16 @@ class _GraphScreenState extends State<GraphScreen> {
                               0.15,),
                           Text(
                             "Currently, sunlight isn’t available due to certain conditions—this could be due to cloud cover, a low UV index, or other atmospheric factors.\nFor now, it may be best to wait and check again later when conditions improve for natural Vitamin D exposure!",
-                            style: GoogleFonts.raleway(
-                              textStyle: TextStyle(
+                            style: TextStyle(
+                              fontFamily: 'Raleway',
                                 color: Colors.white,
                                 fontSize: (isTablet(context)) ? screenWidth *
                                     0.03 : screenWidth * 0.035,
                                 //fontWeight: FontWeight.bold,
                               ),
-                            ),
                             textAlign: TextAlign.center,
-                          ),
+                            ),
+
                         ],
                       ),
                       backgroundColor: Color(0xFFEC9500),
@@ -544,14 +537,13 @@ class _GraphScreenState extends State<GraphScreen> {
                           },
                           child: Text(
                             "Exit",
-                            style: GoogleFonts.brunoAceSc(
-                              textStyle: TextStyle(
+                            style: TextStyle(
+                              fontFamily: 'BrunoAceSC',
                                 color: Colors.white,
                                 fontSize: (isTablet(context)) ? screenWidth *
                                     0.038 : screenWidth * 0.04,
                                 //fontWeight: FontWeight.bold,
                               ),
-                            ),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -561,14 +553,13 @@ class _GraphScreenState extends State<GraphScreen> {
                           },
                           child: Text(
                             "Retry",
-                            style: GoogleFonts.brunoAceSc(
-                              textStyle: TextStyle(
+                            style:  TextStyle(
+                              fontFamily: 'BrunoAceSC',
                                 color: Colors.white,
                                 fontSize: (isTablet(context)) ? screenWidth *
                                     0.038 : screenWidth * 0.04,
                                 //fontWeight: FontWeight.bold,
                               ),
-                            ),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -586,14 +577,13 @@ class _GraphScreenState extends State<GraphScreen> {
                     child: AlertDialog(
                       title: Text(
                         "Sun is unavailable",
-                        style: GoogleFonts.brunoAceSc(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+                          fontFamily: 'BrunoAceSC',
                             color: Colors.white,
                             fontSize: (isTablet(context))
                                 ? screenWidth * 0.042
                                 : screenWidth * 0.048,
                             //fontWeight: FontWeight.bold,
-                          ),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -604,15 +594,14 @@ class _GraphScreenState extends State<GraphScreen> {
                             'assets/images/moon.png', height: screenHeight * 0.15,),
                           Text(
                             "It's already evening, so sunlight for Vitamin D isn't available now. Aim to get some sun exposure tomorrow, preferably around midday for maximum benefit."
-                            , style: GoogleFonts.raleway(
-                            textStyle: TextStyle(
+                            , style: TextStyle(
+                            fontFamily: 'Raleway',
                               color: Colors.white,
                               fontSize: (isTablet(context))
                                   ? screenWidth * 0.03
                                   : screenWidth * 0.035,
                               //fontWeight: FontWeight.bold,
                             ),
-                          ),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -628,14 +617,13 @@ class _GraphScreenState extends State<GraphScreen> {
                           },
                           child: Text(
                             "Ok",
-                            style: GoogleFonts.brunoAceSc(
-                              textStyle: TextStyle(
+                            style: TextStyle(
+                              fontFamily: 'BrunoAceSC',
                                 color: Colors.white,
                                 fontSize: (isTablet(context)) ? screenWidth *
                                     0.038 : screenWidth * 0.04,
                                 //fontWeight: FontWeight.bold,
                               ),
-                            ),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -644,11 +632,12 @@ class _GraphScreenState extends State<GraphScreen> {
                       : Container();
                 }),
           ),
-          (!hasConnection||logoutPressed) ?
-          Expanded(
-            child: Container(
-              color: Colors.white24,
-            ),
+          (!hasConnection||logoutPressed|| vitaminDIntakeComplete) ?
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            color: Colors.white24,
+
           ) : Container(),
           !hasConnection
               ? Padding(
@@ -659,15 +648,14 @@ class _GraphScreenState extends State<GraphScreen> {
                 child: AlertDialog(
                   title: Text(
                     "No Internet Available",
-                    style: GoogleFonts.brunoAceSc(
-                      textStyle: TextStyle(
+                    style: TextStyle(
+                      fontFamily: 'BrunoAceSC',
                         color: Colors.black,
                         fontSize: (isTablet(context))
                             ? screenWidth * 0.042
                             : screenWidth * 0.048,
                         //fontWeight: FontWeight.bold,
                       ),
-                    ),
                     textAlign: TextAlign.center,
                   ),
                   content: Column(
@@ -677,15 +665,14 @@ class _GraphScreenState extends State<GraphScreen> {
                         height: screenHeight * 0.2,),
                       Text(
                         'You need an internet connection to proceed. Please check your connection and try again.',
-                        style: GoogleFonts.raleway(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+                            fontFamily: 'Raleway',
                             color: Colors.black,
                             fontSize: (isTablet(context))
                                 ? screenWidth * 0.03
                                 : screenWidth * 0.04,
                             //fontWeight: FontWeight.bold,
                           ),
-                        ),
                         textAlign: TextAlign.center,),
                     ],
                   ),
@@ -698,15 +685,14 @@ class _GraphScreenState extends State<GraphScreen> {
                       onPressed: () => SystemNavigator.pop(),
                       child: Text(
                         "Exit",
-                        style: GoogleFonts.brunoAceSc(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+                            fontFamily: 'BrunoAceSC',
                             color: Colors.black,
                             fontSize: (isTablet(context))
                                 ? screenWidth * 0.038
                                 : screenWidth * 0.04,
                             //fontWeight: FontWeight.bold,
                           ),
-                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -717,15 +703,14 @@ class _GraphScreenState extends State<GraphScreen> {
                       },
                       child: Text(
                         "Retry",
-                        style: GoogleFonts.brunoAceSc(
-                          textStyle: TextStyle(
+                        style: TextStyle(
+                          fontFamily: 'BrunoAceSC',
                             color: Colors.black,
                             fontSize: (isTablet(context))
                                 ? screenWidth * 0.038
                                 : screenWidth * 0.04,
                             //fontWeight: FontWeight.bold,
                           ),
-                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -742,15 +727,14 @@ class _GraphScreenState extends State<GraphScreen> {
               child: AlertDialog(
                 title: Text(
                   "Log out",
-                  style: GoogleFonts.brunoAceSc(
-                    textStyle: TextStyle(
+                  style: TextStyle(
+                      fontFamily: 'BrunoAceSC',
                       color: Colors.black,
                       fontSize: (isTablet(context))
                           ? screenWidth * 0.05
                           : screenWidth * 0.055,
                       //fontWeight: FontWeight.bold,
                     ),
-                  ),
                   textAlign: TextAlign.center,
                 ),
                 content: Column(
@@ -760,15 +744,14 @@ class _GraphScreenState extends State<GraphScreen> {
                       'assets/images/logout.png', height: screenHeight * 0.2,),
                     Text(
                       "Are you sure you want to logout from session?"
-                      , style: GoogleFonts.raleway(
-                      textStyle: TextStyle(
+                      , style: TextStyle(
+                      fontFamily: 'Raleway',
                         color: Colors.black,
                         fontSize: (isTablet(context))
                             ? screenWidth * 0.04
                             : screenWidth * 0.04,
                         //fontWeight: FontWeight.bold,
                       ),
-                    ),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -786,14 +769,13 @@ class _GraphScreenState extends State<GraphScreen> {
                     },
                     child: Text(
                       "No",
-                      style: GoogleFonts.brunoAceSc(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
                           color: Colors.black,
                           fontSize: (isTablet(context))
                               ? screenWidth * 0.04
                               : screenWidth * 0.04,
                           //fontWeight: FontWeight.bold,
-                        ),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -814,22 +796,82 @@ class _GraphScreenState extends State<GraphScreen> {
                     },
                     child: Text(
                       "Yes",
-                      style: GoogleFonts.brunoAceSc(
-                        textStyle: TextStyle(
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
                           color: Colors.black,
                           fontSize: (isTablet(context))
                               ? screenWidth * 0.04
                               : screenWidth * 0.04,
                           //fontWeight: FontWeight.bold,
                         ),
-                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
 
                 ],),
             ),
-          ) : Container()
+          ) : Container(),
+          vitaminDIntakeComplete?
+          Padding(
+            padding: EdgeInsets.only(bottom: screenHeight * 0.1,
+                left: isTablet(context) ? screenWidth * 0.05 : 0,
+                right: isTablet(context) ? screenWidth * 0.05 : 0),
+            child: Center(
+                child: AlertDialog(
+                  title: Text(
+                    "Vitamin D IU Completed",
+                    style: TextStyle(
+                      fontFamily: 'BrunoAceSC',
+                      color: Colors.black,
+                      fontSize: (isTablet(context))
+                          ? screenWidth * 0.042
+                          : screenWidth * 0.048,
+                      //fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset('assets/images/iuCompleted.png',
+                        height: screenHeight * 0.2,),
+                      Text(
+                        'You already have consumed 1000 IU for today so no further session required',
+                        style: TextStyle(
+                          fontFamily: 'Raleway',
+                          color: Colors.black,
+                          fontSize: (isTablet(context))
+                              ? screenWidth * 0.03
+                              : screenWidth * 0.04,
+                          //fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,),
+                    ],
+                  ),
+                  backgroundColor: Colors.orangeAccent,
+                  actions: [
+                    TextButton(
+                      onPressed: () async {
+                        setState(() {
+                          vitaminDIntakeComplete=false;
+                        });
+                      },
+                      child: Text(
+                        "Ok",
+                        style: TextStyle(
+                          fontFamily: 'BrunoAceSC',
+                          color: Colors.black,
+                          fontSize: (isTablet(context))
+                              ? screenWidth * 0.038
+                              : screenWidth * 0.04,
+                          //fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],)
+            ),
+          ):SizedBox.shrink()
         ],
       )
 
@@ -867,6 +909,8 @@ class _GraphScreenState extends State<GraphScreen> {
   Future<void> checkConnection() async {
     var result = await InternetConnectionChecker().hasConnection;
     if (mounted) {
+      if(result)
+      updateDateRange();
       setState(() {
         hasConnection = result;
       });

@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/pages/LoginScreen.dart';
+import 'package:untitled/pages/SignupScreen.dart';
 import 'package:untitled/pages/countDownScreen.dart';
 import 'package:untitled/pages/estimatedBloodLevel.dart';
 import 'package:untitled/pages/estimatedVitaminDLevel.dart';
@@ -14,7 +15,6 @@ import 'package:untitled/pages/graphScreen.dart';
 import 'package:untitled/pages/sessionFinished.dart';
 import 'package:untitled/pages/skinTypeSelection.dart';
 import 'package:untitled/pages/spf.dart';
-import 'package:untitled/pages/disclaimer.dart';
 import 'package:untitled/providers/sessionDetailsProvider.dart';
 import 'package:untitled/providers/userDataProvider.dart';
 

@@ -39,12 +39,12 @@ class _SpfState extends State<Spf> {
                 SizedBox(height: screenHeight*0.01,),
                 Text(
                   "Sun Screen used during Sun Exposure",
-                  style: GoogleFonts.brunoAceSc(
-                    textStyle: TextStyle(
+                  style: TextStyle(
+                    fontFamily: 'BrunoAceSC',
                       color: Colors.black,
                       fontSize: (isTablet(context))?screenWidth*0.042:screenWidth*0.048,
                       //fontWeight: FontWeight.bold,
-                    ),
+
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -62,13 +62,13 @@ class _SpfState extends State<Spf> {
                         children: [
                           Text(
                             "SPF",
-                            style: GoogleFonts.raleway(
-                              textStyle: TextStyle(
+                            style: TextStyle(
+                              fontFamily: 'Raleway',
                                 color: Colors.black,
                                 fontSize: (isTablet(context))?screenWidth*0.036:screenWidth*0.037,
                                 //fontWeight: FontWeight.bold,
                               ),
-                            ),
+
                           ),
                           SizedBox(width: screenWidth*0.02,),
                           DropdownButton<String>(
@@ -104,12 +104,11 @@ class _SpfState extends State<Spf> {
                 SizedBox(height: screenHeight*0.04,),
                 Text(
                   "Please select the SPF value of the sunscreen you applied to help us accurately track the amount of vitamin IU consumed",
-                  style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
+                  style: TextStyle(
+                    fontFamily: 'Raleway',
                       color: Colors.black54,
                       fontSize: (isTablet(context))?screenWidth*0.034:screenWidth*0.035,
                       //fontWeight: FontWeight.bold,
-                    ),
                   ),
                   textAlign: TextAlign.center,
                 ),
