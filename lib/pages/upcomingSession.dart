@@ -428,7 +428,7 @@ class _UpcomingSessionState extends State<UpcomingSession> {
       sessionTimeInMin=sessionTimeInMin*sessionDetails.spf;
     }
 
-    if(sessionTimeInMin.round()<sessionDetails.timeTillSunsetMinutes){
+    if(sessionTimeInMin.round()<=sessionDetails.timeTillSunsetMinutes){
       sessionDetails.addSessionDuration(sessionTimeInMin.round());
     }else{
       sessionDetails.addSessionDuration(sessionDetails.timeTillSunsetMinutes);
