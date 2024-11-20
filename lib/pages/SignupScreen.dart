@@ -600,15 +600,29 @@ class _SignupscreenState extends State<SignupScreen> {
     double screenHeight = MediaQuery.sizeOf(context).height;
 
     if(_emailController.text.isNotEmpty && _ageController.text.isNotEmpty && _passwordController.text.isNotEmpty && _dateController.text.isNotEmpty && _weightController.text.isNotEmpty && _nameController.text.isNotEmpty) {
-      if (int.parse(_ageController.text.trim()) != 0) {
-        if (_isValidEmail(_emailController.text.trim())) {
-          if (termsAccepted) {
-            return true;
-          }
-          else {
+      if (int.parse(_ageController.text.trim()) > 0) {
+        if(int.parse(_weightController.text.trim()) > 0){
+          if (_isValidEmail(_emailController.text.trim())) {
+            if (termsAccepted) {
+              return true;
+            }
+            else {
+              Fluttertoast.showToast(
+                fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+                msg: "Please accept the terms and conditions to proceed.",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                // Change this to your desired background color
+                textColor: Colors.white,
+              );
+              return false;
+            }
+          } else {
             Fluttertoast.showToast(
               fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-              msg: "Please accept the terms and conditions to proceed.",
+              msg: "The provided email is invalid.",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
@@ -616,12 +630,13 @@ class _SignupscreenState extends State<SignupScreen> {
               // Change this to your desired background color
               textColor: Colors.white,
             );
+            _emailController.text = "";
             return false;
           }
-        } else {
+        }else{
           Fluttertoast.showToast(
             fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-            msg: "The provided email is invalid.",
+            msg: "Invalid Weight",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -629,7 +644,6 @@ class _SignupscreenState extends State<SignupScreen> {
             // Change this to your desired background color
             textColor: Colors.white,
           );
-          _emailController.text = "";
           return false;
         }
       }

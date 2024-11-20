@@ -456,14 +456,43 @@ class _UpdateProfileState extends State<UpdateProfile> {
     final userData = Provider.of<UserDataNotifier>(context, listen: false);
 
     if(_ageController.text.isNotEmpty && _dateController.text.isNotEmpty && _weightController.text.isNotEmpty && _nameController.text.isNotEmpty) {
-      if(userData.user['skinType']!=userData.skinType || _nameController.text.trim()!=userData.user['name'] || dropdownValue!=userData.user['gender'] || _ageController.text.trim()!=userData.user['age'].toString() || _weightController.text.trim()!=userData.user['weight'].toString()){
-        if (int.parse(_ageController.text.trim()) != 0) {
-          return true;
-        }
-        else {
+      if(int.parse(_ageController.text.trim())>0){
+        if(int.parse(_weightController.text.trim())>0){
+          if(userData.user['skinType']!=userData.skinType || _nameController.text.trim()!=userData.user['name'] || dropdownValue!=userData.user['gender'] || _ageController.text.trim()!=userData.user['age'].toString() || _weightController.text.trim()!=userData.user['weight'].toString()){
+            if (int.parse(_ageController.text.trim()) != 0) {
+              return true;
+            }
+            else {
+              Fluttertoast.showToast(
+                fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+                msg: "Invalid Age",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                // Change this to your desired background color
+                textColor: Colors.white,
+              );
+              return false;
+            }
+          }
+          else{
+            Fluttertoast.showToast(
+              fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+              msg: "No changes were made.",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red, // Change this to your desired background color
+              textColor: Colors.white,
+            );
+
+            return false;
+          }
+        }else{
           Fluttertoast.showToast(
             fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-            msg: "Invalid Age",
+            msg: "Invalid Weight",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -473,20 +502,21 @@ class _UpdateProfileState extends State<UpdateProfile> {
           );
           return false;
         }
+
       }else{
         Fluttertoast.showToast(
           fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-          msg: "No changes were made.",
-          toastLength: Toast.LENGTH_LONG,
+          msg: "Invalid Age",
+          toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red, // Change this to your desired background color
+          backgroundColor: Colors.red,
+          // Change this to your desired background color
           textColor: Colors.white,
         );
-
         return false;
       }
-    }
+      }
     else{
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,

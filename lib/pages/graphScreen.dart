@@ -431,7 +431,7 @@ class _GraphScreenState extends State<GraphScreen> {
                 height: isTablet(context) ? screenHeight * 0.04 : screenHeight *
                     0.03,),
               Text(
-                "Vitamin D intake - ${userData.todayIuConsumed}IU",
+                "Today's Vitamin D intake - ${userData.todayIuConsumed} IU",
                 style: TextStyle(
                 fontFamily: 'Raleway',
                     color: Colors.black,
