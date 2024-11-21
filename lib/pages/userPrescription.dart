@@ -135,7 +135,7 @@ class _UserPrescriptionState extends State<UserPrescription> {
                                       ),
 
                                   Consumer<HistoryNotifier>(builder: (context,value,child){
-                                    return (value.pillAdded)?
+                                    return (value.pillSubmitText)?
                                     Column(
                                     children: [
                                       SizedBox(height: screenHeight*0.01,),
@@ -184,7 +184,7 @@ class _UserPrescriptionState extends State<UserPrescription> {
                                             return (value.resultsAdded)?choiceSelected("Update"):choiceSelected("Add");}),
                                       ),
                                   Consumer<TestResultsNotifier>(builder: (context,value,child){
-                                    return (value.resultsAdded)?
+                                    return (value.resultSubmitText)?
                                       Column(
                                     children: [
                                       SizedBox(height: screenHeight*0.01,),

@@ -490,8 +490,8 @@ class _GraphScreenState extends State<GraphScreen> {
             ) : Container();
           }),
           Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: isTablet(context) ? screenWidth * 0.05 : 0),
+            padding: EdgeInsets.only(
+                left: isTablet(context) ? screenWidth * 0.05 : 0,right: isTablet(context) ? screenWidth * 0.05 : 0,bottom: screenHeight*0.06),
             child: Consumer<sessionDetailsNotifier>(
                 builder: (context, value, child) {
                   return (!value.sessionPossible && !value.nightTime) ?
@@ -1058,6 +1058,10 @@ class _GraphScreenState extends State<GraphScreen> {
         context, listen: false);
     final testResultsProvider = Provider.of<TestResultsNotifier>(
         context, listen: false);
+
+    testResultsProvider.removeSubmissionText();
+    historyProvider.removeSubmissionText();
+
     if (userData.user['pills'].isNotEmpty) {
       List<String> userMed = userData.user['pills'].split(',');
       if (userMed.contains('Daily Cal')) {

@@ -196,11 +196,13 @@ class _BloodLevelState extends State<BloodLevel> {
                                     testResultsProvider.dateController.text=_dateController.text.trim();
                                     testResultsProvider.testValueController.text=_testValueController.text.trim() ;
                                     testResultsProvider.addResult();
+                                    testResultsProvider.displaySubmissionText();
                                     Navigator.pop(context);
                                   }else if(_testValueController.text.isEmpty && _dateController.text.isEmpty){
                                     testResultsProvider.testValueController.clear();
                                     testResultsProvider.dateController.clear();
                                     testResultsProvider.removeResult();
+                                    testResultsProvider.removeSubmissionText();
                                     Navigator.pop(context);
                                   }else{
                                     Fluttertoast.showToast(

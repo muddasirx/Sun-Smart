@@ -295,10 +295,15 @@ class _UserHistoryState extends State<UserHistory> {
                                     historyProvider.m3Pressed(m3);
                                     historyProvider.supplementsController.text = supplementsController.text.trim();
 
-                                    if(m1 || m2 || m3 || supplementsController.text.isNotEmpty)
-                                     historyProvider.pillSelected();
-                                   else
-                                      historyProvider.pillRemoved();
+                                    if(m1 || m2 || m3 || supplementsController.text.isNotEmpty) {
+                                    historyProvider.pillSelected();
+                                    historyProvider.displaySubmissionText();
+                                  } else{
+                                        historyProvider.pillRemoved();
+                                        historyProvider.removeSubmissionText();
+                                    }
+
+
 
                                    Navigator.pop(context);
 
