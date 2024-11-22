@@ -29,7 +29,7 @@ class _countDownScreenState extends State<countDownScreen> with SingleTickerProv
   bool quitPressed=false;
   bool updatePressed=false;
   bool hasConnection=true;
-
+  bool dataUploaded=true;
 
   @override
   void initState() {
@@ -397,7 +397,10 @@ class _countDownScreenState extends State<countDownScreen> with SingleTickerProv
                               onPressed: () async{
                                 await checkConnection();
                                 if(hasConnection){
-                                  uploadDataToDB();
+                                  setState(() {
+                                    dataUploaded=false;
+                                  });
+                                  await uploadDataToDB();
                                   countDownDetails.timeSpentInSeconds = (sessionDetails.sessionDurationMinutes * 60) - controller.getTimeInSeconds();
                                   Navigator.pushAndRemoveUntil(
                                     context,
@@ -499,6 +502,41 @@ class _countDownScreenState extends State<countDownScreen> with SingleTickerProv
 
               ),
             ):Container(),
+            dataUploaded?SizedBox.shrink():Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: Colors.white38,
+            ),
+            dataUploaded?SizedBox.shrink():Center(
+                child: Container(
+                  height: screenHeight*0.15,
+                  width: screenWidth*0.45,
+                  decoration: BoxDecoration(
+                    color: Colors.orangeAccent,
+                    borderRadius: BorderRadius.circular(20)
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          height:isTablet(context)?60:35,
+                          width: isTablet(context)?60:35,
+                          child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white),strokeWidth: isTablet(context)?3.5:3,)),
+                      SizedBox(height: screenHeight*0.01,),
+                      Text(
+                        "Please Wait",
+                        style: TextStyle(
+                          fontFamily: 'BrunoAceSC',
+                          color: Colors.white,
+                          fontSize: (isTablet(context))?screenWidth*0.038:screenWidth*0.043,
+                          //fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                )
+            ),
             !hasConnection
                 ? Padding(
               padding: EdgeInsets.only(left: isTablet(context)?screenWidth*0.05:0,right: isTablet(context)?screenWidth*0.05:0,bottom: screenHeight*0.1),
@@ -619,8 +657,10 @@ class _countDownScreenState extends State<countDownScreen> with SingleTickerProv
         await userDoc.update({
           'sessionID': docRef.id,
         });
-
-        userData.fetchUserData(userData.uid);
+        print("fetching user data after first session");
+        await userData.fetchUserData(userData.uid);
+        print("fetching session data after first session");
+        await userData.fetchUserSessions(userData.user['sessionID']);
       }
     } else {
       // Update existing session

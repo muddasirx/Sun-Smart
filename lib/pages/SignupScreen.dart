@@ -700,8 +700,8 @@ class _SignupscreenState extends State<SignupScreen> {
           'skinType':0,
           'test date':'',
           'test value':0,
-          'pills':''
-
+          'pills':'',
+          'admin':false
         });
         final loginData = Provider.of<UserDataNotifier>(context, listen: false);
 
@@ -715,6 +715,8 @@ class _SignupscreenState extends State<SignupScreen> {
         setState(() {
           registerPressed=false;
         });
+        loginData.skinType=0;
+        loginData.todayIuConsumed=0;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => SkinType()),

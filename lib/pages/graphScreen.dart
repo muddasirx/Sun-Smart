@@ -45,6 +45,7 @@ class _GraphScreenState extends State<GraphScreen> {
   @override
   void initState() {
     super.initState();
+    print("--------------------Graph Screen-------------------");
     checkConnection();
   }
 

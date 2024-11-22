@@ -13,6 +13,7 @@ import 'package:untitled/pages/graphScreen.dart';
 import 'package:untitled/pages/skinTypeSelection.dart';
 import 'package:untitled/pages/spf.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:untitled/pages/userAnalysisScreen.dart';
 
 import '../SplashScreen.dart';
 import '../providers/sessionDetailsProvider.dart';
@@ -211,28 +212,36 @@ class _LoginScreenState extends State<LoginScreen> {
                                             if(await _checkLogin()){
 
                                               final loginData = Provider.of<UserDataNotifier>(context, listen: false);
-                                              if(loginData.user['skinType']!=0){
-                                                if(loginData.user['sessionID']!='none'){
+                                              if(loginData.user['admin']){
+                                                Navigator.pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(builder: (context) => UserAnalysis()),
+                                                      (route) => false,
+                                                );
+                                              }else{
+                                                if(loginData.user['skinType']!=0){
+                                                  if(loginData.user['sessionID']!='none'){
+                                                    Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(builder: (context) => GraphScreen()),
+                                                          (route) => false,
+                                                    );
+                                                  }else{
+                                                    Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(builder: (context) => Spf()),
+                                                          (route) => false,
+                                                    );
+                                                  }
+                                                }
+                                                else {
+                                                  print("move to skin type");
                                                   Navigator.pushAndRemoveUntil(
                                                     context,
-                                                    MaterialPageRoute(builder: (context) => GraphScreen()),
-                                                        (route) => false,
-                                                  );
-                                                }else{
-                                                  Navigator.pushAndRemoveUntil(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) => Spf()),
+                                                    MaterialPageRoute(builder: (context) => SkinType()),
                                                         (route) => false,
                                                   );
                                                 }
-                                              }
-                                              else {
-                                                print("move to skin type");
-                                                Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(builder: (context) => SkinType()),
-                                                      (route) => false,
-                                                );
                                               }
                                               setState(() {
                                                 loginPressed=false;
