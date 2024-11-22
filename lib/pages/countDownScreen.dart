@@ -140,22 +140,22 @@ class _countDownScreenState extends State<countDownScreen> with SingleTickerProv
 
 
                                   ,
-                                  borderRadius: BorderRadius.circular(isTablet(context)?99:80),
+                                  borderRadius: BorderRadius.circular(isTablet(context)?130:80),
                                 ),
                               ),
                             ),
                             Transform.rotate(
                               angle: -_controller.value * 2 * pi, // Standard rotation
                               child: Container(
-                                width: isTablet(context)?screenWidth*0.37:screenWidth*0.475,
-                                height: isTablet(context)?screenHeight*0.23:screenHeight*0.225,
+                                width: isTablet(context)?screenWidth*0.375:screenWidth*0.475,
+                                height: isTablet(context)?screenHeight*0.235:screenHeight*0.225,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [Color(0xFFFCC54E), Color(0xFFFDA34F)],
                                     begin: Alignment.topLeft,
                                     end: Alignment.bottomRight,
                                   ),
-                                  borderRadius: BorderRadius.circular(isTablet(context)?99:80),
+                                  borderRadius: BorderRadius.circular(isTablet(context)?130:80),
                                 ),
                               ),
                             ),
