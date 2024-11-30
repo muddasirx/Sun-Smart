@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:untitled/SplashScreen.dart';
 import 'package:untitled/pages/LoginScreen.dart';
 import 'package:untitled/pages/SignupScreen.dart';
+import 'package:untitled/pages/admin%20screens/manageAds.dart';
+import 'package:untitled/pages/createAd.dart';
 import 'package:untitled/pages/testResults.dart';
 import 'package:untitled/pages/clothingType.dart';
 import 'package:untitled/pages/countDownScreen.dart';
@@ -17,9 +19,12 @@ import 'package:untitled/pages/skinTypeSelection.dart';
 import 'package:untitled/pages/sourcesOfVitaminD.dart';
 import 'package:untitled/pages/spf.dart';
 import 'package:untitled/pages/upcomingSession.dart';
+import 'package:untitled/pages/update/updatePassword.dart';
 import 'package:untitled/pages/update/updateProfile.dart';
 import 'package:untitled/pages/userHistory.dart';
 import 'package:untitled/pages/userPrescription.dart';
+import 'package:untitled/providers/adminPanelProvider.dart';
+import 'package:untitled/providers/adsProvider.dart';
 import 'package:untitled/providers/countDownDetailsProvider.dart';
 import 'package:untitled/providers/historyProvider.dart';
 import 'package:untitled/providers/sessionDetailsProvider.dart';
@@ -39,6 +44,8 @@ void main() {
       ChangeNotifierProvider(create: (_) => TestResultsNotifier()),
       ChangeNotifierProvider(create: (_) => sessionDetailsNotifier()),
       ChangeNotifierProvider(create: (_) =>countDownDetailsNotifier()),
+      ChangeNotifierProvider(create: (_) =>AdminPanelNotifier()),
+      ChangeNotifierProvider(create: (_) =>AdsNotifier()),
     ],
     child: MyApp(),
   ),);
@@ -73,7 +80,11 @@ class MyApp extends StatelessWidget {
           "/countDownScreen" : (context) => countDownScreen(),
           "/SessionFinished" : (context) => SessionFinished(),
           "/GraphScreen" : (context) => GraphScreen(),
-          "/UpdateProfile" : (context) =>UpdateProfile()
+          "/UpdateProfile" : (context) =>UpdateProfile(),
+          "/UpdatePassword" : (context) =>UpdatePassword(),
+          "/ManageAds"  : (context) => ManageAds(),
+          "/CreateAd" : (context) => CreateAd(),
+
     },
     );
   }

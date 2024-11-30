@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/pages/LoginScreen.dart';
 import 'package:untitled/pages/SignupScreen.dart';
+import 'package:untitled/pages/admin%20screens/adminGraph.dart';
 import 'package:untitled/pages/countDownScreen.dart';
 import 'package:untitled/pages/estimatedBloodLevel.dart';
 import 'package:untitled/pages/estimatedVitaminDLevel.dart';
@@ -15,7 +16,8 @@ import 'package:untitled/pages/graphScreen.dart';
 import 'package:untitled/pages/sessionFinished.dart';
 import 'package:untitled/pages/skinTypeSelection.dart';
 import 'package:untitled/pages/spf.dart';
-import 'package:untitled/pages/userAnalysisScreen.dart';
+import 'package:untitled/pages/admin screens/userAnalysisScreen.dart';
+import 'package:untitled/providers/adminPanelProvider.dart';
 import 'package:untitled/providers/sessionDetailsProvider.dart';
 import 'package:untitled/providers/userDataProvider.dart';
 
@@ -211,6 +213,7 @@ class SplashScreenState extends State<SplashScreen> with SingleTickerProviderSta
   Future<void> checkUserStatus() async{
     final loginData = Provider.of<UserDataNotifier>(context, listen: false);
     final sessionDetails = Provider.of<sessionDetailsNotifier>(context, listen: false);
+    final adminPanel = Provider.of<AdminPanelNotifier>(context, listen: false);
 
     SharedPreferences prefLogin = await SharedPreferences.getInstance();
     loginData.email= await prefLogin.getString('email') ?? '';
@@ -219,6 +222,9 @@ class SplashScreenState extends State<SplashScreen> with SingleTickerProviderSta
     print("fetching user session!");
     if(loginData.uid.isNotEmpty){
       await loginData.fetchUserData(loginData.uid);
+      if(loginData.user['admin']){
+        adminPanel.fetchData();
+      }
       print("checking session attended!");
       if(loginData.user['sessionID']!='none') {
         print("Session Id: ${loginData.user['sessionID']}");

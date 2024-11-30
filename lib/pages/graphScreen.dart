@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sidebarx/sidebarx.dart';
 import 'package:untitled/pages/LoginScreen.dart';
 import '../SplashScreen.dart';
 import '../providers/historyProvider.dart';
@@ -32,15 +33,19 @@ class _GraphScreenState extends State<GraphScreen> {
       monthPressed = false,
       weekPressed = true;
   String selectedRange = 'Week';
-  DateTime currentDate = DateTime.now();
+  DateTime currentWeekDate = DateTime.now();
+  DateTime currentMonthDate = DateTime.now();
+  DateTime currentYearDate = DateTime.now();
   DateTime rangeStart = DateTime.now();
   DateTime rangeEnd = DateTime.now();
   final List<String> menuItems = [
     'Update profile',
     'Update my history',
+    'Update password',
     'Logout'
   ];
   bool vitaminDIntakeComplete=false;
+  final SidebarXController _controller = SidebarXController(selectedIndex: -1, extended: true);
 
   @override
   void initState() {
@@ -51,20 +56,116 @@ class _GraphScreenState extends State<GraphScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery
-        .sizeOf(context)
-        .width;
-    double screenHeight = MediaQuery
-        .sizeOf(context)
-        .height;
+    print("----------UI Rebuild-----------");
+    double screenWidth = MediaQuery.sizeOf(context).width;
+    double screenHeight = MediaQuery.sizeOf(context).height;
     final userData = Provider.of<UserDataNotifier>(context, listen: false);
-    final sessionDetails = Provider.of<sessionDetailsNotifier>(
-        context, listen: false);
+    final sessionDetails = Provider.of<sessionDetailsNotifier>(context, listen: false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+
+      drawer: Drawer(
+
+        width: isTablet(context)?screenWidth*0.5:screenWidth * 0.6,
+        child: Column(
+          children: [
+            SizedBox(height: screenHeight * 0.08),
+            Center(
+              child: CircleAvatar(
+                radius: isTablet(context)
+                    ? screenHeight * 0.045
+                    : screenHeight * 0.04,
+                backgroundImage: (userData.user['gender'] == 'Female')
+                    ? AssetImage('assets/images/avatars/female.jpg')
+                    : AssetImage('assets/images/avatars/male.jpeg'),
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.03),
+            Expanded(
+              child: SidebarX(
+                showToggleButton: false,
+                controller: _controller,
+                extendedTheme: SidebarXTheme(
+                    iconTheme: IconThemeData(size: screenHeight*0.027),
+                    textStyle: TextStyle(fontSize: screenHeight*0.018),
+                  width: isTablet(context)?screenWidth*0.5:screenWidth * 0.6,
+                    itemTextPadding: EdgeInsets.only(left: screenWidth*0.02)
+                ),
+                items:  [
+                  SidebarXItem(icon: Icons.person,
+                    selectable: false,
+                    label: 'Update profile',onTap: (){
+                    Navigator.pop(context);
+                    userData.updateProfile=true;
+                    userData.skinType=userData.user['skinType'];
+                    Navigator.pushNamed(context, "/SkinType");
+                  },),
+
+                  SidebarXItem(icon: Icons.history, label: 'Update my history',selectable: false,
+                      onTap: (){
+                    Navigator.pop(context);
+                    userData.updateHistoryPressed = true;
+                    fetchUserHistory();
+                    Navigator.pushNamed(context, "/UserPrescription");
+                  }),
+
+                  SidebarXItem(icon: Icons.lock, label: 'Update password',selectable: false,
+                      onTap: (){
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, "/UpdatePassword" );
+                  }),
+
+                ],
+              ),
+            ),
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: screenWidth*0.05,),
+              child: InkWell(
+                splashFactory: NoSplash.splashFactory,
+                onTap: (){
+                  Navigator.pop(context);
+                  setState(() {
+                    logoutPressed=true;
+                  });
+                },
+                child: Container(
+                  height: screenHeight*0.045,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFFCC54E), Color(0xFFFDA34F)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(50.0), // Rounded corners
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.exit_to_app,size: screenHeight*0.025,color: Colors.white,),
+                      Text(' Log out',style: TextStyle(
+                        color: Colors.white,
+                          fontSize: (isTablet(context))
+                              ? screenWidth * 0.04
+                              : screenWidth * 0.041, fontWeight: FontWeight.bold
+                      ),),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: screenHeight*0.03,)
+          ],
+        ),
+      ),
+
       appBar: AppBar(
         iconTheme: IconThemeData(
+          color: Colors.black87,
+          size: (isTablet(context))?screenWidth* 0.046:screenWidth* 0.06,//(isTablet(context))?30:23
+        ),
+       /* iconTheme: IconThemeData(
           color: Colors.black87,
           size: (isTablet(context)) ? screenWidth * 0.046 : screenWidth *
               0.06, //(isTablet(context))?30:23
@@ -84,6 +185,9 @@ class _GraphScreenState extends State<GraphScreen> {
                   userData.updateHistoryPressed = true;
                   fetchUserHistory();
                   Navigator.pushNamed(context, "/UserPrescription");
+                  break;
+                case 'Update password':
+
                   break;
                 case 'Logout':
                   setState(() {
@@ -145,9 +249,9 @@ class _GraphScreenState extends State<GraphScreen> {
               borderRadius: BorderRadius.circular(10), // Rounded corners
             ),
           ),
-        ],
-
+        ],*/
       ),
+
       body: Stack(
         children: [
           hasConnection?
@@ -176,7 +280,7 @@ class _GraphScreenState extends State<GraphScreen> {
               ),
               SizedBox(height: screenHeight * 0.02),
 
-              Padding(
+              (selectedRange == 'Week')?Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,7 +312,73 @@ class _GraphScreenState extends State<GraphScreen> {
                     ),
                   ],
                 ),
-              ),
+              ):SizedBox.shrink(),
+              (selectedRange == 'Month')?Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_new, size: screenWidth * 0.055,
+                        color: Colors.black87,),
+                      onPressed: moveToPreviousRange,
+                    ),
+                    Text(
+                      getRangeLabel(),
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
+                        color: Colors.black,
+                        fontSize: (isTablet(context))
+                            ? screenWidth * 0.03
+                            : screenWidth * 0.039,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                          Icons.arrow_forward_ios, size: screenWidth * 0.055),
+                      color: isForwardButtonEnabled() ? Colors.black87 : Colors
+                          .grey,
+                      onPressed: isForwardButtonEnabled()
+                          ? moveToNextRange
+                          : null,
+                    ),
+                  ],
+                ),
+              ):SizedBox.shrink(),
+              (selectedRange == 'Year')?Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_new, size: screenWidth * 0.055,
+                        color: Colors.black87,),
+                      onPressed: moveToPreviousRange,
+                    ),
+                    Text(
+                      getRangeLabel(),
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
+                        color: Colors.black,
+                        fontSize: (isTablet(context))
+                            ? screenWidth * 0.03
+                            : screenWidth * 0.039,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                          Icons.arrow_forward_ios, size: screenWidth * 0.055),
+                      color: isForwardButtonEnabled() ? Colors.black87 : Colors
+                          .grey,
+                      onPressed: isForwardButtonEnabled()
+                          ? moveToNextRange
+                          : null,
+                    ),
+                  ],
+                ),
+              ):SizedBox.shrink(),
               SizedBox(height: screenHeight * 0.01,),
               SizedBox(
                 height: MediaQuery
@@ -432,7 +602,7 @@ class _GraphScreenState extends State<GraphScreen> {
                 height: isTablet(context) ? screenHeight * 0.04 : screenHeight *
                     0.03,),
               Text(
-                "Today's Vitamin D intake - ${userData.todayIuConsumed} IU",
+                "Today's Vitamin D Intake - ${userData.todayIuConsumed} IU",
                 style: TextStyle(
                 fontFamily: 'Raleway',
                     color: Colors.black,
@@ -630,7 +800,7 @@ class _GraphScreenState extends State<GraphScreen> {
                         ),
                       ],),
                   )
-                      : Container();
+                      : SizedBox.shrink();
                 }),
           ),
           (!hasConnection||logoutPressed|| vitaminDIntakeComplete) ?
@@ -639,7 +809,7 @@ class _GraphScreenState extends State<GraphScreen> {
             width: double.infinity,
             color: Colors.white24,
 
-          ) : Container(),
+          ) : SizedBox.shrink(),
           !hasConnection
               ? Padding(
             padding: EdgeInsets.only(bottom: screenHeight * 0.1,
@@ -718,7 +888,7 @@ class _GraphScreenState extends State<GraphScreen> {
                   ],)
             ),
           )
-              : Container(),
+              : SizedBox.shrink(),
           logoutPressed ?
           Padding(
             padding: EdgeInsets.only(bottom: screenHeight * 0.05,
@@ -811,7 +981,7 @@ class _GraphScreenState extends State<GraphScreen> {
 
                 ],),
             ),
-          ) : Container(),
+          ) : SizedBox.shrink(),
           vitaminDIntakeComplete?
           Padding(
             padding: EdgeInsets.only(bottom: screenHeight * 0.1,
@@ -921,15 +1091,15 @@ class _GraphScreenState extends State<GraphScreen> {
   void updateDateRange() {
     setState(() {
       if (selectedRange == 'Week') {
-        int weekday = currentDate.weekday;
-        rangeStart = currentDate.subtract(Duration(days: weekday - 1)); // Start from Monday
+        int weekday = currentWeekDate.weekday;
+        rangeStart = currentWeekDate.subtract(Duration(days: weekday - 1)); // Start from Monday
         rangeEnd = rangeStart.add(Duration(days: 6)); // End on Sunday
       } else if (selectedRange == 'Month') {
-        rangeStart = DateTime(currentDate.year, currentDate.month, 1);
-        rangeEnd = DateTime(currentDate.year, currentDate.month + 1, 0);
+        rangeStart = DateTime(currentMonthDate.year, currentMonthDate.month, 1);
+        rangeEnd = DateTime(currentMonthDate.year, currentMonthDate.month + 1, 0);
       } else if (selectedRange == 'Year') {
-        rangeStart = DateTime(currentDate.year, 1, 1);
-        rangeEnd = DateTime(currentDate.year, 12, 31);
+        rangeStart = DateTime(currentYearDate.year, 1, 1);
+        rangeEnd = DateTime(currentYearDate.year, 12, 31);
       }
     });
   }
@@ -937,11 +1107,11 @@ class _GraphScreenState extends State<GraphScreen> {
   void moveToPreviousRange() {
     setState(() {
       if (selectedRange == 'Week') {
-        currentDate = currentDate.subtract(Duration(days: 7));
+        currentWeekDate = currentWeekDate.subtract(Duration(days: 7));
       } else if (selectedRange == 'Month') {
-        currentDate = DateTime(currentDate.year, currentDate.month - 1);
+        currentMonthDate = DateTime(currentMonthDate.year, currentMonthDate.month - 1);
       } else if (selectedRange == 'Year') {
-        currentDate = DateTime(currentDate.year - 1);
+        currentYearDate = DateTime(currentYearDate.year - 1);
       }
       updateDateRange();
     });
@@ -950,11 +1120,11 @@ class _GraphScreenState extends State<GraphScreen> {
   void moveToNextRange() {
     setState(() {
       if (selectedRange == 'Week') {
-        currentDate = currentDate.add(Duration(days: 7));
+        currentWeekDate = currentWeekDate.add(Duration(days: 7));
       } else if (selectedRange == 'Month') {
-        currentDate = DateTime(currentDate.year, currentDate.month + 1);
+        currentMonthDate = DateTime(currentMonthDate.year, currentMonthDate.month + 1);
       } else if (selectedRange == 'Year') {
-        currentDate = DateTime(currentDate.year + 1);
+        currentYearDate = DateTime(currentYearDate.year + 1);
       }
       updateDateRange();
     });
@@ -962,24 +1132,24 @@ class _GraphScreenState extends State<GraphScreen> {
 
   bool isForwardButtonEnabled() {
     if (selectedRange == 'Week') {
-      return currentDate.isBefore(
-          DateTime.now().subtract(Duration(days: DateTime.now().weekday - 1)));
+      return rangeEnd.isBefore(DateTime.now());
     } else if (selectedRange == 'Month') {
-      return currentDate.isBefore(DateTime(DateTime.now().year, DateTime.now().month, 1));
+      return currentMonthDate.isBefore(DateTime(DateTime.now().year, DateTime.now().month, 1));
     } else if (selectedRange == 'Year') {
-      return currentDate.year < DateTime.now().year;
+      return currentYearDate.year < DateTime.now().year;
     }
     return false;
   }
 
   String getRangeLabel() {
+    print("--------Range start: ${rangeStart} , Range End: ${rangeEnd}---------");
     if (selectedRange == 'Week') {
       return '${DateFormat('MMM dd').format(rangeStart)} - ${DateFormat(
           'MMM dd').format(rangeEnd)}';
     } else if (selectedRange == 'Month') {
-      return DateFormat('MMM yyyy').format(currentDate);
+      return DateFormat('MMM yyyy').format(currentMonthDate);
     } else if (selectedRange == 'Year') {
-      return DateFormat('yyyy').format(currentDate);
+      return DateFormat('yyyy').format(currentYearDate);
     }
     return '';
   }
@@ -993,9 +1163,9 @@ class _GraphScreenState extends State<GraphScreen> {
     if (selectedRange == 'Week') {
       numberOfBars = 7; // 7 days
     } else if (selectedRange == 'Month') {
-      numberOfBars = DateTime(currentDate.year, currentDate.month + 1, 0).day;
+      numberOfBars = DateTime(currentMonthDate.year, currentMonthDate.month + 1, 0).day;
     } else {
-      numberOfBars = 12; // 12 months
+      numberOfBars = 12;
     }
 
     double barWidth = screenWidth / (numberOfBars * 2);
@@ -1008,9 +1178,9 @@ class _GraphScreenState extends State<GraphScreen> {
       if (selectedRange == 'Week') {
         periodStart = rangeStart.add(Duration(days: i)); // Start from Monday
       } else if (selectedRange == 'Month') {
-        periodStart = DateTime(currentDate.year, currentDate.month, i + 1);
+        periodStart = DateTime(currentMonthDate.year, currentMonthDate.month, i + 1);
       } else {
-        periodStart = DateTime(currentDate.year, i + 1, 1);
+        periodStart = DateTime(currentYearDate.year, i + 1, 1);
       }
 
       double iuSum = 0;
@@ -1019,7 +1189,7 @@ class _GraphScreenState extends State<GraphScreen> {
         // Group and sum `iuConsumed` by month
         userData.userGraphDetails?.forEach((session) {
           DateTime sessionDate = session['date'];
-          if (sessionDate.year == currentDate.year &&
+          if (sessionDate.year == currentYearDate.year &&
               sessionDate.month == i + 1) {
             iuSum += session['iuConsumed']?.toDouble() ?? 0;
           }

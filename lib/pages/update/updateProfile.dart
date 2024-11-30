@@ -366,7 +366,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
               width: double.infinity,
               color: Colors.white24,
             )
-          :Container(),
+          :SizedBox.shrink(),
           !hasConnection
               ? Padding(
             padding: EdgeInsets.only(top: isTablet(context)?screenHeight*0.1:0,left: isTablet(context)?screenWidth*0.05:0,right: isTablet(context)?screenWidth*0.05:0),
@@ -431,7 +431,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   ],)
             ),
           )
-              : Container(),
+              : SizedBox.shrink(),
         ],
       ),
       bottomNavigationBar: Image.asset('assets/images/backgrounds/bg3.jpg',width: double.infinity,),

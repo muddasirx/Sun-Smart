@@ -13,11 +13,12 @@ import 'package:untitled/pages/graphScreen.dart';
 import 'package:untitled/pages/skinTypeSelection.dart';
 import 'package:untitled/pages/spf.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:untitled/pages/userAnalysisScreen.dart';
 
 import '../SplashScreen.dart';
+import '../providers/adminPanelProvider.dart';
 import '../providers/sessionDetailsProvider.dart';
 import '../providers/userDataProvider.dart';
+import 'admin screens/userAnalysisScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -65,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.sizeOf(context).width;
     double screenHeight = MediaQuery.sizeOf(context).height;
+    final adminPanel = Provider.of<AdminPanelNotifier>(context, listen: false);
 
     return Scaffold(
         body: SafeArea(
@@ -213,6 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                               final loginData = Provider.of<UserDataNotifier>(context, listen: false);
                                               if(loginData.user['admin']){
+                                                adminPanel.fetchData();
                                                 Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(builder: (context) => UserAnalysis()),
@@ -478,8 +481,6 @@ class _LoginScreenState extends State<LoginScreen> {
       await loginData.fetchUserData(credential.user!.uid);
       print("fetching user session!");
       print("${loginData.user["name"]}");
-      loginData.fetchUserSessions(loginData.user['sessionID']);
-      print("checking session attended!");
       print("session id: "+loginData.user['sessionID'].toString());
       if(loginData.user['sessionID']!='none') {
         print("Session Id: ${loginData.user['sessionID']}");
