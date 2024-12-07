@@ -102,7 +102,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         Fluttertoast.showToast(
                           fontSize: (isTablet(context))?22:13,
                           msg: "Oops! It seems there's no account registered with this email.",
-                          toastLength: Toast.LENGTH_SHORT,
+                          toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.BOTTOM,
                           timeInSecForIosWeb: 1,
                           backgroundColor: Colors.red, // Change this to your desired background color
@@ -158,7 +158,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         Fluttertoast.showToast(
           fontSize: (isTablet(context))?22:13,
           msg: "Invalid email.",
-          toastLength: Toast.LENGTH_SHORT,
+          toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red, // Change this to your desired background color
@@ -171,7 +171,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?22:13,
         msg: "Please provide the email to reset password.",
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red, // Change this to your desired background color
@@ -220,10 +220,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       );
 
     }on FirebaseAuthException catch (e) {
+      FocusManager.instance.primaryFocus?.unfocus();
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?22:13,
         msg: '${e.message}',
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.grey[300],

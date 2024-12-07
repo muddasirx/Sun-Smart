@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/pages/skinTypeSelection.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../SplashScreen.dart';
+import '../providers/sessionDetailsProvider.dart';
 import '../providers/userDataProvider.dart';
 import 'LoginScreen.dart';
 
@@ -610,7 +611,7 @@ class _SignupscreenState extends State<SignupScreen> {
               Fluttertoast.showToast(
                 fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
                 msg: "Please accept the terms and conditions to proceed.",
-                toastLength: Toast.LENGTH_SHORT,
+                toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
                 backgroundColor: Colors.red,
@@ -623,7 +624,7 @@ class _SignupscreenState extends State<SignupScreen> {
             Fluttertoast.showToast(
               fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
               msg: "The provided email is invalid.",
-              toastLength: Toast.LENGTH_SHORT,
+              toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
               backgroundColor: Colors.red,
@@ -637,7 +638,7 @@ class _SignupscreenState extends State<SignupScreen> {
           Fluttertoast.showToast(
             fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
             msg: "Invalid Weight",
-            toastLength: Toast.LENGTH_SHORT,
+            toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.red,
@@ -651,7 +652,7 @@ class _SignupscreenState extends State<SignupScreen> {
         Fluttertoast.showToast(
           fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
           msg: "Invalid Age",
-          toastLength: Toast.LENGTH_SHORT,
+          toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
@@ -705,6 +706,9 @@ class _SignupscreenState extends State<SignupScreen> {
         });
         final loginData = Provider.of<UserDataNotifier>(context, listen: false);
 
+        final sessionDetails = Provider.of<sessionDetailsNotifier>(context, listen: false);
+        sessionDetails.vitaminDIntake=1000;
+
         loginData.email=_emailController.text.trim();
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool(SplashScreenState.keyLogin, true);
@@ -712,22 +716,42 @@ class _SignupscreenState extends State<SignupScreen> {
         await prefs.setString('uid', userCredential.user!.uid);
         loginData.uid=userCredential.user!.uid;
         loginData.fetchUserData(userCredential.user!.uid);
+        print('clearing session');
+        loginData.userSessions=[];
         setState(() {
           registerPressed=false;
         });
         loginData.skinType=0;
         loginData.todayIuConsumed=0;
-        Navigator.pushReplacement(
+        loginData.userSessions = [
+          {
+            "date": Timestamp.now(),
+            "iuConsumed": 0,
+          }
+        ];
+        loginData.setGraphSession();
+        print("The user hasn't taken any session yet.");
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => SkinType()),
+              (route) => false,
+        );
+        Fluttertoast.showToast(
+          fontSize: (isTablet(context))?22:13,
+          msg: "Account created successfully",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.grey[300],
+          textColor:Colors.black,
         );
       }
 
     } on FirebaseAuthException catch (e) {
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-        msg: "-----${e.message}",
-        toastLength: Toast.LENGTH_SHORT,
+        msg: "${e.message}",
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
@@ -742,7 +766,7 @@ class _SignupscreenState extends State<SignupScreen> {
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
         msg: "${e.toString()}",
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,

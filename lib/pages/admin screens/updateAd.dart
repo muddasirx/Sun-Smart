@@ -860,7 +860,7 @@ class _UpdateAdState extends State<UpdateAd> {
                       Fluttertoast.showToast(
                         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
                         msg: "Ad updated successfully",
-                        toastLength: Toast.LENGTH_SHORT,
+                        toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.BOTTOM,
                         timeInSecForIosWeb: 1,
                         backgroundColor: Colors.grey[300],
@@ -940,7 +940,7 @@ class _UpdateAdState extends State<UpdateAd> {
         Fluttertoast.showToast(
           fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
           msg: "Please add at least 3 supplements to proceed",
-          toastLength: Toast.LENGTH_SHORT,
+          toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red, // Change this to your desired background color
@@ -953,7 +953,7 @@ class _UpdateAdState extends State<UpdateAd> {
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
         msg: "Title cannot be left empty",
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red, // Change this to your desired background color

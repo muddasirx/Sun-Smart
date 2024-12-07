@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
@@ -82,7 +84,7 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                         Navigator.pop(context);
                       }
                     },
-                        icon: Icon(Icons.arrow_back,size: (isTablet(context))?screenWidth* 0.05:screenWidth* 0.065,color: Colors.black87,)),
+                        icon: Icon(Platform.isIOS?Icons.arrow_back_ios:Icons.arrow_back,size: (isTablet(context))?screenWidth* 0.05:screenWidth* 0.065,color: Colors.black87,)),
                     Center(
                       child: (indexFetched)?
                       Padding(

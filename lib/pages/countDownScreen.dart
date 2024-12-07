@@ -253,8 +253,11 @@ class _countDownScreenState extends State<countDownScreen> with SingleTickerProv
                         NeonCircularTimer(
                           width: isTablet(context)?screenWidth*0.28:screenWidth*0.36,
                           textFormat: (sessionDetails.sessionDurationMinutes>60)?TextFormat.HH_MM_SS:TextFormat.MM_SS,
-                          onComplete: (){
-                            uploadDataToDB();
+                          onComplete: () async{
+                            setState(() {
+                              dataUploaded=false;
+                            });
+                            await uploadDataToDB();
                             countDownDetails.timeSpentInSeconds = (sessionDetails.sessionDurationMinutes * 60) - controller.getTimeInSeconds();
                             Navigator.pushAndRemoveUntil(
                               context,

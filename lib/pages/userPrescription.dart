@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +31,10 @@ class _UserPrescriptionState extends State<UserPrescription> {
   void initState() {
     super.initState();
     checkConnection();
+    final historyProvider = Provider.of<HistoryNotifier>(
+        context, listen: false);
+    noPressed=historyProvider.noPressed;
+    yesPressed=!noPressed;
   }
 
 
@@ -61,7 +67,7 @@ class _UserPrescriptionState extends State<UserPrescription> {
                     IconButton(onPressed: (){
                       Navigator.pop(context);
                     },
-                        icon: Icon(Icons.arrow_back,size: (isTablet(context))?screenWidth* 0.05:screenWidth* 0.065,color: Colors.black87,)),
+                        icon: Icon(Platform.isIOS?Icons.arrow_back_ios:Icons.arrow_back,size: (isTablet(context))?screenWidth* 0.05:screenWidth* 0.065,color: Colors.black87,)),
                     SizedBox(height: (isTablet(context))?screenHeight*0.03:screenHeight*0.00,),
                     Padding(
                       padding:  EdgeInsets.only(left: screenWidth*0.07,right:screenWidth*0.04 ),
@@ -391,7 +397,7 @@ class _UserPrescriptionState extends State<UserPrescription> {
     final testResultsProvider= Provider.of<TestResultsNotifier>(context,listen: false);
 
     CollectionReference userCollection = FirebaseFirestore.instance.collection('UserInfo');
-
+    historyProvider.noPressed=noPressed;
     try {
       print(loginData.uid);
       QuerySnapshot querySnapshot = await userCollection.where('uid', isEqualTo: loginData.uid).get();

@@ -5,6 +5,7 @@ class HistoryNotifier with ChangeNotifier {
   bool pillAdded=false;
   bool pillSubmitText=false;
   TextEditingController supplementsController=TextEditingController();
+  bool noPressed=false;
 
   void displaySubmissionText(){
     pillSubmitText=true;

@@ -106,6 +106,7 @@ class _GraphScreenState extends State<GraphScreen> {
                       onTap: (){
                     Navigator.pop(context);
                     userData.updateHistoryPressed = true;
+                    clearPreviousHistory();
                     fetchUserHistory();
                     Navigator.pushNamed(context, "/UserPrescription");
                   }),
@@ -1223,6 +1224,23 @@ class _GraphScreenState extends State<GraphScreen> {
     return barGroups;
   }
 
+  void clearPreviousHistory(){
+    final userData = Provider.of<UserDataNotifier>(context, listen: false);
+    final historyProvider = Provider.of<HistoryNotifier>(
+        context, listen: false);
+    final testResultsProvider = Provider.of<TestResultsNotifier>(
+        context, listen: false);
+    historyProvider.m1Pressed(false);
+    historyProvider.m2Pressed(false);
+    historyProvider.m3Pressed(false);
+    historyProvider.supplementsController.clear();
+    historyProvider.pillRemoved();
+
+    testResultsProvider.dateController.clear();
+    testResultsProvider.testValueController.clear();
+    testResultsProvider.removeResult();
+  }
+
   void fetchUserHistory() {
     final userData = Provider.of<UserDataNotifier>(context, listen: false);
     final historyProvider = Provider.of<HistoryNotifier>(
@@ -1232,35 +1250,40 @@ class _GraphScreenState extends State<GraphScreen> {
 
     testResultsProvider.removeSubmissionText();
     historyProvider.removeSubmissionText();
+    if(userData.user['pills'].isEmpty && userData.user['test date'].isEmpty){
+      historyProvider.noPressed=true;
+    }else{
+      if (userData.user['pills'].isNotEmpty) {
+        List<String> userMed = userData.user['pills'].split(',');
+        if (userMed.contains('Daily Cal')) {
+          historyProvider.m1Pressed(true);
+          userMed.remove('Daily Cal');
+        }
+        if (userMed.contains('Insta CAL-D')) {
+          historyProvider.m2Pressed(true);
+          userMed.remove('Insta CAL-D');
+        }
+        if (userMed.contains('WIL-D')) {
+          historyProvider.m3Pressed(true);
+          userMed.remove('WIL-D');
+        }
+        if (userMed.isNotEmpty) {
+          historyProvider.supplementsController.text = userMed.join(',');
+        }
+        historyProvider.pillSelected();
+      } else
+        historyProvider.pillRemoved();
 
-    if (userData.user['pills'].isNotEmpty) {
-      List<String> userMed = userData.user['pills'].split(',');
-      if (userMed.contains('Daily Cal')) {
-        historyProvider.m1Pressed(true);
-        userMed.remove('Daily Cal');
+      if (userData.user['test date'].isNotEmpty) {
+        testResultsProvider.dateController.text = userData.user['test date'];
+        testResultsProvider.testValueController.text =
+            userData.user['test value'].toString();
+        testResultsProvider.addResult();
       }
-      if (userMed.contains('Insta CAL-D')) {
-        historyProvider.m2Pressed(true);
-        userMed.remove('Insta CAL-D');
-      }
-      if (userMed.contains('WIL-D')) {
-        historyProvider.m3Pressed(true);
-        userMed.remove('WIL-D');
-      }
-      if (userMed.isNotEmpty) {
-        historyProvider.supplementsController.text = userMed.join(',');
-      }
-      historyProvider.pillSelected();
-    } else
-      historyProvider.pillRemoved();
-
-    if (userData.user['test date'].isNotEmpty) {
-      testResultsProvider.dateController.text = userData.user['test date'];
-      testResultsProvider.testValueController.text =
-          userData.user['test value'].toString();
-      testResultsProvider.addResult();
+      else
+        testResultsProvider.removeResult();
     }
-    else
-      testResultsProvider.removeResult();
+
+
   }
 }

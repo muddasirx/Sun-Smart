@@ -146,10 +146,10 @@ class _SourcesOfVitaminDState extends State<SourcesOfVitaminD> {
                 onPressed: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   await prefs.setBool('appSettings', true);
-                  if(loginData.user['sessionID']!='none'){
+                 // if(loginData.user['sessionID']!='none'){
                     Navigator.pushNamed(context, "/GraphScreen");
-                  }else
-                  Navigator.pushNamed(context, "/Spf");
+                 // }else
+                 // Navigator.pushNamed(context, "/Spf");
                 },
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white, padding: EdgeInsets.symmetric(horizontal: (isTablet(context))?screenWidth*0.15:screenWidth*0.15, vertical: (isTablet(context))?screenHeight*0.014:screenHeight*0.01), // Text color

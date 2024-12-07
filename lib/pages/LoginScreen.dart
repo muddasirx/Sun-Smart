@@ -212,8 +212,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                           await checkConnection();
                                           if(hasConnection){
                                             if(await _checkLogin()){
-
                                               final loginData = Provider.of<UserDataNotifier>(context, listen: false);
+
+                                              final sessionDetails = Provider.of<sessionDetailsNotifier>(context, listen: false);
+                                              sessionDetails.vitaminDIntake=1000;
+                                              if(loginData.user['sessionID']=='none'){
+                                                loginData.userSessions = [
+                                                  {
+                                                    "date": Timestamp.now(),
+                                                    "iuConsumed": 0,
+                                                  }
+                                                ];
+                                              }
+
+
                                               if(loginData.user['admin']){
                                                 adminPanel.fetchData();
                                                 Navigator.pushAndRemoveUntil(
@@ -230,9 +242,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                                           (route) => false,
                                                     );
                                                   }else{
+                                                    loginData.setGraphSession();
+                                                    print("The user hasn't taken any session yet.");
                                                     Navigator.pushAndRemoveUntil(
                                                       context,
-                                                      MaterialPageRoute(builder: (context) => Spf()),
+                                                      MaterialPageRoute(builder: (context) => GraphScreen()),
                                                           (route) => false,
                                                     );
                                                   }
@@ -420,7 +434,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Fluttertoast.showToast(
           fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
           msg: "Invalid email.",
-          toastLength: Toast.LENGTH_SHORT,
+          toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red, // Change this to your desired background color
@@ -433,7 +447,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
         msg: "Please fill in all required fields to continue.",
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red, // Change this to your desired background color
@@ -459,7 +473,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Fluttertoast.showToast(
         fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
         msg: "Invalid email or password.",
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red, // Change this to your desired background color

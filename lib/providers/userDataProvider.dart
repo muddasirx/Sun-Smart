@@ -10,7 +10,12 @@ class UserDataNotifier with ChangeNotifier {
   String uid = 'none';
   bool appSettingsApplied=false;
   var user;
-  List<dynamic>? userSessions;
+  List<dynamic> userSessions = [
+    {
+      "date": Timestamp.now(),
+      "iuConsumed": 0,
+    }
+  ];
   int todayIuConsumed=0;
   List<dynamic>? userGraphDetails;
   bool updateHistoryPressed=false;
@@ -55,15 +60,15 @@ class UserDataNotifier with ChangeNotifier {
 
     userSessions = await docSnapshot.get('sessionData');
     print('user session fetched');
-    userSessions?.sort((b,a) {
+    userSessions.sort((b,a) {
       return (a['date'] as Timestamp).compareTo(b['date'] as Timestamp);
     });
     print('user session sorted');
     userGraphDetails=userSessions;
     print('updating graph data');
-    for (int i=0;i<userSessions!.length;i++) {
-      if (userSessions?[i]['date'] is Timestamp) {
-        userGraphDetails?[i]['date'] = (userSessions?[i]['date'] as Timestamp).toDate();
+    for (int i=0;i<userSessions.length;i++) {
+      if (userSessions[i]['date'] is Timestamp) {
+        userGraphDetails?[i]['date'] = (userSessions[i]['date'] as Timestamp).toDate();
       }
     }
     print('graph data updated');
@@ -107,6 +112,17 @@ class UserDataNotifier with ChangeNotifier {
         break; // Exit the loop after finding today's entry.
       }
     }
+  }
+
+  void setGraphSession(){
+    userGraphDetails=userSessions;
+    print('updating graph data');
+    for (int i=0;i<userSessions.length;i++) {
+      if (userSessions[i]['date'] is Timestamp) {
+        userGraphDetails?[i]['date'] = (userSessions[i]['date'] as Timestamp).toDate();
+      }
+    }
+    notifyListeners();
   }
 
 
