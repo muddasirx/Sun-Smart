@@ -434,8 +434,10 @@ class _UpcomingSessionState extends State<UpcomingSession> {
       sessionDetails.addSessionDuration(sessionTimeInMin.round());
     }else{
       sessionDetails.addSessionDuration(sessionDetails.timeTillSunsetMinutes);
-      double vitaminD= (sessionDetails.timeTillSunsetMinutes*uvIndex*typeFactor*ageFactor)/coverFactor;
-      sessionDetails.addVitaminDIntake(vitaminD.round());
+      sessionDetails.addSessionDuration(sessionDetails.timeTillSunsetMinutes);
+      double vitaminDPerMinute = sessionDetails.vitaminDIntake / sessionTimeInMin;
+      double adjustedVitaminD = vitaminDPerMinute * sessionDetails.timeTillSunsetMinutes;
+      sessionDetails.addVitaminDIntake(adjustedVitaminD.round());
     }
 
     print("Session vitamin D calculated: ${sessionDetails.vitaminDIntake}");
