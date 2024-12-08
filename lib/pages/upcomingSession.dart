@@ -434,7 +434,6 @@ class _UpcomingSessionState extends State<UpcomingSession> {
       sessionDetails.addSessionDuration(sessionTimeInMin.round());
     }else{
       sessionDetails.addSessionDuration(sessionDetails.timeTillSunsetMinutes);
-      sessionDetails.addSessionDuration(sessionDetails.timeTillSunsetMinutes);
       double vitaminDPerMinute = sessionDetails.vitaminDIntake / sessionTimeInMin;
       double adjustedVitaminD = vitaminDPerMinute * sessionDetails.timeTillSunsetMinutes;
       sessionDetails.addVitaminDIntake(adjustedVitaminD.round());

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -59,7 +61,7 @@ class _BloodLevelState extends State<BloodLevel> {
                   IconButton(onPressed: (){
                     Navigator.pop(context);
                   },
-                      icon: Icon(Icons.arrow_back,size: (isTablet(context))?screenWidth* 0.05:screenWidth* 0.065,color: Colors.black87,)),
+                      icon: Icon(Platform.isIOS?Icons.arrow_back_ios:Icons.arrow_back,size: (isTablet(context))?screenWidth* 0.05:screenWidth* 0.065,color: Colors.black87,)),
                   Padding(
                       padding: EdgeInsets.symmetric(horizontal: screenWidth*0.05),
                     child: Center(
