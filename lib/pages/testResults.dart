@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -207,15 +208,32 @@ class _BloodLevelState extends State<BloodLevel> {
                                     testResultsProvider.removeSubmissionText();
                                     Navigator.pop(context);
                                   }else{
-                                    Fluttertoast.showToast(
-                                      fontSize: (isTablet(context))?22:13,
-                                      msg: "Please fill in  both the fields to proceed",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor: Colors.red,
-                                      textColor: Colors.white,
-                                    );
+                                      if(Platform.isIOS){
+                                        showToast(
+                                          'Please fill in  both the fields to proceed',
+                                          context: context,
+                                          animation: StyledToastAnimation.slideFromTop,
+                                          reverseAnimation: StyledToastAnimation.fade,
+                                          position: StyledToastPosition.top,
+                                          duration: const Duration(seconds: 3),
+                                          backgroundColor: Colors.red,
+                                          textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+                                          borderRadius: BorderRadius.circular(10.0),
+                                          toastHorizontalMargin: 20.0,
+                                          animDuration: const Duration(milliseconds: 500),
+                                        );
+                                      }
+                                      else{
+                                        Fluttertoast.showToast(
+                                          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+                                          msg: "Please fill in  both the fields to proceed",
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.red,
+                                          textColor: Colors.white,
+                                        );
+                                      }
                                   }
 
                                 },
@@ -226,92 +244,7 @@ class _BloodLevelState extends State<BloodLevel> {
                                 child: Text('Confirm'),
                               ),
                             ),
-
-                          /*
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.cyan,
-                                    borderRadius: BorderRadius.circular(50)
-                                ),
-                                child:Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: screenWidth*0.06,vertical: screenHeight*0.015),
-                                  child: Text(
-                                    "Save",
-                                    style: TextStyle(
-                                    fontFamily: 'BrunoAceSC',
-                                        color: Colors.white,
-                                        fontSize: (isTablet(context))?screenWidth*0.032:screenWidth*0.038,
-                                        //fontWeight: FontWeight.bold,
-
-                                    ),
-                                  ),
-                                )
-                            ),
-                          ),
-                          SizedBox(height: screenHeight*0.06,),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: screenWidth*0.09),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Divider(
-                                    //thickness: 2,
-                                    color: Colors.black54
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 8),
-                                  child: Text(
-                                    "OR",
-                                    style: TextStyle(
-                                    fontFamily: 'Raleway',
-
-                                        color: Colors.black54,
-                                        fontSize: (isTablet(context))?screenWidth*0.0355:screenWidth*0.043,
-                                        //fontWeight: FontWeight.bold,
-
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Divider(
-                                    // thickness: 2,
-                                    color: Colors.black54
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: screenHeight*0.06,),
-                          Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Color(0xFFFCC54E), Color(0xFFFDA34F)],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0), // Rounded corners
-                            ),
-                            child: TextButton(
-                              onPressed: () {
-                                    Navigator.pushNamed(context, "/EstimatedVitaminDBloodLevel");
-                              },
-                              style: TextButton.styleFrom(
-                                foregroundColor: Colors.white, padding: EdgeInsets.symmetric(horizontal: (isTablet(context))?screenWidth*0.06:screenWidth*0.1, vertical: (isTablet(context))?screenHeight*0.014:screenHeight*0.01), // Text color
-                                textStyle: TextStyle(fontSize: (isTablet(context))?screenWidth*0.04:screenWidth*0.042, fontWeight: FontWeight.bold),
-                              ),
-                              child: Text('My Estimated Vitamin D Level'),
-                            ),
-                          )
-                          */
-              
-              
-              
-                        ],
+                          ]
                       ),
                     ),
               

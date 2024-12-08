@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +15,7 @@ import 'package:untitled/pages/graphScreen.dart';
 import 'package:untitled/pages/skinTypeSelection.dart';
 import 'package:untitled/pages/spf.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import '../SplashScreen.dart';
 import '../providers/adminPanelProvider.dart';
 import '../providers/sessionDetailsProvider.dart';
@@ -431,28 +433,66 @@ class _LoginScreenState extends State<LoginScreen> {
          return true;
 
       } else {
-        Fluttertoast.showToast(
-          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-          msg: "Invalid email.",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red, // Change this to your desired background color
-          textColor: Colors.white,
-        );
+        if(Platform.isIOS){
+          showToast(
+            'Invalid email',
+            context: context,
+            animation: StyledToastAnimation.slideFromTop,
+            reverseAnimation: StyledToastAnimation.fade,
+            position: StyledToastPosition.top,
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.red,
+            textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+            borderRadius: BorderRadius.circular(10.0),
+            toastHorizontalMargin: 20.0,
+            animDuration: const Duration(milliseconds: 500),
+          );
+        }
+        else {
+          Fluttertoast.showToast(
+            fontSize: (isTablet(context)) ? screenWidth * 0.03 : screenWidth *
+                0.035,
+            msg: "Invalid email",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            // Change this to your desired background color
+            textColor: Colors.white,
+          );
+        }
         return false;
       }
     }
     else{
-      Fluttertoast.showToast(
-        fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-        msg: "Please fill in all required fields to continue.",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red, // Change this to your desired background color
-        textColor: Colors.white,
-      );
+      if(Platform.isIOS){
+        showToast(
+          'Please fill in all required fields to continue',
+          context: context,
+          animation: StyledToastAnimation.slideFromTop,
+          reverseAnimation: StyledToastAnimation.fade,
+          position: StyledToastPosition.top,
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+          borderRadius: BorderRadius.circular(10.0),
+          toastHorizontalMargin: 20.0,
+          animDuration: const Duration(milliseconds: 500),
+        );
+      }
+      else {
+        Fluttertoast.showToast(
+          fontSize:
+              (isTablet(context)) ? screenWidth * 0.03 : screenWidth * 0.035,
+          msg: "Please fill in all required fields to continue",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          // Change this to your desired background color
+          textColor: Colors.white,
+        );
+      }
 
       return false;
     }
@@ -470,15 +510,33 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }
     catch(e){
-      Fluttertoast.showToast(
-        fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-        msg: "Invalid email or password.",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red, // Change this to your desired background color
-        textColor: Colors.white,
-      );
+      if(Platform.isIOS){
+        showToast(
+          'Invalid email or password',
+          context: context,
+          animation: StyledToastAnimation.slideFromTop,
+          reverseAnimation: StyledToastAnimation.fade,
+          position: StyledToastPosition.top,
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+          borderRadius: BorderRadius.circular(10.0),
+          toastHorizontalMargin: 20.0,
+          animDuration: const Duration(milliseconds: 500),
+        );
+      }else {
+        Fluttertoast.showToast(
+          fontSize:
+              (isTablet(context)) ? screenWidth * 0.03 : screenWidth * 0.035,
+          msg: "Invalid email or password",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          // Change this to your desired background color
+          textColor: Colors.white,
+        );
+      }
       print(e.toString());
       return false;
     }

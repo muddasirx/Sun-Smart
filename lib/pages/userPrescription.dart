@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -230,21 +231,40 @@ class _UserPrescriptionState extends State<UserPrescription> {
                                           MaterialPageRoute(builder: (context) => GraphScreen()),
                                               (route) => false,
                                         );
-                                        Fluttertoast.showToast(
-                                          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-                                          msg: "User History updated successfully.",
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.BOTTOM,
-                                          timeInSecForIosWeb: 1,
-                                          backgroundColor: Colors.grey[300],
-                                          textColor: Colors.black,
-                                        );
-                                        userData.updateHistoryPressed=false;
+                                        if(Platform.isAndroid){
+                                          showToast(
+                                            'User History updated successfully',
+                                            context: context,
+                                            animation: StyledToastAnimation.slideFromTop,
+                                            reverseAnimation: StyledToastAnimation.fade,
+                                            position: StyledToastPosition.top,
+                                            duration: const Duration(seconds: 3),
+                                            backgroundColor: Colors.grey[350],
+                                            textStyle:  TextStyle(color: Colors.black,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+                                            borderRadius: BorderRadius.circular(10.0),
+                                            toastHorizontalMargin: 20.0,
+                                            animDuration: const Duration(milliseconds: 500),
+                                          );
+                                        }
+                                        else {
+                                    Fluttertoast.showToast(
+                                      fontSize: (isTablet(context))
+                                          ? screenWidth * 0.03
+                                          : screenWidth * 0.035,
+                                      msg: "User History updated successfully.",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.grey[300],
+                                      textColor: Colors.black,
+                                    );
+                                  }
+                                  userData.updateHistoryPressed=false;
                                       }else
                                         Navigator.pushNamed(context, "/SourcesOfVitaminD");
                                     }
                                     else if(noPressed) {
-                                      print("Inside no pressed");
+                                     print("Inside no pressed");
                                       removeUserHistory();
                                       if(userData.updateHistoryPressed){
                                         Navigator.pushAndRemoveUntil(
@@ -252,30 +272,66 @@ class _UserPrescriptionState extends State<UserPrescription> {
                                           MaterialPageRoute(builder: (context) => GraphScreen()),
                                               (route) => false,
                                         );
-                                        Fluttertoast.showToast(
-                                          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-                                          msg: "User History updated successfully.",
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.BOTTOM,
-                                          timeInSecForIosWeb: 1,
-                                          backgroundColor: Colors.grey[300],
-                                          textColor: Colors.black,
-                                        );
-                                        userData.updateHistoryPressed=false;
+                                        if(Platform.isAndroid){
+                                          showToast(
+                                            'User History updated successfully',
+                                            context: context,
+                                            animation: StyledToastAnimation.slideFromTop,
+                                            reverseAnimation: StyledToastAnimation.fade,
+                                            position: StyledToastPosition.top,
+                                            duration: const Duration(seconds: 3),
+                                            backgroundColor: Colors.grey[350],
+                                            textStyle:  TextStyle(color: Colors.black,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+                                            borderRadius: BorderRadius.circular(10.0),
+                                            toastHorizontalMargin: 20.0,
+                                            animDuration: const Duration(milliseconds: 500),
+                                          );
+                                        }
+                                        else {
+                                          Fluttertoast.showToast(
+                                            fontSize: (isTablet(context))
+                                                ? screenWidth * 0.03
+                                                : screenWidth * 0.035,
+                                            msg: "User History updated successfully",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.BOTTOM,
+                                            timeInSecForIosWeb: 1,
+                                            backgroundColor: Colors.grey[300],
+                                            textColor: Colors.black,
+                                          );
+                                  }
+                                  userData.updateHistoryPressed=false;
                                       }else
                                         Navigator.pushNamed(context, "/SourcesOfVitaminD");
                                     }
                                     else{
-                                      Fluttertoast.showToast(
-                                        fontSize: (isTablet(context))?22:13,
-                                        msg: "Please add the pill and results to proceed",
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                      );
-                                    }
+                                      if(Platform.isIOS){
+                                        showToast(
+                                          'Please add the pill and results to proceed',
+                                          context: context,
+                                          animation: StyledToastAnimation.slideFromTop,
+                                          reverseAnimation: StyledToastAnimation.fade,
+                                          position: StyledToastPosition.top,
+                                          duration: const Duration(seconds: 3),
+                                          backgroundColor: Colors.red,
+                                          textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+                                          borderRadius: BorderRadius.circular(10.0),
+                                          toastHorizontalMargin: 20.0,
+                                          animDuration: const Duration(milliseconds: 500),
+                                        );
+                                      }
+                                      else{
+                                          Fluttertoast.showToast(
+                                            fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+                                            msg: "Please add the pill and results to proceed",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.BOTTOM,
+                                            timeInSecForIosWeb: 1,
+                                            backgroundColor: Colors.red,
+                                            textColor: Colors.white,
+                                          );
+                                      }
+                              }
                                   }
 
                                 },
@@ -510,6 +566,7 @@ class _UserPrescriptionState extends State<UserPrescription> {
       )
     );
   }
+
   Widget choice(String ch){
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;

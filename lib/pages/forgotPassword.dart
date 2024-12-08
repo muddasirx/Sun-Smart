@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -99,16 +102,34 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         setState(() {
                           submitPressed=false;
                         });
+                        if(Platform.isIOS){
+                          showToast(
+                            "Oops! It seems there's no account registered with this email",
+                            context: context,
+                            animation: StyledToastAnimation.slideFromTop,
+                            reverseAnimation: StyledToastAnimation.fade,
+                            position: StyledToastPosition.top,
+                            duration: const Duration(seconds: 3),
+                            backgroundColor: Colors.red,
+                            textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+                            borderRadius: BorderRadius.circular(10.0),
+                            toastHorizontalMargin: 20.0,
+                            animDuration: const Duration(milliseconds: 500),
+                          );
+                        }
+                        else{
                         Fluttertoast.showToast(
-                          fontSize: (isTablet(context))?22:13,
-                          msg: "Oops! It seems there's no account registered with this email.",
+                          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+                          msg: "Oops! It seems there's no account registered with this email",
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.BOTTOM,
                           timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red, // Change this to your desired background color
+                          backgroundColor: Colors.red,
+                          // Change this to your desired background color
                           textColor: Colors.white,
                         );
                       }
+                    }
                     }
                 }
               },
@@ -150,33 +171,72 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 
   bool validateField(){
+    double screenWidth = MediaQuery.sizeOf(context).width;
+
     if(emailController.text.isNotEmpty){
       if(_isValidEmail(emailController.text.trim())){
         return true;
       }
       else{
-        Fluttertoast.showToast(
-          fontSize: (isTablet(context))?22:13,
-          msg: "Invalid email.",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red, // Change this to your desired background color
-          textColor: Colors.white,
-        );
+        if(Platform.isIOS){
+          showToast(
+            'Invalid email',
+            context: context,
+            animation: StyledToastAnimation.slideFromTop,
+            reverseAnimation: StyledToastAnimation.fade,
+            position: StyledToastPosition.top,
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.red,
+            textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+            borderRadius: BorderRadius.circular(10.0),
+            toastHorizontalMargin: 20.0,
+            animDuration: const Duration(milliseconds: 500),
+          );
+        }
+        else {
+          Fluttertoast.showToast(
+            fontSize:
+                (isTablet(context)) ? screenWidth * 0.03 : screenWidth * 0.035,
+            msg: "Invalid email",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            // Change this to your desired background color
+            textColor: Colors.white,
+          );
+        }
         return false;
       }
     }
     else{
-      Fluttertoast.showToast(
-        fontSize: (isTablet(context))?22:13,
-        msg: "Please provide the email to reset password.",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red, // Change this to your desired background color
-        textColor: Colors.white,
-      );
+      if(Platform.isIOS){
+        showToast(
+          'Please provide the email to reset password',
+          context: context,
+          animation: StyledToastAnimation.slideFromTop,
+          reverseAnimation: StyledToastAnimation.fade,
+          position: StyledToastPosition.top,
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+          borderRadius: BorderRadius.circular(10.0),
+          toastHorizontalMargin: 20.0,
+          animDuration: const Duration(milliseconds: 500),
+        );
+      }
+      else {
+        Fluttertoast.showToast(
+          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+          msg: "Please provide the email to reset password",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          // Change this to your desired background color
+          textColor: Colors.white,
+        );
+      }
 
       return false;
     }
@@ -200,19 +260,38 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 
   void sendPasswordResetEmail(){
+    double screenWidth = MediaQuery.sizeOf(context).width;
+    double screenHeight = MediaQuery.sizeOf(context).height;
+
     try{
       final FirebaseAuth auth = FirebaseAuth.instance;
       auth.sendPasswordResetEmail(email: emailController.text.trim());
-
-      Fluttertoast.showToast(
-        fontSize: (isTablet(context))?22:13,
-        msg: "A password reset email has been sent to you.",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.grey[300],
-        textColor:Colors.black,
-      );
+      if(Platform.isIOS){
+        showToast(
+          "A password reset email has been sent to you",
+          context: context,
+          animation: StyledToastAnimation.slideFromTop,
+          reverseAnimation: StyledToastAnimation.fade,
+          position: StyledToastPosition.top,
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.grey[300],
+          textStyle:  TextStyle(color: Colors.black,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+          borderRadius: BorderRadius.circular(10.0),
+          toastHorizontalMargin: 20.0,
+          animDuration: const Duration(milliseconds: 500),
+        );
+      }
+      else {
+        Fluttertoast.showToast(
+          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+          msg: "A password reset email has been sent to you",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.grey[300],
+          textColor: Colors.black,
+        );
+      }
       Navigator.pushNamedAndRemoveUntil(
         context,
         '/LoginPage',
@@ -220,16 +299,32 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       );
 
     }on FirebaseAuthException catch (e) {
-      FocusManager.instance.primaryFocus?.unfocus();
-      Fluttertoast.showToast(
-        fontSize: (isTablet(context))?22:13,
-        msg: '${e.message}',
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.grey[300],
-        textColor:Colors.black,
-      );
+      if(Platform.isIOS){
+        showToast(
+          '${e.message}',
+          context: context,
+          animation: StyledToastAnimation.slideFromTop,
+          reverseAnimation: StyledToastAnimation.fade,
+          position: StyledToastPosition.top,
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+          borderRadius: BorderRadius.circular(10.0),
+          toastHorizontalMargin: 20.0,
+          animDuration: const Duration(milliseconds: 500),
+        );
+      }
+      else {
+        Fluttertoast.showToast(
+          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+          msg: '${e.message}',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.grey[300],
+          textColor: Colors.black,
+        );
+      }
       setState(() {
         submitPressed=false;
       });

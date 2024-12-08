@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -621,9 +624,58 @@ class _SignupscreenState extends State<SignupScreen> {
               return false;
             }
           } else {
+            if(Platform.isIOS){
+              showToast(
+                'The provided email is invalid',
+                context: context,
+                animation: StyledToastAnimation.slideFromTop,
+                reverseAnimation: StyledToastAnimation.fade,
+                position: StyledToastPosition.top,
+                duration: const Duration(seconds: 3),
+                backgroundColor: Colors.red,
+                textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+                borderRadius: BorderRadius.circular(10.0),
+                toastHorizontalMargin: 20.0,
+                animDuration: const Duration(milliseconds: 500),
+              );
+            }else {
+              Fluttertoast.showToast(
+                fontSize: (isTablet(context))
+                    ? screenWidth * 0.03
+                    : screenWidth * 0.035,
+                msg: "The provided email is invalid",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                // Change this to your desired background color
+                textColor: Colors.white,
+              );
+            }
+            _emailController.text = "";
+            return false;
+          }
+        }else{
+          if(Platform.isIOS){
+            showToast(
+              'Invalid Weight',
+              context: context,
+              animation: StyledToastAnimation.slideFromTop,
+              reverseAnimation: StyledToastAnimation.fade,
+              position: StyledToastPosition.top,
+              duration: const Duration(seconds: 3),
+              backgroundColor: Colors.red,
+              textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+              borderRadius: BorderRadius.circular(10.0),
+              toastHorizontalMargin: 20.0,
+              animDuration: const Duration(milliseconds: 500),
+            );
+          }else {
             Fluttertoast.showToast(
-              fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-              msg: "The provided email is invalid.",
+              fontSize: (isTablet(context))
+                  ? screenWidth * 0.03
+                  : screenWidth * 0.035,
+              msg: "Invalid Weight",
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
@@ -631,13 +683,30 @@ class _SignupscreenState extends State<SignupScreen> {
               // Change this to your desired background color
               textColor: Colors.white,
             );
-            _emailController.text = "";
-            return false;
           }
-        }else{
+          return false;
+        }
+      }
+      else {
+        if(Platform.isIOS){
+          showToast(
+            'Invalid Age',
+            context: context,
+            animation: StyledToastAnimation.slideFromTop,
+            reverseAnimation: StyledToastAnimation.fade,
+            position: StyledToastPosition.top,
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.red,
+            textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+            borderRadius: BorderRadius.circular(10.0),
+            toastHorizontalMargin: 20.0,
+            animDuration: const Duration(milliseconds: 500),
+          );
+        }else {
           Fluttertoast.showToast(
-            fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-            msg: "Invalid Weight",
+            fontSize:
+                (isTablet(context)) ? screenWidth * 0.03 : screenWidth * 0.035,
+            msg: "Invalid Age",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -645,13 +714,31 @@ class _SignupscreenState extends State<SignupScreen> {
             // Change this to your desired background color
             textColor: Colors.white,
           );
-          return false;
         }
+        return false;
       }
-      else {
+    }
+    else{
+      if(Platform.isIOS){
+        showToast(
+          'Please fill in all required fields to continue',
+          context: context,
+          animation: StyledToastAnimation.slideFromTop,
+          reverseAnimation: StyledToastAnimation.fade,
+          position: StyledToastPosition.top,
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+          borderRadius: BorderRadius.circular(10.0),
+          toastHorizontalMargin: 20.0,
+          animDuration: const Duration(milliseconds: 500),
+        );
+      }
+        else {
         Fluttertoast.showToast(
-          fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-          msg: "Invalid Age",
+          fontSize:
+              (isTablet(context)) ? screenWidth * 0.03 : screenWidth * 0.035,
+          msg: "Please fill in all required fields to continue",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -659,19 +746,7 @@ class _SignupscreenState extends State<SignupScreen> {
           // Change this to your desired background color
           textColor: Colors.white,
         );
-        return false;
       }
-    }
-    else{
-      Fluttertoast.showToast(
-        fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-        msg: "Please fill in all required fields to continue.",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red, // Change this to your desired background color
-        textColor: Colors.white,
-      );
 
       return false;
     }
@@ -736,42 +811,94 @@ class _SignupscreenState extends State<SignupScreen> {
           MaterialPageRoute(builder: (context) => SkinType()),
               (route) => false,
         );
-        Fluttertoast.showToast(
-          fontSize: (isTablet(context))?22:13,
-          msg: "Account created successfully",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.grey[300],
-          textColor:Colors.black,
-        );
+        if(Platform.isIOS){
+          showToast(
+            'Account created successfully',
+            context: context,
+            animation: StyledToastAnimation.slideFromTop,
+            reverseAnimation: StyledToastAnimation.fade,
+            position: StyledToastPosition.top,
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.grey[300],
+            textStyle:  TextStyle(color: Colors.black,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+            borderRadius: BorderRadius.circular(10.0),
+            toastHorizontalMargin: 20.0,
+            animDuration: const Duration(milliseconds: 500),
+          );
+        }else {
+          Fluttertoast.showToast(
+            fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
+            msg: "Account created successfully",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.grey[300],
+            textColor: Colors.black,
+          );
+        }
       }
 
     } on FirebaseAuthException catch (e) {
-      Fluttertoast.showToast(
-        fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-        msg: "${e.message}",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-      );
+      if(Platform.isIOS){
+        showToast(
+          "${e.message}",
+          context: context,
+          animation: StyledToastAnimation.slideFromTop,
+          reverseAnimation: StyledToastAnimation.fade,
+          position: StyledToastPosition.top,
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+          borderRadius: BorderRadius.circular(10.0),
+          toastHorizontalMargin: 20.0,
+          animDuration: const Duration(milliseconds: 500),
+        );
+      }
+      else {
+        Fluttertoast.showToast(
+          fontSize:
+              (isTablet(context)) ? screenWidth * 0.03 : screenWidth * 0.035,
+          msg: "${e.message}",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+        );
+      }
       print("${e.message}");
       setState(() {
         registerPressed=false;
       });
     } catch (e) {
       print("${e.toString()}");
-      Fluttertoast.showToast(
-        fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
-        msg: "${e.toString()}",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-      );
+      if(Platform.isIOS){
+        showToast(
+          "${e.toString()}",
+          context: context,
+          animation: StyledToastAnimation.slideFromTop,
+          reverseAnimation: StyledToastAnimation.fade,
+          position: StyledToastPosition.top,
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          textStyle:  TextStyle(color: Colors.white,fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035),
+          borderRadius: BorderRadius.circular(10.0),
+          toastHorizontalMargin: 20.0,
+          animDuration: const Duration(milliseconds: 500),
+        );
+      }
+      else {
+        Fluttertoast.showToast(
+          fontSize:
+              (isTablet(context)) ? screenWidth * 0.03 : screenWidth * 0.035,
+          msg: "${e.toString()}",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+        );
+      }
       setState(() {
         registerPressed=false;
       });
