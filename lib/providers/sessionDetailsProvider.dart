@@ -13,8 +13,13 @@ class sessionDetailsNotifier with ChangeNotifier {
     bool sessionPossible=true;
     bool nightTime=false;
     bool sessionUpdated=false;
+    bool apiLimitExceeded=false;
 
 
+    void apiLimitCheck(bool x){
+      apiLimitExceeded=x;
+      notifyListeners();
+    }
     void nightArrived(){
       nightTime=true;
       notifyListeners();

@@ -22,6 +22,7 @@ class UserDataNotifier with ChangeNotifier {
   bool locationProvided=false;
   bool updateProfile=false;
   int skinType=0;
+  bool sessionReminderPressed=false;
 
   void changeSkinType(int x){
       skinType=x;

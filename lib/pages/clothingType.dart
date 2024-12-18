@@ -124,6 +124,8 @@ class _ClothingTypeState extends State<ClothingType> {
                               if(hasConnection){
                                 if(!sessionDetails.sessionUpdated){
                                   sessionDetails.addClothingTypeNumber(checkClothingType());
+                                  sessionDetails.vitaminDIntake=1000;
+                                  print("Vitamin D intake: "+sessionDetails.vitaminDIntake.toString());
                                   print("Clothing type ${sessionDetails.clothingTypeNumber}");
                                   if(!userData.locationProvided){
                                     Navigator.pushNamed(context, "/LocationAccess");

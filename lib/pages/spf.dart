@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'package:http/http.dart' as http;
 import '../providers/sessionDetailsProvider.dart';
 
 class Spf extends StatefulWidget {
@@ -125,12 +127,12 @@ class _SpfState extends State<Spf> {
                     borderRadius: BorderRadius.circular(50), // Rounded corners
                   ),
                   child: TextButton(
-                    onPressed: () {
+                    onPressed: () async{
                       final sessionDetails = Provider.of<sessionDetailsNotifier>(context, listen: false);
                       sessionDetails.addSPF(int.parse(dropDownValue));
 
                       print("SPF: ${sessionDetails.spf}");
-                          Navigator.pushNamed(context, "/ClothingType");
+                      Navigator.pushNamed(context, "/ClothingType");
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white, padding: EdgeInsets.symmetric(horizontal: (isTablet(context))?screenWidth*0.18:screenWidth*0.2, vertical: (isTablet(context))?screenHeight*0.014:screenHeight*0.01), // Text color
@@ -151,4 +153,5 @@ class _SpfState extends State<Spf> {
     var screenWidth = MediaQuery.of(context).size.width;
     return screenWidth >= 600 && screenWidth <= 1024;
   }
+
 }

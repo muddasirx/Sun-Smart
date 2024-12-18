@@ -388,12 +388,15 @@ class _UpcomingSessionState extends State<UpcomingSession> {
     uvIndex=result!;
 
     sessionDetails.addUvIndex(uvIndex);
-    print("----------About to check----------");
     if(uvIndex<=0){
       sessionDetails.sessionSuspended();
-      print("----------checking now----------");
       print("----------UV Index: ${uvIndex}----------");
       //Navigator.popUntil(context, ModalRoute.withName('/Spf'));
+      Navigator.popUntil(context, ModalRoute.withName('/Spf'));
+      Navigator.pop(context);
+    }else if(uvIndex==100.0){
+      sessionDetails.apiLimitCheck(true);
+      print("------------- Api limit Exceeded -------------");
       Navigator.popUntil(context, ModalRoute.withName('/Spf'));
       Navigator.pop(context);
     }else{

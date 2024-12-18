@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:untitled/providers/sessionDetailsProvider.dart';
@@ -6,7 +7,7 @@ import 'package:untitled/providers/sessionDetailsProvider.dart';
 class WeatherService {
   //static final String apiKey = '653a6225e629445477d9d634e85d2671';   // openWeatherMap
 
-  static final String apiKey = 'openuv-1fqpnrm33tvt9h-io';     // openUV
+  static final String apiKey = 'openuv-l673rm4pe5qnp-io';     // openUV
 
   static Future<double?> fetchUVIndex(double latitude, double longitude,sessionDetailsNotifier sessionDetails) async {
     print("Inside data fetching Api method");
@@ -63,7 +64,10 @@ class WeatherService {
         }*/
         return result;       // openUV
 
-      } else {
+      }else if(response.statusCode==403){
+        return 100.0;
+      }
+      else {
         print('Error: ${response.statusCode} - ${response.reasonPhrase}');
         return null;
       }

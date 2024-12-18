@@ -8,8 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
-import '../providers/adminPanelProvider.dart';
-import '../providers/adsProvider.dart';
+import '../../providers/adminPanelProvider.dart';
+import '../../providers/adsProvider.dart';
 
 class CreateAd extends StatefulWidget {
   const CreateAd({super.key});

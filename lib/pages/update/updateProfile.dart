@@ -13,6 +13,7 @@ import '../../SplashScreen.dart';
 import '../../providers/sessionDetailsProvider.dart';
 import '../../providers/userDataProvider.dart';
 import '../LoginScreen.dart';
+import '../graphScreen.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({super.key});
@@ -312,9 +313,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
                               userData.updateProfile=false;
                             }
                             userData.updateSkinType(userData.skinType);
-                            updateData();
-                            Navigator.pop(context);
-                            Navigator.pop(context);
+                            await updateData();
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => GraphScreen()),
+                                  (route) => false,
+                            );
                             Fluttertoast.showToast(
                               fontSize: (isTablet(context))?screenWidth*0.03:screenWidth*0.035,
                               msg: "Profile updated successfully.",
@@ -551,7 +555,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
           'weight': int.parse(_weightController.text.trim()),
         });
 
-        userData.fetchUserData(userData.uid);
+       await userData.fetchUserData(userData.uid);
 
         print('User info updated successfully');
       } else {

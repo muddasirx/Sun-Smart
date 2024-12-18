@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -38,12 +36,6 @@ class _GraphScreenState extends State<GraphScreen> {
   DateTime currentYearDate = DateTime.now();
   DateTime rangeStart = DateTime.now();
   DateTime rangeEnd = DateTime.now();
-  final List<String> menuItems = [
-    'Update profile',
-    'Update my history',
-    'Update password',
-    'Logout'
-  ];
   bool vitaminDIntakeComplete=false;
   final SidebarXController _controller = SidebarXController(selectedIndex: -1, extended: true);
 
@@ -56,7 +48,6 @@ class _GraphScreenState extends State<GraphScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("----------UI Rebuild-----------");
     double screenWidth = MediaQuery.sizeOf(context).width;
     double screenHeight = MediaQuery.sizeOf(context).height;
     final userData = Provider.of<UserDataNotifier>(context, listen: false);
@@ -93,7 +84,7 @@ class _GraphScreenState extends State<GraphScreen> {
                     itemTextPadding: EdgeInsets.only(left: screenWidth*0.02)
                 ),
                 items:  [
-                  SidebarXItem(icon: Icons.person,
+                  SidebarXItem(icon: Icons.person_2_outlined,
                     selectable: false,
                     label: 'Update profile',onTap: (){
                     Navigator.pop(context);
@@ -111,11 +102,29 @@ class _GraphScreenState extends State<GraphScreen> {
                     Navigator.pushNamed(context, "/UserPrescription");
                   }),
 
-                  SidebarXItem(icon: Icons.lock, label: 'Update password',selectable: false,
+                  SidebarXItem(icon: Icons.lock_outline, label: 'Update password',selectable: false,
                       onTap: (){
                     Navigator.pop(context);
                     Navigator.pushNamed(context, "/UpdatePassword" );
                   }),
+
+                  /*
+                  SidebarXItem(icon: Icons.alarm, label: 'Supplement reminder',selectable: false,
+                      onTap: (){
+                        userData.sessionReminderPressed=false;
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, "/Reminder" );
+                      }),
+
+
+                  SidebarXItem(icon: Icons.alarm, label: 'Session reminder',selectable: false,
+                      onTap: (){
+                        userData.sessionReminderPressed=true;
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, "/Reminder" );
+                      }),
+                      */
+
 
                 ],
               ),
@@ -166,91 +175,6 @@ class _GraphScreenState extends State<GraphScreen> {
           color: Colors.black87,
           size: (isTablet(context))?screenWidth* 0.046:screenWidth* 0.06,//(isTablet(context))?30:23
         ),
-       /* iconTheme: IconThemeData(
-          color: Colors.black87,
-          size: (isTablet(context)) ? screenWidth * 0.046 : screenWidth *
-              0.06, //(isTablet(context))?30:23
-        ),
-        actions: [
-          PopupMenuButton<String>(
-            icon: Icon(Icons.more_vert, color: Colors.black),
-            onSelected: (value) {
-              // Handle menu item selection
-              switch (value) {
-                case 'Update profile':
-                  userData.updateProfile=true;
-                  userData.skinType=userData.user['skinType'];
-                  Navigator.pushNamed(context, "/SkinType");
-                  break;
-                case 'Update my history':
-                  userData.updateHistoryPressed = true;
-                  fetchUserHistory();
-                  Navigator.pushNamed(context, "/UserPrescription");
-                  break;
-                case 'Update password':
-
-                  break;
-                case 'Logout':
-                  setState(() {
-                    logoutPressed = true;
-                  });
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return menuItems.map((item) {
-                if (item == 'Logout') {
-                  return PopupMenuItem<String>(
-                    value: item,
-                    child: Row(
-                      children: [
-                        Icon(Icons.exit_to_app, color: Colors.grey,
-                          size: isTablet(context)
-                              ? screenWidth * 0.02
-                              : screenWidth * 0.05,),
-                        // Logout icon
-                        SizedBox(width: screenWidth * 0.015),
-                        // Add some spacing
-                        Text(
-                          item,
-                          style: TextStyle(
-                            fontFamily: 'Raleway',
-                              color: Colors.black,
-                              fontSize: (isTablet(context)) ? screenWidth *
-                                  0.028 : screenWidth * 0.037,
-                              //fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  );
-                } else {
-                  return PopupMenuItem<String>(
-                    value: item,
-                    child: Text(
-                      item,
-                      style: TextStyle(
-                        fontFamily: 'Raleway',
-                          color: Colors.black,
-                          fontSize: (isTablet(context))
-                              ? screenWidth * 0.028
-                              : screenWidth * 0.037,
-                          //fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  );
-                }
-              }).toList();
-            },
-            color: Color(0xFFDADADA),
-            // Background color of the menu
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-            ),
-          ),
-        ],*/
       ),
 
       body: Stack(
@@ -653,6 +577,10 @@ class _GraphScreenState extends State<GraphScreen> {
 
             ],
           ):SizedBox(),
+
+
+          // Alerts
+
           Consumer<sessionDetailsNotifier>(builder: (context, value, child) {
             return (!value.sessionPossible) ?
             Container(
@@ -804,13 +732,14 @@ class _GraphScreenState extends State<GraphScreen> {
                       : SizedBox.shrink();
                 }),
           ),
-          (!hasConnection||logoutPressed|| vitaminDIntakeComplete) ?
+        Consumer<sessionDetailsNotifier>(builder: (context, value, child){
+        return (!hasConnection||logoutPressed|| vitaminDIntakeComplete || sessionDetails.apiLimitExceeded) ?
           Container(
             height: double.infinity,
             width: double.infinity,
             color: Colors.white24,
 
-          ) : SizedBox.shrink(),
+          ) : SizedBox.shrink();}),
           !hasConnection
               ? Padding(
             padding: EdgeInsets.only(bottom: screenHeight * 0.1,
@@ -983,6 +912,70 @@ class _GraphScreenState extends State<GraphScreen> {
                 ],),
             ),
           ) : SizedBox.shrink(),
+          Consumer<sessionDetailsNotifier>(builder: (context, value, child){
+         return sessionDetails.apiLimitExceeded?
+          Padding(
+            padding: EdgeInsets.only(bottom: screenHeight * 0.05,
+                left: isTablet(context) ? screenWidth * 0.05 : 0,
+                right: isTablet(context) ? screenWidth * 0.05 : 0),
+            child: Center(
+              child: AlertDialog(
+                title: Text(
+                  "Server Busy",
+                  style: TextStyle(
+                    fontFamily: 'BrunoAceSC',
+                    color: Colors.black,
+                    fontSize: (isTablet(context))
+                        ? screenWidth * 0.05
+                        : screenWidth * 0.055,
+                    //fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      'assets/images/server.png', height: screenHeight * 0.2,),
+                    Text(
+                      "Service is temporarily unavailable. Please try taking your Vitamin D session tomorrow. We appreciate your cooperation."
+                      , style: TextStyle(
+                      fontFamily: 'Raleway',
+                      color: Colors.black,
+                      fontSize: (isTablet(context))
+                          ? screenWidth * 0.04
+                          : screenWidth * 0.04,
+                      //fontWeight: FontWeight.bold,
+                    ),
+                    ),
+                  ],
+                ),
+                backgroundColor: Theme
+                    .of(context)
+                    .colorScheme
+                    .secondary,
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                        sessionDetails.apiLimitCheck(false);
+                    },
+                    child: Text(
+                      "Ok",
+                      style: TextStyle(
+                        fontFamily: 'BrunoAceSC',
+                        color: Colors.black,
+                        fontSize: (isTablet(context))
+                            ? screenWidth * 0.04
+                            : screenWidth * 0.04,
+                        //fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+
+                ],),
+            ),
+          ) : SizedBox.shrink();}),
           vitaminDIntakeComplete?
           Padding(
             padding: EdgeInsets.only(bottom: screenHeight * 0.1,

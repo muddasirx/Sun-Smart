@@ -5,7 +5,8 @@ import 'package:untitled/SplashScreen.dart';
 import 'package:untitled/pages/LoginScreen.dart';
 import 'package:untitled/pages/SignupScreen.dart';
 import 'package:untitled/pages/admin%20screens/manageAds.dart';
-import 'package:untitled/pages/createAd.dart';
+import 'package:untitled/pages/admin%20screens/createAd.dart';
+import 'package:untitled/pages/reminder.dart';
 import 'package:untitled/pages/testResults.dart';
 import 'package:untitled/pages/clothingType.dart';
 import 'package:untitled/pages/countDownScreen.dart';
@@ -31,9 +32,28 @@ import 'package:untitled/providers/sessionDetailsProvider.dart';
 import 'package:untitled/providers/testResultsProvider.dart';
 import 'package:untitled/providers/userDataProvider.dart';
 import 'package:untitled/theme.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  /*AwesomeNotifications().initialize(
+      'assets/images/icon.png',
+      [
+        NotificationChannel(
+            channelKey: 'alerts',
+            channelName: 'Alerts',
+            channelDescription: 'Notification tests as alerts',
+            playSound: true,
+            onlyAlertOnce: true,
+            groupAlertBehavior: GroupAlertBehavior.Children,
+            importance: NotificationImportance.High,
+            defaultPrivacy: NotificationPrivacy.Private,
+            defaultColor: Colors.deepPurple,
+            ledColor: Colors.deepPurple)
+      ],
+      debug: true) ;*/
+
+  tz.initializeTimeZones();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -60,7 +80,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      title: 'Flutter Demo',
+      title: 'Wilson\'s Healthcare',
         routes:  {
           "/": (context) => SplashScreen(),
           "/LoginPage": (context) => LoginScreen(),
@@ -84,7 +104,7 @@ class MyApp extends StatelessWidget {
           "/UpdatePassword" : (context) =>UpdatePassword(),
           "/ManageAds"  : (context) => ManageAds(),
           "/CreateAd" : (context) => CreateAd(),
-
+          "/Reminder" : (context) =>Reminder(),
     },
     );
   }
